@@ -1,0 +1,15 @@
+LINGUAGENS DE PROGRAMAÇÃO
+	Pitch -> Finalizado
+	Ferramentas de codificação -> Pendente
+	Macro arquitetura desenhada -> Pendente 
+	Banco de dados modelado -> Em andamento/ Nathan
+	Protótipo funcional -> Pendente
+	Apresentação através de um vídeo(com o conteúdo de ambas as matérias) -> Pendente
+
+ENGENHARIA DE SOFTWARE I
+	Requisito de alto nível -> atualizar(não menciona a sala)
+	Modelo de Domínio -> arrumar/atualizar
+	Diagrama de caso de uso -> Fizemos no caderno, passar para o arquivo e atualizar
+	Caso de uso textual -> Atualizei com o cenário do aluno jogando, este acho que está pronto 
+	Protótipo de interface visual -> Pendente
+	tabela de elementos da tela -> Pendente
