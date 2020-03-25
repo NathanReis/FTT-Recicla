@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaExibeQuizController">
+   <children>
+      <ToolBar layoutX="-5.0" layoutY="-1.0" prefHeight="57.0" prefWidth="606.0" style="-fx-background-color: #8DBA62;">
+         <items>
+            <Pane layoutX="1.0" layoutY="4.0" prefHeight="47.0" prefWidth="421.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="7.0" text="QUIZ" textFill="WHITE">
+                     <font>
+                        <Font name="Wingdings" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </items>
+      </ToolBar>
+      <Pane layoutY="55.0" prefHeight="347.0" prefWidth="600.0" style="-fx-background-color: A5CA97;">
+         <children>
+            <Pane layoutX="26.0" layoutY="16.0" prefHeight="318.0" prefWidth="547.0" style="-fx-background-color: #8DBA62;">
+               <children>
+                  <Pane layoutX="5.0" layoutY="5.0" prefHeight="307.0" prefWidth="536.0" style="-fx-background-color: #FDEBC7;">
+                     <children>
+                        <Button layoutX="367.0" layoutY="24.0" mnemonicParsing="false" onAction="#btnAdicionaPergunta" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: #73D54A;" text="Adicionar Pergunta" textFill="WHITE">
+                           <effect>
+                              <DropShadow blurType="ONE_PASS_BOX" height="19.52" offsetX="1.0" offsetY="1.0" radius="8.8875" width="18.03" />
+                           </effect></Button>
+                     </children></Pane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
