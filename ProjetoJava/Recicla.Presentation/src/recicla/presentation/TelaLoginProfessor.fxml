@@ -10,7 +10,6 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="746.0" style="-fx-background-color: #86b161;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaLoginProfessorController">
    <children>
       <Polygon fill="DODGERBLUE" layoutX="155.0" layoutY="117.0" points="-162.0, 343.0, 591.0, 343.0, 591.0, 171.0" stroke="#00000008" strokeType="INSIDE" style="-fx-fill: #C5E0B4;" />

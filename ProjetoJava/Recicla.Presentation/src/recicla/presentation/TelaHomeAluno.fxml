@@ -28,7 +28,7 @@
          <children>
             <Pane prefHeight="515.0" prefWidth="178.0" style="-fx-border-color: Green;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <Button layoutX="16.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#btnAcessaSala" prefHeight="28.0" prefWidth="146.0" style="-fx-background-color: #009b6e;" text="Acessar Sala" textFill="#f5f2f2">
+                  <Button layoutX="16.0" layoutY="88.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="146.0" style="-fx-background-color: #009b6e;" text="Acessar Sala" textFill="#f5f2f2">
                      <font>
                         <Font size="18.0" />
                      </font>
