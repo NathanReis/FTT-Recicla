@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaExibeSalaController">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
+         <children>
+            <Label fx:id="txt_titulo_sala" layoutX="14.0" layoutY="7.0" text="Turma X" textFill="WHITE">
+               <font>
+                  <Font name="Wingdings" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="-1.0" layoutY="61.0" prefHeight="429.0" prefWidth="712.0" style="-fx-background-color: A5CA97;">
+         <children>
+            <Pane layoutX="10.0" layoutY="16.0" prefHeight="385.0" prefWidth="683.0" style="-fx-background-color: #8DBA62;">
+               <children>
+                  <Pane layoutX="6.0" layoutY="6.0" prefHeight="371.0" prefWidth="669.0" style="-fx-background-color: #FDEBC7;">
+                     <children>
+                        <Button layoutX="494.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnAdicionaRodada" prefHeight="34.0" prefWidth="158.0" style="-fx-background-color: #73D54A;" text="Adiciona Rodada" textFill="WHITE">
+                           <effect>
+                              <DropShadow blurType="ONE_PASS_BOX" height="19.52" offsetX="1.0" offsetY="1.0" radius="8.8875" width="18.03" />
+                           </effect>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

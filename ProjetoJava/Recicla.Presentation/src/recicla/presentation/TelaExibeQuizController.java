@@ -30,7 +30,6 @@ public class TelaExibeQuizController implements Initializable {
         // TODO
     }    
 
-    @FXML
     private void btnAdicionaPergunta(ActionEvent event) {
         try{
             
@@ -47,5 +46,9 @@ public class TelaExibeQuizController implements Initializable {
         
        
     }
+
+   
+
+
     
 }
