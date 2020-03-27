@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaLojaController">
+   <children>
+      <Pane prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
+         <children>
+            <Pane layoutX="561.0" layoutY="19.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+               <children>
+                  <Label fx:id="txtDinheiro" layoutX="42.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <effect>
+                  <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+               </effect>
+            </Pane>
+            <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="536.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagens/bau.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutY="62.0" prefHeight="429.0" prefWidth="706.0" style="-fx-background-color: A5CA97;">
+         <children>
+            <Pane layoutX="-2.0" layoutY="47.0" prefHeight="355.0" prefWidth="713.0" style="-fx-background-color: #8DBA62;">
+               <children>
+                  <Pane layoutX="1.0" layoutY="8.0" prefHeight="341.0" prefWidth="713.0" style="-fx-background-color: #FDEBC7;">
+                     <children>
+                        <Pane layoutX="90.0" layoutY="24.0" prefHeight="281.0" prefWidth="144.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 20; -fx-border-color: green; -fx-border-radius: 20;">
+                           <effect>
+                              <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                           </effect>
+                           <children>
+                              <Pane layoutY="229.0" prefHeight="68.0" prefWidth="144.0" style="-fx-background-color: #8DBA62; -fx-background-radius: 11;">
+                                 <children>
+                                    <Label layoutX="52.0" layoutY="6.0" text="\$ 50" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="21.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnCompraTempo" prefHeight="27.0" prefWidth="102.0" style="-fx-background-color: #73D54A;" text="Comprar" textFill="WHITE">
+                                       <effect>
+                                          <DropShadow blurType="ONE_PASS_BOX" height="19.52" offsetX="1.0" offsetY="1.0" radius="8.8875" width="18.03" />
+                                       </effect>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <ImageView fitHeight="113.0" fitWidth="144.0" layoutX="-1.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/Sand_clock_2.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="35.0" layoutY="8.0" text="Tempo" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="13.0" layoutY="137.0" prefHeight="16.0" prefWidth="122.0" text="Poder: Ganhe mais " textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="153.0" prefHeight="16.0" prefWidth="122.0" text="30s" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="200.0" prefHeight="16.0" prefWidth="122.0" text="Jogo: Todos" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="285.0" layoutY="24.0" prefHeight="281.0" prefWidth="144.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 20; -fx-border-color: green; -fx-border-radius: 20;">
+                           <children>
+                              <Pane layoutY="229.0" prefHeight="68.0" prefWidth="144.0" style="-fx-background-color: #8DBA62; -fx-background-radius: 11;">
+                                 <children>
+                                    <Label layoutX="52.0" layoutY="6.0" text="\$ 50" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="21.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnCompraResposta" prefHeight="27.0" prefWidth="102.0" style="-fx-background-color: #73D54A;" text="Comprar" textFill="WHITE">
+                                       <effect>
+                                          <DropShadow blurType="ONE_PASS_BOX" height="19.52" offsetX="1.0" offsetY="1.0" radius="8.8875" width="18.03" />
+                                       </effect>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <ImageView fitHeight="113.0" fitWidth="144.0" layoutX="18.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/correct_2.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="21.0" layoutY="8.0" text="Resposta" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="13.0" layoutY="137.0" prefHeight="16.0" prefWidth="122.0" text="Poder: Descubra a " textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="15.0" layoutY="153.0" prefHeight="16.0" prefWidth="122.0" text="resposta" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="200.0" prefHeight="16.0" prefWidth="122.0" text="Jogo: Quiz" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <effect>
+                              <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                           </effect>
+                        </Pane>
+                        <Pane layoutX="488.0" layoutY="24.0" prefHeight="281.0" prefWidth="144.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 20; -fx-border-color: green; -fx-border-radius: 20;">
+                           <children>
+                              <Pane layoutY="229.0" prefHeight="68.0" prefWidth="144.0" style="-fx-background-color: #8DBA62; -fx-background-radius: 11;">
+                                 <children>
+                                    <Label layoutX="52.0" layoutY="6.0" text="\$ 50" textFill="WHITE">
+                                       <font>
+                                          <Font name="Arial" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Button layoutX="21.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnCompraPontos" prefHeight="27.0" prefWidth="102.0" style="-fx-background-color: #73D54A;" text="Comprar" textFill="WHITE">
+                                       <effect>
+                                          <DropShadow blurType="ONE_PASS_BOX" height="19.52" offsetX="1.0" offsetY="1.0" radius="8.8875" width="18.03" />
+                                       </effect>
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Label layoutX="35.0" layoutY="8.0" text="Pontos" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="13.0" layoutY="136.0" prefHeight="16.0" prefWidth="122.0" text="Poder: Dobre os " textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="13.0" layoutY="152.0" prefHeight="16.0" prefWidth="122.0" text="pontos de uma " textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="199.0" prefHeight="16.0" prefWidth="122.0" text="Jogo: Todos" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="34.0" layoutY="51.0" text="2 x" textFill="#5db427">
+                                 <font>
+                                    <Font name="Wingdings 2" size="58.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="13.0" layoutY="169.0" prefHeight="16.0" prefWidth="122.0" text="partida" textFill="#4e844a">
+                                 <font>
+                                    <Font name="Georgia" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <effect>
+                              <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                           </effect>
+                        </Pane>
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Label layoutX="24.0" layoutY="17.0" text="Lojinha" textFill="WHITE">
+         <font>
+            <Font name="Wingdings" size="27.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
