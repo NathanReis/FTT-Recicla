@@ -1,2 +1,2 @@
 # FTT_LP2_Recicla
-![alt text](ReciclaDB.png "Diagrama de dados")
+![alt text](DocumentacaoProjeto/ReciclaDB.png "Diagrama de dados")
