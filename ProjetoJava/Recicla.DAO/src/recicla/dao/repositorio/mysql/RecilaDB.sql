@@ -48,8 +48,8 @@ CREATE TABLE Recordes
   RecordeId INT UNSIGNED AUTO_INCREMENT,
   JogoId TINYINT UNSIGNED NOT NULL,
   UsuarioId INT UNSIGNED NOT NULL,
-  QtdPartidas SAMLLINT UNSIGNED DEFAULT 0,
-  QtdVitorias SAMLLINT UNSIGNED DEFAULT 0,
+  QtdPartidas SMALLINT UNSIGNED DEFAULT 0,
+  QtdVitorias SMALLINT UNSIGNED DEFAULT 0,
   MelhorTempo TIME NOT NULL,
   Pontos SMALLINT UNSIGNED NOT NULL,
   PRIMARY KEY (RecordeId),
@@ -60,8 +60,8 @@ CREATE TABLE Recordes
 CREATE TABLE ItensLoja
 (
   ItemLojaId TINYINT UNSIGNED AUTO_INCREMENT,
-  Nome VARCHAR NOT NULL,
-  Descricao VARCHAR NOT NULL,
+  Nome VARCHAR(25) NOT NULL,
+  Descricao VARCHAR(255) NOT NULL,
   Preco DECIMAL UNSIGNED NOT NULL,
   PRIMARY KEY (ItemLojaId)
 );
@@ -117,7 +117,7 @@ CREATE TABLE Rodadas
 CREATE TABLE JogosXRodadas
 (
   RodadaId INT UNSIGNED,
-  JogoId INT UNSIGNED NOT NULL,
+  JogoId TINYINT UNSIGNED NOT NULL,
   ItemJogoId INT UNSIGNED,
   PRIMARY KEY (RodadaId),
   FOREIGN KEY (RodadaId) REFERENCES Rodadas (RodadaId),
@@ -131,13 +131,19 @@ DELIMITER $
 -- ####################
 -- Criação das triggers
 -- ####################
-
+CREATE TRIGGER tgrAfterInsertUsuarios
+AFTER INSERT ON Usuarios
+FOR EACH ROW
+BEGIN
+	INSERT INTO Configuracoes (ConfiguracaoId) VALUES (NEW.UsuarioId);
+END$
 -- ####################
 -- Criação dos eventos
 -- ####################
 
 DELIMITER ;
-
 -- ####################
 -- Criação de dados base
 -- ####################
+INSERT INTO Usuarios (Nome, Usuario, Senha, TipoUsuario)
+VALUES ('Professor', 'professor', AES_ENCRYPT('manager', 'ld83mf0'), 'P');
