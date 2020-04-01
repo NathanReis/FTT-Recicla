@@ -4,15 +4,15 @@ LINGUAGENS DE PROGRAMAÇÃO
 		Qual ambiente de desenvolvimento Java?
 		Qual o tipo de banco de dados utilizado?
 	Macro arquitetura desenhada, com uma visão das camadas de implementação da solução -> Pendente 
-	Modelagem do Banco e os Scripts -> Em andamento/ Nathan
-	Protótipo funcional, com swing ou Java -> Pendente
+	Modelagem do Banco e os Scripts -> Finalizado
+	Protótipo funcional, com swing ou Java -> Finalizado
 	Apresentação através de um vídeo(com o conteúdo de ambas as matérias) -> Pendente
 
 ENGENHARIA DE SOFTWARE I
-	Requisito de alto nível -> atualizar(lá fala que o professor não cadastra o aluno)
+	Requisito de alto nível -> Finalizado
 	Modelo de Domínio -> Finalizado
 	Diagrama de caso de uso -> Finalizado
 	Caso de uso textual -> Finalizado
-	Protótipo de interface visual -> Em andamento/ Ítalo
+	Protótipo de interface visual -> Finalizado
 	tabela de elementos da tela -> Pendente/ Ítalo
 	Apresentação através de um vídeo(com o conteúdo de ambas as matérias) -> Pendente
