@@ -14,5 +14,5 @@ ENGENHARIA DE SOFTWARE I
 	Diagrama de caso de uso -> Finalizado
 	Caso de uso textual -> Finalizado
 	Protótipo de interface visual -> Finalizado
-	tabela de elementos da tela -> Pendente/ Ítalo
+	tabela de elementos da tela -> Finalizado
 	Apresentação através de um vídeo(com o conteúdo de ambas as matérias) -> Pendente
