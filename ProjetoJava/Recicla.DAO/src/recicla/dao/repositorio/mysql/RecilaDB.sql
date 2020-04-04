@@ -111,10 +111,18 @@ CREATE TABLE Rodadas
   RodadaId INT UNSIGNED AUTO_INCREMENT,
   SalaId INT UNSIGNED NOT NULL,
   JogoId TINYINT UNSIGNED NOT NULL,
-  ItemJogoId SMALLINT UNSIGNED,
   PRIMARY KEY (RodadaId),
   FOREIGN KEY (SalaId) REFERENCES Salas (SalaId),
   FOREIGN KEY (JogoId) REFERENCES Jogos (JogoId)
+);
+
+CREATE TABLE ItensRodada
+(
+  ItemRodadaId INT UNSIGNED AUTO_INCREMENT,
+  RodadaId INT UNSIGNED NOT NULL,
+  ItemJogoId SMALLINT UNSIGNED,
+  PRIMARY KEY (ItemRodadaId),
+  FOREIGN KEY (RodadaId) REFERENCES Rodadas (RodadaId)
 );
 -- ####################
 -- Criação das views
