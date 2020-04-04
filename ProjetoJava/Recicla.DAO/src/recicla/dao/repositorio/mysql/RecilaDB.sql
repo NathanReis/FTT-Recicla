@@ -17,6 +17,15 @@ USE ReciclaDB;
 -- ####################
 -- Criação das tabelas
 -- ####################
+CREATE TABLE Salas
+(
+  SalaId INT UNSIGNED AUTO_INCREMENT,
+  Descricao VARCHAR(50) NOT NULL,
+  ChaveAcesso CHAR(5) NOT NULL,
+  HorarioInicio TIME NOT NULL,
+  PRIMARY KEY (SalaId)
+);
+
 CREATE TABLE Usuarios
 (
   UsuarioId INT UNSIGNED AUTO_INCREMENT,
@@ -24,7 +33,9 @@ CREATE TABLE Usuarios
   Usuario VARCHAR(15) NOT NULL,
   Senha VARBINARY(255) NOT NULL,
   TipoUsuario CHAR(1) DEFAULT 'A',
-  PRIMARY KEY (UsuarioId)
+  SalaId INT UNSIGNED,
+  PRIMARY KEY (UsuarioId),
+  FOREIGN KEY (SalaId) REFERENCES Salas (SalaId)
 );
 
 CREATE TABLE Configuracoes
@@ -86,15 +97,6 @@ CREATE TABLE PerguntasQuiz
   JogoId TINYINT UNSIGNED DEFAULT 1,
   PRIMARY KEY (PerguntaQuizId),
   FOREIGN KEY (JogoId) REFERENCES Jogos (JogoId)
-);
-
-CREATE TABLE Salas
-(
-  SalaId INT UNSIGNED AUTO_INCREMENT,
-  Descricao VARCHAR(50) NOT NULL,
-  ChaveAcesso CHAR(5) NOT NULL,
-  HorarioInicio TIME NOT NULL,
-  PRIMARY KEY (SalaId)
 );
 
 CREATE TABLE SalasXUsuarios
