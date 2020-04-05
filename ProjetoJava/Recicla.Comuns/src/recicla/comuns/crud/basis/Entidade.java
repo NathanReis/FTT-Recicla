@@ -10,5 +10,21 @@ package recicla.comuns.crud.basis;
  * @author vitorlupinetti
  */
 public class Entidade {
+    private int Id;
+
+    /**
+     * @return the Id
+     */
+    public int getId() {
+        return Id;
+    }
+
+    /**
+     * @param Id the Id to set
+     */
+    public void setId(int Id) {
+        this.Id = Id;
+    }
+    
     
 }

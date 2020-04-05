@@ -9,13 +9,22 @@ import recicla.comuns.crud.basis.Entidade;
 
 /**
  *
- * @author vitorlupinetti
+ * @author italo
  */
-public class Usuario extends Entidade {
-    private String Nome;
-    private String Usuario;
-    private String Senha;
-    private char TipoUsuario;
+public class Rodada extends Entidade {
     private int SalaId;
-    private double Dinheiro;
+
+    /**
+     * @return the SalaId
+     */
+    public int getSalaId() {
+        return SalaId;
+    }
+
+    /**
+     * @param SalaId the SalaId to set
+     */
+    public void setSalaId(int SalaId) {
+        this.SalaId = SalaId;
+    }
 }

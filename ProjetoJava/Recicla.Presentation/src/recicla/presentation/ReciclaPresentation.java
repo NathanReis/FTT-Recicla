@@ -19,7 +19,7 @@ public class ReciclaPresentation extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("TelaHome.fxml"));
         
         Scene scene = new Scene(root);
         
