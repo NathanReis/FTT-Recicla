@@ -34,6 +34,7 @@ CREATE TABLE Usuarios
   Senha VARBINARY(255) NOT NULL,
   TipoUsuario CHAR(1) DEFAULT 'A',
   SalaId INT UNSIGNED,
+  Dinheiro DECIMAL DEFAULT 0,
   PRIMARY KEY (UsuarioId),
   FOREIGN KEY (SalaId) REFERENCES Salas (SalaId)
 );
@@ -99,32 +100,31 @@ CREATE TABLE PerguntasQuiz
   FOREIGN KEY (JogoId) REFERENCES Jogos (JogoId)
 );
 
-CREATE TABLE SalasXUsuarios
-(
-  SalaId INT UNSIGNED,
-  UsuarioId INT UNSIGNED,
-  PRIMARY KEY (SalaId, UsuarioId),
-  FOREIGN KEY (SalaId) REFERENCES Salas (SalaId),
-  FOREIGN KEY (UsuarioId) REFERENCES Usuarios (UsuarioId)
-);
-
 CREATE TABLE Rodadas
 (
   RodadaId INT UNSIGNED AUTO_INCREMENT,
   SalaId INT UNSIGNED NOT NULL,
-  JogoId TINYINT UNSIGNED NOT NULL,
   PRIMARY KEY (RodadaId),
-  FOREIGN KEY (SalaId) REFERENCES Salas (SalaId),
+  FOREIGN KEY (SalaId) REFERENCES Salas (SalaId)
+);
+
+CREATE TABLE JogosRodada
+(
+  JogoRodadaId INT UNSIGNED AUTO_INCREMENT,
+  RodadaId INT UNSIGNED NOT NULL,
+  JogoId TINYINT UNSIGNED NOT NULL,
+  PRIMARY KEY (JogoRodadaId),
+  FOREIGN KEY (RodadaId) REFERENCES Rodadas (RodadaId),
   FOREIGN KEY (JogoId) REFERENCES Jogos (JogoId)
 );
 
-CREATE TABLE ItensRodada
+CREATE TABLE JogosRodadaXPerguntasQuiz
 (
-  ItemRodadaId INT UNSIGNED AUTO_INCREMENT,
-  RodadaId INT UNSIGNED NOT NULL,
-  ItemJogoId SMALLINT UNSIGNED,
-  PRIMARY KEY (ItemRodadaId),
-  FOREIGN KEY (RodadaId) REFERENCES Rodadas (RodadaId)
+  JogoRodadaId INT UNSIGNED,
+  PerguntaQuizId SMALLINT UNSIGNED,
+  PRIMARY KEY (JogoRodadaId, PerguntaQuizId),
+  FOREIGN KEY (JogoRodadaId) REFERENCES JogosRodada (JogoRodadaId),
+  FOREIGN KEY (PerguntaQuizId) REFERENCES PerguntasQuiz (PerguntaQuizId)
 );
 -- ####################
 -- Criação das views
