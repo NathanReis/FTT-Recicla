@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -17,7 +18,10 @@
         <Button fx:id="button" layoutX="33.0" layoutY="327.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="108.0" style="-fx-background-color: #73d54a;" text="Professor" textFill="#f8f7f7">
          <font>
             <Font name="System Bold" size="12.0" />
-         </font></Button>
+         </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+         </effect></Button>
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <ImageView fitHeight="123.0" fitWidth="108.0" layoutX="39.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -44,10 +48,13 @@
             <Font name="Arial" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="button2" layoutX="187.0" layoutY="327.0" onAction="#handleButtonAction" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #73d54a;" text="Aluno" textFill="#f8f7f7">
+      <Button fx:id="button2" layoutX="187.0" layoutY="327.0" onAction="#ExibeHomeAluno" prefHeight="32.0" prefWidth="127.0" style="-fx-background-color: #73d54a;" text="Aluno" textFill="#f8f7f7">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+         </effect>
       </Button>
       <ImageView fitHeight="83.0" fitWidth="160.0" layoutX="161.0" pickOnBounds="true" preserveRatio="true">
          <image>

@@ -16,4 +16,5 @@ public abstract class Repositorio {
     public abstract Entidade atualiza(int id, EntidadesDisponiveis tipoEntidade);
     public abstract void insere(Entidade E, EntidadesDisponiveis tipoEntidade);
     public abstract void deleta(int id, EntidadesDisponiveis tipoEntidade);
+    public abstract Entidade localiza(String codigo, EntidadesDisponiveis tipoEntidade);
 }

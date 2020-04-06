@@ -9,6 +9,17 @@ package recicla.comuns.enums;
  *
  * @author vitorlupinetti
  */
-public class EntidadesDisponiveis {
+public enum EntidadesDisponiveis {
     
+    USUARIO("usuario");     
+ 
+    private String descricao;
+ 
+    EntidadesDisponiveis(String descricao) {
+        this.descricao = descricao;
+    }
+ 
+    public String getDescricao() {
+        return descricao;
+    }
 }

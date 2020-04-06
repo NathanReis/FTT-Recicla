@@ -17,8 +17,8 @@ public class MySQLDAO <E extends Entidade> extends DAO{
         super(entityclass);
     }
     
-    final String STRING_CONEXAO = "";  
-    final String USUARIO = "";  
+    final String STRING_CONEXAO = "jdbc:mysql://localhost/recicladb";  
+    final String USUARIO = "root";  
     final String SENHA = "";
     private String tabela;
     

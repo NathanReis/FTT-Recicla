@@ -34,5 +34,10 @@ public class RepositorioMySQL extends Repositorio {
     public void deleta(int id, EntidadesDisponiveis tipoEntidade) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Entidade localiza(String codigo, EntidadesDisponiveis tipoEntidade) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

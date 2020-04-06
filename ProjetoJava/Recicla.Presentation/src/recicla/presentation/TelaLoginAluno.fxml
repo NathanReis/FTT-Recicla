@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
@@ -11,14 +17,14 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="746.0" style="-fx-background-color: #86b161;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaLoginProfessorController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="746.0" style="-fx-background-color: #86b161;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaLoginAlunoController">
    <children>
       <Polygon fill="DODGERBLUE" layoutX="155.0" layoutY="117.0" points="-162.0, 343.0, 591.0, 343.0, 591.0, 171.0" stroke="#00000008" strokeType="INSIDE" style="-fx-fill: #C5E0B4;" />
       <Polygon fill="DODGERBLUE" layoutX="145.0" layoutY="107.0" points="-145.0, 58.0, 601.0, -107.0, -145.0, -107.0" stroke="#00000003" strokeType="INSIDE" style="-fx-fill: #C5E0B4;" />
       <Pane layoutX="204.0" layoutY="47.0" prefHeight="389.0" prefWidth="338.0" style="-fx-background-color: #fdebc7; -fx-background-radius: 30;">
          <children>
-            <TextField layoutX="56.0" layoutY="147.0" prefHeight="44.0" prefWidth="228.0" style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-radius: 5;" />
-            <PasswordField layoutX="54.0" layoutY="233.0" prefHeight="44.0" prefWidth="228.0" style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-radius: 5;" />
+            <TextField fx:id="txtLogin" layoutX="56.0" layoutY="147.0" prefHeight="44.0" prefWidth="228.0" style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-radius: 5;" />
+            <PasswordField fx:id="txtSenha" layoutX="54.0" layoutY="233.0" prefHeight="44.0" prefWidth="228.0" style="-fx-background-color: transparent; -fx-border-color: green; -fx-border-radius: 5;" />
             <Label layoutX="57.0" layoutY="111.0" prefHeight="27.0" prefWidth="50.0" text="Login" textFill="GREEN">
                <font>
                   <Font name="Calibri" size="20.0" />
@@ -34,7 +40,7 @@
                   <Font name="Calibri" size="38.0" />
                </font>
             </Label>
-            <Button layoutX="54.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#btnEntrar" prefHeight="39.0" prefWidth="228.0" style="-fx-background-color: #009b6e;" text="Entrar" textFill="#f5f2f2">
+            <Button fx:id="btnValidaAcesso" layoutX="54.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#btnEntrar" prefHeight="39.0" prefWidth="228.0" style="-fx-background-color: #009b6e;" text="Entrar" textFill="#f5f2f2">
                <font>
                   <Font size="18.0" />
                </font>
