@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.presentation;
 
 import java.net.URL;
@@ -15,11 +10,8 @@ import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
- *
- * @author italo
  */
 public class TelaCadastroPerguntaController implements Initializable {
-
     @FXML
     private TextField txt_alternativa_1;
     @FXML
@@ -44,5 +36,4 @@ public class TelaCadastroPerguntaController implements Initializable {
     @FXML
     private void btn_salva_pergunta(ActionEvent event) {
     }
-    
 }

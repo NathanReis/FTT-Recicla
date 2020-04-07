@@ -1,43 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.dao.repositorio.mysql;
 
+import java.sql.SQLException;
 import recicla.comuns.crud.basis.Entidade;
 import recicla.comuns.enums.EntidadesDisponiveis;
+import recicla.comuns.enums.TipoRepositorio;
+import recicla.dao.basis.DAO;
+import recicla.dao.basis.FabricaDAOS;
 import recicla.dao.repositorio.basis.Repositorio;
 
-/**
- *
- * @author vitorlupinetti
- */
 public class RepositorioMySQL extends Repositorio {
-
     @Override
-    public Entidade seleciona(int id, EntidadesDisponiveis tipoEntidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Entidade consultar(int id, EntidadesDisponiveis tipoEntidade) throws SQLException {
+        DAO dao = FabricaDAOS.Fabrica(tipoEntidade, TipoRepositorio.MYSQL);
+        Entidade entidade = dao.consultar(id);
 
-    @Override
-    public Entidade atualiza(int id, EntidadesDisponiveis tipoEntidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void insere(Entidade E, EntidadesDisponiveis tipoEntidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deleta(int id, EntidadesDisponiveis tipoEntidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Entidade localiza(String codigo, EntidadesDisponiveis tipoEntidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entidade;
     }
     
+    @Override
+    public Entidade consultar(String usuario, EntidadesDisponiveis tipoEntidade) throws SQLException {
+        DAO dao = FabricaDAOS.Fabrica(tipoEntidade, TipoRepositorio.MYSQL);
+        Entidade entidade = dao.consultar(usuario);
+
+        return entidade;
+    }
+
+    @Override
+    public void inserir(Entidade entidade, EntidadesDisponiveis tipoEntidade) throws SQLException {
+        DAO dao = FabricaDAOS.Fabrica(tipoEntidade, TipoRepositorio.MYSQL);
+        dao.inserir(entidade);
+    }
+
+    @Override
+    public void atualizar(Entidade entidade, EntidadesDisponiveis tipoEntidade) throws SQLException {
+        DAO dao = FabricaDAOS.Fabrica(tipoEntidade, TipoRepositorio.MYSQL);
+        dao.atualizar(entidade);
+    }
+
+    @Override
+    public void deletar(int id, EntidadesDisponiveis tipoEntidade) throws SQLException {
+        DAO dao = FabricaDAOS.Fabrica(tipoEntidade, TipoRepositorio.MYSQL);
+        dao.deletar(id);
+    }
 }

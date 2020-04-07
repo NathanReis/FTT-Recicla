@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.dao.basis;
 
 import java.sql.SQLException;
@@ -10,23 +5,18 @@ import java.util.ArrayList;
 import recicla.comuns.crud.basis.Entidade;
 import recicla.comuns.enums.EntidadesDisponiveis;
 
-/**
- *
- * @author vitorlupinetti
- */
 public abstract class DAO <E extends Entidade> {
-    
     protected Class<E> entityClass;
 
     public DAO(Class<E> entityClass){
         this.entityClass = entityClass;
     }
-    
         
-    public abstract E seleciona(int id, EntidadesDisponiveis tipoEntidade)throws SQLException;
-    public abstract E atualiza(int id, EntidadesDisponiveis tipoEntidade);
-    public abstract void insere(Entidade entidade, EntidadesDisponiveis tipoEntidade);
-    public abstract void deleta(int id, EntidadesDisponiveis tipoEntidade);
+    public abstract E consultar(int id) throws SQLException;
+    public abstract E consultar(String valorCampo) throws SQLException;
+    public abstract void inserir(Entidade entidade) throws SQLException;
+    public abstract void atualizar(Entidade enteidade)  throws SQLException;
+    public abstract void deletar(int id) throws SQLException;
     
     protected E getInstanceOfE()
     {

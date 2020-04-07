@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.business.config;
+
 import recicla.comuns.enums.TipoRepositorio;
 
-/**
- *
- * @author vitorlupinetti
- */
 public class Config {
     private static Config uniqueInstance;
  
@@ -28,9 +20,8 @@ public class Config {
     public TipoRepositorio getTipoRepositorio() {
         return tipoRepositorio;
     }
-
     
-    public void setDatabase(TipoRepositorio tipoRepositorio) {
+    public void setTipoRepositorio(TipoRepositorio tipoRepositorio) {
         this.tipoRepositorio = tipoRepositorio;
     }
 }

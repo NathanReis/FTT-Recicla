@@ -1,18 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.comuns.vos;
 
+import annotation.CampoNoBanco;
 import recicla.comuns.crud.basis.Entidade;
 
-/**
- *
- * @author italo
- */
 public class Rodada extends Entidade {
+    @CampoNoBanco(nome = "RodadaId", chave = true)
+    private int RodadaId;
+    @CampoNoBanco(nome = "SalaId", chave = false)
     private int SalaId;
+    
+    /**
+     * @return the RodadaId
+     */
+    public int getRodadaId() {
+        return RodadaId;
+    }
+
+    /**
+     * @param RodadaId the RodadaId to set
+     */
+    public void setRodadaId(int RodadaId) {
+        this.RodadaId = RodadaId;
+    }
 
     /**
      * @return the SalaId

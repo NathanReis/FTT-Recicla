@@ -1,24 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.comuns.vos;
 
+import annotation.CampoNoBanco;
 import recicla.comuns.crud.basis.Entidade;
 
-/**
- *
- * @author vitorlupinetti
- */
 public class Usuario extends Entidade {
-    
+    @CampoNoBanco(nome = "UsuarioId", chave = true)
+    private int UsuarioId;
+    @CampoNoBanco(nome = "Nome", chave = false)
     private String Nome;
+    @CampoNoBanco(nome = "Usuario", chave = false)
     private String Usuario;
+    @CampoNoBanco(nome = "Senha", chave = false)
     private String Senha;
-    private char TipoUsuario;
+    @CampoNoBanco(nome = "TipoUsuario", chave = false)
+    private String TipoUsuario;
+    @CampoNoBanco(nome = "SalaId", chave = false)
     private int SalaId;
+    @CampoNoBanco(nome = "Dinheiro", chave = false)
     private double Dinheiro;
+    
+    /**
+     * @return the UsuarioId
+     */
+    public int getUsuarioId() {
+        return UsuarioId;
+    }
+
+    /**
+     * @param UsuarioId the UsuarioId to set
+     */
+    public void setUsuarioId(int UsuarioId) {
+        this.UsuarioId = UsuarioId;
+    }
     
     /**
      * @return the Nome
@@ -65,14 +78,14 @@ public class Usuario extends Entidade {
     /**
      * @return the TipoUsuario
      */
-    public char getTipoUsuario() {
+    public String getTipoUsuario() {
         return TipoUsuario;
     }
 
     /**
      * @param TipoUsuario the TipoUsuario to set
      */
-    public void setTipoUsuario(char TipoUsuario) {
+    public void setTipoUsuario(String TipoUsuario) {
         this.TipoUsuario = TipoUsuario;
     }
 
@@ -103,5 +116,4 @@ public class Usuario extends Entidade {
     public void setDinheiro(double Dinheiro) {
         this.Dinheiro = Dinheiro;
     }
-  
 }

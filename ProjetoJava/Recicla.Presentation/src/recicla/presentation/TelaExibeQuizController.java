@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.presentation;
 
 import java.net.URL;
@@ -17,11 +12,8 @@ import javafx.stage.Stage;
 
 /**
  * FXML Controller class
- *
- * @author italo
  */
 public class TelaExibeQuizController implements Initializable {
-
     /**
      * Initializes the controller class.
      */
@@ -31,24 +23,15 @@ public class TelaExibeQuizController implements Initializable {
     }    
 
     private void btnAdicionaPergunta(ActionEvent event) {
-        try{
-            
+        try {
             FXMLLoader fxml = new FXMLLoader(getClass().getResource("TelaCadastroPergunta.fxml")); 
             Parent root = (Parent) fxml.load();
             Stage stage = new Stage();
             stage.setTitle("Cadastro de Pergunta");
             stage.setScene(new Scene(root));           
             stage.show();
-            
-        }catch(Exception e){
+        } catch(Exception e) {
             System.out.println("Falha ao carregar a janela");
         }
-        
-       
     }
-
-   
-
-
-    
 }

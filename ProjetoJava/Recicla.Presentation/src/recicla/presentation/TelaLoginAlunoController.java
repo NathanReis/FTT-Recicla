@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.presentation;
 
 import java.net.URL;
@@ -18,11 +13,8 @@ import recicla.comuns.vos.Usuario;
 
 /**
  * FXML Controller class
- *
- * @author italo
  */
 public class TelaLoginAlunoController implements Initializable {
-
     @FXML
     private TextField txtLogin;
     @FXML
@@ -40,19 +32,21 @@ public class TelaLoginAlunoController implements Initializable {
 
     @FXML
     private void btnEntrar(MouseEvent event) {
-        
         Usuario user = new Usuario();
         user.setUsuario(txtLogin.getText()); 
         user.setSenha(txtSenha.getText());
         
-        Acesso acesso = new Acesso();
-        boolean usuariovalido = acesso.validaUsuario(user);        
-        if(usuariovalido){
-        //acessa home
-        }else{
-        //mensagem de erro
+        try {
+            Acesso acesso = new Acesso();
+            boolean usuariovalido = acesso.validaUsuario(user);
+
+            if(usuariovalido) {
+                System.out.println("Usuario valido");
+            } else {
+                System.out.println("Usuario invalido");
+            }
+        } catch (Exception erro) {
+            erro.printStackTrace();
         }
-        
     }
-    
 }
