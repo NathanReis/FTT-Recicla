@@ -2,12 +2,18 @@ package recicla.presentation;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import recicla.business.acesso.Acesso;
 import recicla.comuns.vos.Usuario;
 
@@ -21,6 +27,8 @@ public class TelaLoginAlunoController implements Initializable {
     private PasswordField txtSenha;
     @FXML
     private Button btnValidaAcesso;
+    @FXML
+    private Hyperlink txtNaoCadastro;
 
     /**
      * Initializes the controller class.
@@ -41,12 +49,38 @@ public class TelaLoginAlunoController implements Initializable {
             boolean usuariovalido = acesso.validaUsuario(user);
 
             if(usuariovalido) {
-                System.out.println("Usuario valido");
+                
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }               
+                
+                
             } else {
                 System.out.println("Usuario invalido");
             }
         } catch (Exception erro) {
             erro.printStackTrace();
         }
+    }
+
+    @FXML
+    private void ExibeCadastroAluno(ActionEvent event) {
+        
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("TelaCadastro.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }           
+                
     }
 }

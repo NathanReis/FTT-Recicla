@@ -48,7 +48,7 @@
                   <DropShadow blurType="ONE_PASS_BOX" offsetX="1.0" offsetY="1.0" radius="9.2575" width="18.03" />
                </effect>
             </Button>
-            <Hyperlink layoutX="89.0" layoutY="347.0" text="Não tem cadastro?">
+            <Hyperlink fx:id="txtNaoCadastro" layoutX="89.0" layoutY="347.0" onAction="#ExibeCadastroAluno" onMouseClicked="#ExibeCadastroAluno" text="Não tem cadastro?">
                <font>
                   <Font size="18.0" />
                </font>
