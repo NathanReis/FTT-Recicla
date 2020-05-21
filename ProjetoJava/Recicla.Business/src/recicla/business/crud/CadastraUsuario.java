@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import recicla.business.basis.FabricaRepositorio;
 import recicla.comuns.enums.EntidadesDisponiveis;
 import recicla.comuns.vos.Usuario;
+import recicla.dao.acesso.UsuarioMySQLDAO;
 import recicla.dao.repositorio.basis.Repositorio;
 
 /**
@@ -21,8 +22,12 @@ public class CadastraUsuario {
         boolean retorno = true;
         
         try {
-            Repositorio repositorio = FabricaRepositorio.Fabrica();
-            repositorio.inserir(user, EntidadesDisponiveis.USUARIO);
+            //Repositorio repositorio = FabricaRepositorio.Fabrica();
+            //repositorio.inserir(user, EntidadesDisponiveis.USUARIO);
+            
+            UsuarioMySQLDAO dao = new UsuarioMySQLDAO();
+            dao.inserir(user);
+            
         } catch (SQLException ex) {
             retorno = false;
         }
