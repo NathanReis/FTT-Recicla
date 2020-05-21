@@ -5,6 +5,8 @@
  */
 package recicla.presentation;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -16,6 +18,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import recicla.business.crud.CadastraUsuario;
 import recicla.comuns.vos.Usuario;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.lang.reflect.Type;
 
 /**
  * FXML Controller class
@@ -32,7 +39,8 @@ public class TelaCadastroController implements Initializable {
     private PasswordField txtSenha;
     @FXML
     private TextField txtNome;
-
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -42,11 +50,16 @@ public class TelaCadastroController implements Initializable {
     }    
 
     @FXML
-    private void CadastraUsuario(ActionEvent event) throws SQLException {
+    private void CadastraUsuario(ActionEvent event) throws SQLException, Exception {
         Usuario user = new Usuario();
         user.setUsuario(txtLogin.getText());
         user.setSenha(txtSenha.getText());
         user.setNome(txtNome.getText());
+        
+        
+
+
+       //System.out.println(u.getLogin());
         
         CadastraUsuario insere = new CadastraUsuario();
         boolean inserir = insere.InsereUsuario(user);
@@ -58,5 +71,7 @@ public class TelaCadastroController implements Initializable {
         }
         
     }
+    
+   
     
 }
