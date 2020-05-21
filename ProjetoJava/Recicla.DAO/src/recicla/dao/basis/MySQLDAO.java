@@ -16,7 +16,7 @@ public class MySQLDAO <E extends Entidade> extends DAO{
     
     final String STRING_CONEXAO = "jdbc:mysql://localhost/ReciclaDB?useTimezone=true&serverTimezone=UTC";  
     final String USUARIO = "root";  
-    final String SENHA = "1234";
+    final String SENHA = "";
     private String tabela;
     
     protected String getStringConexao(){
