@@ -35,3 +35,4 @@ hs_err_pid*
 /ProjetoJava/Recicla.DAO/build/
 /ProjetoJava/Recicla.DAO/dist/
 /ProjetoJava/Recicla.Business/dist/
+/testAPI/nbproject/private/

@@ -81,7 +81,7 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
             String query = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, SalaId, Dinheiro FROM " + getTabela() + " WHERE Usuario = ?;";
 
-            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+            try (PreparedStatement stmt = conexao.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
                 stmt.setString(1, usuario);
 
                 try (ResultSet rs = stmt.executeQuery()) {
