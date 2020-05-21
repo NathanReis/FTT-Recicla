@@ -8,7 +8,24 @@
         <data xmlns="http://www.netbeans.org/ns/web-project/3">
             <name>ReciclaWebServices</name>
             <minimum-ant-version>1.6.5</minimum-ant-version>
-            <web-module-libraries/>
+            <web-module-libraries>
+                <library dirs="200">
+                    <file>${reference.Recicla_Comuns.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${file.reference.gson-2.3.1.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${reference.Recicla_Business.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${reference.Recicla_DAO.jar}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+            </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
                 <root id="src.dir" name="Pacotes de Códigos-fonte"/>
@@ -20,5 +37,31 @@
         <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
             <definitions>./lib/nblibraries.properties</definitions>
         </libraries>
+        <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
+            <reference>
+                <foreign-project>Recicla_Business</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>Recicla_Comuns</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
+                <foreign-project>Recicla_DAO</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+        </references>
     </configuration>
 </project>

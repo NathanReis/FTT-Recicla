@@ -5,6 +5,8 @@
  */
 package ws;
 
+import com.google.gson.Gson;
+import java.sql.SQLException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -12,14 +14,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import recicla.business.basis.FabricaRepositorio;
+import recicla.comuns.crud.basis.Entidade;
+import recicla.comuns.enums.EntidadesDisponiveis;
+import recicla.comuns.vos.Usuario;
+import recicla.dao.acesso.UsuarioMySQLDAO;
+import recicla.dao.repositorio.basis.Repositorio;
 
 /**
  * REST Web Service
  *
  * @author vitorlupinetti
  */
-@Path("generic")
+@Path("user")
 public class UserWs {
 
     @Context
@@ -37,9 +46,17 @@ public class UserWs {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
+    @Path("/obtem-usuario/{user}/{senha}")
+    public String getJson(@PathParam("user") String user, @PathParam("senha") String senha) throws SQLException {
         //TODO return proper representation object
-        return "ola mundo";
+        Usuario u = new Usuario();
+        UsuarioMySQLDAO dao = new UsuarioMySQLDAO();
+        
+        u = (Usuario)dao.buscarPorCredenciais(user, senha);
+        
+    
+        Gson g = new Gson();
+        return g.toJson(u);
     }
 
     /**
