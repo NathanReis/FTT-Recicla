@@ -5,7 +5,10 @@
  */
 package recicla.comuns.vos;
 
-import java.awt.Image;
+import javafx.scene.image.Image;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import recicla.comuns.crud.basis.Entidade;
 
 /**
@@ -17,6 +20,26 @@ public class Card extends Entidade {
     private int id_carta;
     private boolean status;
     private Image imagem;
+    private int id_carta_par;
+    
+    
+    public Card(int id){
+        this.id_carta = id;     
+    }
+    
+    /**
+     * @return the id_carta_par
+     */    
+    public int getId_carta_par(){
+        return id_carta_par;
+    }
+    
+    /**
+     * @param id_carta_par the status to set
+     */    
+    public void setId_carta_par(int id_carta_par){
+        this.id_carta_par = id_carta_par;
+    }
 
     /**
      * @return the id_carta
@@ -59,5 +82,41 @@ public class Card extends Entidade {
     public void setImagem(Image imagem) {
         this.imagem = imagem;
     }
+    
+    public List<Card> Lista_cards_randomicos(){
+    
+        List<Card> lista_cards = new ArrayList<Card>();
+        Random rand = new Random();
+        boolean status = false;
+        int n=0;
+        
+        while (!status) {
+            Card carta = new Card(rand.nextInt(11));
+            if( carta.id_carta == 0)
+                continue;
+            if (!lista_cards.stream().anyMatch(x -> x.id_carta == carta.id_carta)) {
+                lista_cards.add(carta);
+                n++;
+            }
+            if (n == 10) 
+                status = true;
+            
+
+        }
+
+        
+        return lista_cards;
+    }
+    
+    public static boolean Verifica_Par_cartas(int numero, List<Card> cartas) {
+
+        if (cartas.stream().anyMatch(x -> x.id_carta_par == numero)) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }    
+  
     
 }
