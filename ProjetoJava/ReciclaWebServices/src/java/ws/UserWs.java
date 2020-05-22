@@ -78,9 +78,12 @@ public class UserWs {
         Gson g = new Gson();
         Usuario u = g.fromJson(user, Usuario.class);
         CadastraUsuario crud = new CadastraUsuario();
+        boolean inserted = crud.insereUsuario(u);
         //UsuarioMySQLDAO dao = new UsuarioMySQLDAO();
-        crud.InsereUsuario(u);
         //dao.inserir(u);
+        if(inserted == false)
+            return null;
+        
         return g.toJson(u);
     }
 }

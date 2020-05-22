@@ -19,8 +19,12 @@ import javafx.scene.control.TextField;
 import recicla.business.crud.CadastraUsuario;
 import recicla.comuns.vos.Usuario;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.lang.reflect.Type;
 
@@ -40,6 +44,7 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private TextField txtNome;
     
+    String url = "http://localhost:8080/ReciclaWebServices/webresources/user/adciona-usuario";
     
     /**
      * Initializes the controller class.
@@ -61,17 +66,73 @@ public class TelaCadastroController implements Initializable {
 
        //System.out.println(u.getLogin());
         
-        CadastraUsuario insere = new CadastraUsuario();
-        boolean inserir = insere.InsereUsuario(user);
-        
+        //CadastraUsuario insere = new CadastraUsuario();
+        //boolean inserir = insere.InsereUsuario(user);
+       /* 
         if (inserir) {
             System.out.println("inseriu com sucesso");
         } else {
             System.out.println("Falha ao Inserir");
-        }
+        }*/
+       
+       Gson g = new Gson();
+       
+       String json = g.toJson(user);
+       String retorno = sendPost(json);
+       
+       System.out.print(retorno);
         
     }
     
+    
+    public String sendPost(String json) throws Exception {
+
+        try {
+            // Cria um objeto HttpURLConnection:
+            HttpURLConnection request = (HttpURLConnection) new URL(url).openConnection();
+
+            try {
+                // Define que a conexão pode enviar informações e obtê-las de volta:
+                request.setDoOutput(true);
+                request.setDoInput(true);
+
+                // Define o content-type:
+                request.setRequestProperty("Content-Type", "application/json");
+
+                // Define o método da requisição:
+                request.setRequestMethod("POST");
+
+                // Conecta na URL:
+                request.connect();
+
+                // Escreve o objeto JSON usando o OutputStream da requisição:
+                try (OutputStream outputStream = request.getOutputStream()) {
+                    outputStream.write(json.getBytes("UTF-8"));
+                }
+
+                // Caso você queira usar o código HTTP para fazer alguma coisa, descomente esta linha.
+                int response = request.getResponseCode();
+                System.out.print(response);
+
+                return readResponse(request);
+            } finally {
+                request.disconnect();
+            }
+        } catch (IOException ex) {
+            throw new Exception(ex);
+        }
+    }
    
+    private String readResponse(HttpURLConnection request) throws IOException {
+        ByteArrayOutputStream os;
+        try (InputStream is = request.getInputStream()) {
+            os = new ByteArrayOutputStream();
+            int b;
+            while ((b = is.read()) != -1) {
+                os.write(b);
+            }
+        }
+            return new String(os.toByteArray());
+    }
     
 }
