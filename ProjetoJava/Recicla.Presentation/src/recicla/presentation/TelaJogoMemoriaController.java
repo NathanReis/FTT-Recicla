@@ -78,6 +78,23 @@ public class TelaJogoMemoriaController implements Initializable {
         }
 
     }
+    //Retorna a posição da carta com o Id_especificado
+    public int Posicao_Lista_por_id (int Id){
+     Card carta;
+        try {
+            carta = cartas.stream().filter(x -> x.getId_carta() == Id).findFirst().get();
+            if (carta != null) {
+                return cartas.indexOf(carta);
+            } else {
+                return -1;
+            }
+        } catch (Exception ex) {
+            //Quando não encontra uma carta na busca ele lança o NoSuchElementException
+            return -1;
+        }
+    
+    
+    }
 
     //Este método monta o tabuleiro de forma randomica
     public void Monta_Jogo_da_Memoria(List<Card> cartas) throws FileNotFoundException {
@@ -86,20 +103,23 @@ public class TelaJogoMemoriaController implements Initializable {
         int card_aleatorio;
         boolean flagto0 = true;
         boolean status = true;
-        int i = 9;
+        int i = 10;
+  
         while (status) {
-            //carta aleatória de 0 a 4
-            card_aleatorio = rand.nextInt(5);
+            //carta aleatória de 1 a 5
+            card_aleatorio = rand.nextInt(6);
+            if(card_aleatorio == 0)
+                continue;
 
-            if (!Card.Verifica_Par_cartas(card_aleatorio, cartas) || (card_aleatorio == 0 && flagto0)) {
+            if (!Card.Verifica_Par_cartas(card_aleatorio, cartas)) {
 
                 //defino as imagens
-                cartas.get(i).setImagem(Instancia_Imagens(n));
-                cartas.get(card_aleatorio).setImagem(Instancia_Imagens(n));
+                cartas.get(Posicao_Lista_por_id(i)).setImagem(Instancia_Imagens(n));
+                cartas.get(Posicao_Lista_por_id(card_aleatorio)).setImagem(Instancia_Imagens(n));
 
                 //defino os pares
-                cartas.get(i).setId_carta_par(card_aleatorio);
-                cartas.get(card_aleatorio).setId_carta_par(i);
+                cartas.get(Posicao_Lista_por_id(i)).setId_carta_par(card_aleatorio);
+                cartas.get(Posicao_Lista_por_id(card_aleatorio)).setId_carta_par(i);
 
                 //acréscimo do n
                 n++;
@@ -107,19 +127,20 @@ public class TelaJogoMemoriaController implements Initializable {
                 //decréscimo do i
                 i--;
 
-                if (card_aleatorio == 0) {
-                    flagto0 = false;
-                }
+//                if (card_aleatorio == 0) {
+//                    flagto0 = false;
+//                }
             }
 
-            if (i < 5) {
+            if (i < 6) {
                 status = false;
             }
 
         }
 
     }
-
+    
+    //Instancia as imagens
     public Image Instancia_Imagens(int numero_imagem) throws FileNotFoundException{
          
         switch (numero_imagem) {
@@ -148,17 +169,142 @@ public class TelaJogoMemoriaController implements Initializable {
 
         return null;
     }
+    
+    //Compara as Cartas abertas
+    public void Compara_Cartas(Card carta_aberta) {
+        
+        Card carta;
+        try {          
+            carta = cartas.stream().filter(x -> x.isStatus() == true && x.getId_carta() != carta_aberta.getId_carta()).findFirst().get();
+            if (carta != null) {
+                if (carta_aberta.getId_carta() == carta.getId_carta_par()) {
+                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
+                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
+                    Acao_Conparacao_Carta(carta_aberta.getId_carta(),carta.getId_carta(),true);
+                    
+                } else {
+                    cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
+                    cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
+                    Acao_Conparacao_Carta(carta_aberta.getId_carta(),carta.getId_carta(),false);                    
+                }
+            } 
+        } catch (Exception ex) {
+            //Quando não encontra uma carta na busca ele lança o NoSuchElementException
+            System.out.println(ex.getMessage());
+        } 
+        System.out.println("Acabou de comparar as cartas");
+
+    }
+    
+    //Verifica se possui outra carta aberta
+    public boolean Verifica_Cartas_Abertas(Card carta_aberta) {
+        Card carta;
+        try {
+            carta = cartas.stream().filter(x -> x.isStatus() == true && x.getId_carta() != carta_aberta.getId_carta()).findFirst().get();
+            if (carta != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            //Quando não encontra uma carta na busca ele lança o NoSuchElementException
+            return false;
+        }
+
+    }    
+    
+    //Esconde ou mostra as cartas
+    public void Acao_Conparacao_Carta(int Id_1, int Id_2, boolean resultado) throws InterruptedException{ 
+
+        if (resultado) {
+
+            if (Id_1 == 1 || Id_2 == 1) {                
+                img_card_1.setImage(null);
+            }
+            if (Id_1 == 2 || Id_2 == 2) {               
+                img_card_2.setImage(null);
+            }
+            if (Id_1 == 3 || Id_2 == 3) {
+                img_card_3.setImage(null);
+            }
+            if (Id_1 == 4 || Id_2 == 4) {
+                img_card_4.setImage(null);
+            }
+            if (Id_1 == 5 || Id_2 == 5) {
+                img_card_5.setImage(null);
+            }
+            if (Id_1 == 6 || Id_2 == 6) {
+                img_card_6.setImage(null);
+            }
+            if (Id_1 == 7 || Id_2 == 7) {
+                img_card_7.setImage(null);
+            }
+            if (Id_1 == 8 || Id_2 == 8) {
+                img_card_8.setImage(null);
+            }
+            if (Id_1 == 9 || Id_2 == 9) {
+                img_card_9.setImage(null);
+            }
+            if (Id_1 == 10 || Id_2 == 10) {
+                img_card_10.setImage(null);
+            }
+
+        } else {
+            if (Id_1 == 1 || Id_2 == 1) {
+                img_card_1.setImage(cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get().getImagem());
+                Thread.sleep(1000);
+                img_card_1.setImage(card_background);
+            }
+            if (Id_1 == 2 || Id_2 == 2) {
+                img_card_2.setImage(cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get().getImagem());
+                Thread.sleep(1000);
+                img_card_2.setImage(card_background);
+            }
+            if (Id_1 == 3 || Id_2 == 3) {
+                img_card_3.setImage(card_background);
+            }
+            if (Id_1 == 4 || Id_2 == 4) {
+                img_card_4.setImage(card_background);
+            }
+            if (Id_1 == 5 || Id_2 == 5) {
+                img_card_5.setImage(card_background);
+            }
+            if (Id_1 == 6 || Id_2 == 6) {
+                img_card_6.setImage(card_background);
+            }
+            if (Id_1 == 7 || Id_2 == 7) {
+                img_card_7.setImage(card_background);
+            }
+            if (Id_1 == 8 || Id_2 == 8) {
+                img_card_8.setImage(card_background);
+            }
+            if (Id_1 == 9 || Id_2 == 9) {
+                img_card_9.setImage(card_background);
+            }
+            if (Id_1 == 10 || Id_2 == 10) {
+                img_card_10.setImage(card_background);
+            }
+
+        }
+
+    }
 
     //Evento do Card 1
     @FXML
     private void Card_Event(MouseEvent event) {
         
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get();
-
+        
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_1.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get().setStatus(true);
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");                    
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_1.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get().setStatus(false);
@@ -176,8 +322,14 @@ public class TelaJogoMemoriaController implements Initializable {
 
         if (carta != null) {
             if (!carta.isStatus()) {
-                img_card_2.setImage(carta.getImagem());
+                img_card_2.setImage(carta.getImagem());      
                 cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                     Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_2.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get().setStatus(false);
@@ -196,6 +348,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_6.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 6).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                     Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_6.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 6).findFirst().get().setStatus(false);
@@ -214,6 +372,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_7.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 7).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                     Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_7.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 7).findFirst().get().setStatus(false);
@@ -232,6 +396,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_8.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 8).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                     Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_8.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 8).findFirst().get().setStatus(false);
@@ -250,6 +420,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_9.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 9).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                     Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_9.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 9).findFirst().get().setStatus(false);
@@ -268,6 +444,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_10.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 10).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                     Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_10.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 10).findFirst().get().setStatus(false);
@@ -286,6 +468,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_3.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 3).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_3.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 3).findFirst().get().setStatus(false);
@@ -304,6 +492,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_4.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 4).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);                   
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_4.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 4).findFirst().get().setStatus(false);
@@ -322,6 +516,12 @@ public class TelaJogoMemoriaController implements Initializable {
             if (!carta.isStatus()) {
                 img_card_5.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 5).findFirst().get().setStatus(true);
+                 if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta); 
+                    System.out.println("Tem carta aberta");
+                } else {
+                    System.out.println("Não tem carta aberta");
+                }
             } else {
                 img_card_5.setImage(card_background);
                 cartas.stream().filter(x -> x.getId_carta() == 5).findFirst().get().setStatus(false);
