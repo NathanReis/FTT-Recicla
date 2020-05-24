@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -64,6 +66,8 @@ public class TelaJogoMemoriaController implements Initializable {
     //lista global das cartas
     List<Card> cartas;
     Image card_background; 
+    @FXML
+    private Button btn_compara_cartas;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,8 +104,7 @@ public class TelaJogoMemoriaController implements Initializable {
     public void Monta_Jogo_da_Memoria(List<Card> cartas) throws FileNotFoundException {
         int n = 1;
         Random rand = new Random();
-        int card_aleatorio;
-        boolean flagto0 = true;
+        int card_aleatorio;      
         boolean status = true;
         int i = 10;
   
@@ -172,26 +175,34 @@ public class TelaJogoMemoriaController implements Initializable {
     
     //Compara as Cartas abertas
     public void Compara_Cartas(Card carta_aberta) {
-        
+
         Card carta;
-        try {          
+        try {
             carta = cartas.stream().filter(x -> x.isStatus() == true && x.getId_carta() != carta_aberta.getId_carta()).findFirst().get();
             if (carta != null) {
                 if (carta_aberta.getId_carta() == carta.getId_carta_par()) {
-                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
-                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
-                    Acao_Conparacao_Carta(carta_aberta.getId_carta(),carta.getId_carta(),true);
-                    
+                    cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
+                    cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Validação");
+                    alert.setContentText("Você acertou");
+                    alert.showAndWait();
+                    Acao_Conparacao_Carta(carta_aberta.getId_carta(), carta.getId_carta(), true);
+
                 } else {
                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
-                    Acao_Conparacao_Carta(carta_aberta.getId_carta(),carta.getId_carta(),false);                    
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Validação");
+                    alert.setContentText("Você errou");
+                    alert.showAndWait();
+                    Acao_Conparacao_Carta(carta_aberta.getId_carta(), carta.getId_carta(), false);
                 }
-            } 
+            }
         } catch (Exception ex) {
             //Quando não encontra uma carta na busca ele lança o NoSuchElementException
             System.out.println(ex.getMessage());
-        } 
+        }
         System.out.println("Acabou de comparar as cartas");
 
     }
@@ -214,7 +225,7 @@ public class TelaJogoMemoriaController implements Initializable {
     }    
     
     //Esconde ou mostra as cartas
-    public void Acao_Conparacao_Carta(int Id_1, int Id_2, boolean resultado) throws InterruptedException{ 
+    public void Acao_Conparacao_Carta(int Id_1, int Id_2, boolean resultado){ 
 
         if (resultado) {
 
@@ -250,14 +261,10 @@ public class TelaJogoMemoriaController implements Initializable {
             }
 
         } else {
-            if (Id_1 == 1 || Id_2 == 1) {
-                img_card_1.setImage(cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get().getImagem());
-                Thread.sleep(1000);
+            if (Id_1 == 1 || Id_2 == 1) {       
                 img_card_1.setImage(card_background);
             }
-            if (Id_1 == 2 || Id_2 == 2) {
-                img_card_2.setImage(cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get().getImagem());
-                Thread.sleep(1000);
+            if (Id_1 == 2 || Id_2 == 2) {             
                 img_card_2.setImage(card_background);
             }
             if (Id_1 == 3 || Id_2 == 3) {
@@ -300,7 +307,7 @@ public class TelaJogoMemoriaController implements Initializable {
                 img_card_1.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get().setStatus(true);
                 if (Verifica_Cartas_Abertas(carta)) {
-                    Compara_Cartas(carta);                   
+                     Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");                    
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -325,7 +332,7 @@ public class TelaJogoMemoriaController implements Initializable {
                 img_card_2.setImage(carta.getImagem());      
                 cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get().setStatus(true);
                  if (Verifica_Cartas_Abertas(carta)) {
-                     Compara_Cartas(carta);                   
+                      Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -529,6 +536,18 @@ public class TelaJogoMemoriaController implements Initializable {
 
         } else {
             System.out.println("Erro na busca da carta");
+        }
+    }
+
+    @FXML
+    private void Comparar_Cartas(MouseEvent event) {
+        Card carta;
+        try {
+            carta = cartas.stream().filter(x -> x.isStatus() == true).findFirst().get();
+            Compara_Cartas(carta);
+        } catch (Exception ex) {
+            //Quando não encontra uma carta na busca ele lança o NoSuchElementException
+
         }
     }
     
