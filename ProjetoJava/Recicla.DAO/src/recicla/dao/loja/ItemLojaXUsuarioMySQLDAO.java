@@ -16,6 +16,10 @@ public class ItemLojaXUsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         setTabela("ItensLojaXUsuarios");
     }
     
+    protected String getComandoConsultar() {
+        return "SELECT * FROM " + getTabela() + " WHERE UsuarioId = ?;";
+    }
+    
     @Override
     protected String getComandoInserir() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
