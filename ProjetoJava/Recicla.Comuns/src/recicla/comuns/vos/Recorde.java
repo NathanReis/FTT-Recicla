@@ -10,8 +10,8 @@ public class Recorde extends Entidade {
     private int JogoId;
     @CampoNoBanco(nome = "UsuarioId", chave = false)
     private int UsuarioId;
-    @CampoNoBanco(nome = "QtdPartidade", chave = false)
-    private int QtdPartidade;
+    @CampoNoBanco(nome = "QtdPartidas", chave = false)
+    private int QtdPartidas;
     @CampoNoBanco(nome = "QtdVitorias", chave = false)
     private int QtdVitorias;
     @CampoNoBanco(nome = "MelhorTempo", chave = false)
@@ -62,17 +62,17 @@ public class Recorde extends Entidade {
     }
 
     /**
-     * @return the QtdPartidade
+     * @return the QtdPartidas
      */
-    public int getQtdPartidade() {
-        return QtdPartidade;
+    public int getQtdPartidas() {
+        return QtdPartidas;
     }
 
     /**
-     * @param QtdPartidade the QtdPartidade to set
+     * @param QtdPartidas the QtdPartidas to set
      */
-    public void setQtdPartidade(int QtdPartidade) {
-        this.QtdPartidade = QtdPartidade;
+    public void setQtdPartidas(int QtdPartidas) {
+        this.QtdPartidas = QtdPartidas;
     }
 
     /**

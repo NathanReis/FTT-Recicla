@@ -60,6 +60,7 @@ public class MySQLDAO <E extends Entidade> extends DAO{
         return entidade;
     }
     
+    @Override
     public Entidade consultar(String valorCampo) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

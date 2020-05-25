@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.comuns.vos;
 
 import javafx.scene.image.Image;
@@ -11,17 +6,11 @@ import java.util.List;
 import java.util.Random;
 import recicla.comuns.crud.basis.Entidade;
 
-/**
- *
- * @author italo
- */
 public class Card extends Entidade {
-    
     private int id_carta;
     private boolean status;
     private Image imagem;
     private int id_carta_par;
-    
     
     public Card(int id){
         this.id_carta = id;     
@@ -84,7 +73,6 @@ public class Card extends Entidade {
     }
     
     public List<Card> Lista_cards_randomicos(){
-    
         List<Card> lista_cards = new ArrayList<Card>();
         Random rand = new Random();
         boolean status = false;
@@ -100,23 +88,16 @@ public class Card extends Entidade {
             }
             if (n == 10) 
                 status = true;
-            
-
         }
 
-        
         return lista_cards;
     }
     
     public static boolean Verifica_Par_cartas(int numero, List<Card> cartas) {
-
         if (cartas.stream().anyMatch(x -> x.id_carta_par == numero)) {
             return true;
         } else {
             return false;
         }
-
     }    
-  
-    
 }
