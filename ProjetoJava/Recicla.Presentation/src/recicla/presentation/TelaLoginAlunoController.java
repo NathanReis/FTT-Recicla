@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
@@ -78,6 +79,10 @@ public class TelaLoginAlunoController implements Initializable {
             }  
                 
             } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login");
+                alert.setContentText("Login inválido, tente novamente.");
+                alert.showAndWait();
                 System.out.println("Usuario invalido");
             }
         } catch (Exception erro) {

@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.lang.reflect.Type;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -60,25 +61,26 @@ public class TelaCadastroController implements Initializable {
         user.setUsuario(txtLogin.getText());
         user.setSenha(txtSenha.getText());
         user.setNome(txtNome.getText());
-        
-        
-
-
-       //System.out.println(u.getLogin());
-        
-        //CadastraUsuario insere = new CadastraUsuario();
-        //boolean inserir = insere.InsereUsuario(user);
-       /* 
-        if (inserir) {
-            System.out.println("inseriu com sucesso");
-        } else {
-            System.out.println("Falha ao Inserir");
-        }*/
        
        Gson g = new Gson();
        
        String json = g.toJson(user);
        String retorno = sendPost(json);
+       
+       if(retorno.equalsIgnoreCase("invalid"))
+       {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Cadastro");
+            alert.setContentText("Cadastro inválido, verifique campos em branco.");
+            alert.showAndWait();
+       }
+       else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cadastro");
+            alert.setContentText("Cadastrado com sucesso.");
+            alert.showAndWait();
+       }
+       
        
        System.out.print(retorno);
         
@@ -112,6 +114,11 @@ public class TelaCadastroController implements Initializable {
 
                 // Caso você queira usar o código HTTP para fazer alguma coisa, descomente esta linha.
                 int response = request.getResponseCode();
+                
+                if(response != 200)
+                {
+                    return "invalid";
+                }
                 System.out.print(response);
 
                 return readResponse(request);
