@@ -33,6 +33,7 @@ public class ItemLojaMySQLDAO <E extends Entidade> extends MySQLDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
     protected E preencherEntidade(ResultSet rs) throws SQLException {
         ItemLoja entidade = new ItemLoja();
 

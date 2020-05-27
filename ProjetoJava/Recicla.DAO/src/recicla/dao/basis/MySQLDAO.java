@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import recicla.comuns.crud.basis.Entidade;
 
 public class MySQLDAO <E extends Entidade> extends DAO{
@@ -37,6 +38,25 @@ public class MySQLDAO <E extends Entidade> extends DAO{
     
     protected String getTabela(){
         return tabela;
+    }
+    
+    @Override
+    public ArrayList<Entidade> listar() throws SQLException {
+        ArrayList<Entidade> lista = new ArrayList<Entidade>();
+        
+        try (Connection conexao = DriverManager.getConnection(STRING_CONEXAO, USUARIO, SENHA)) {
+            String query = "SELECT * FROM " + tabela;
+            
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        lista.add(preencherEntidade(rs));
+                    }
+                }
+            }
+        }
+        
+        return lista;
     }
 
     @Override

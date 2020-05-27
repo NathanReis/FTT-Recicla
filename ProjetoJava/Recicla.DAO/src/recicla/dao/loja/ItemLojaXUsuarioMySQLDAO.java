@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import recicla.comuns.crud.basis.Entidade;
 import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.dao.basis.MySQLDAO;
@@ -16,8 +17,39 @@ public class ItemLojaXUsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         setTabela("ItensLojaXUsuarios");
     }
     
+    @Override
+    public ArrayList<Entidade> listar() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public ArrayList<Entidade> listarPorUsuarioId(int usuarioId) throws SQLException {
+        ArrayList<Entidade> lista = new ArrayList<Entidade>();
+        
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String query = "SELECT * FROM " + getTabela() + " WHERE UsuarioId = ?";
+            
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                stmt.setInt(1, usuarioId);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        lista.add(preencherEntidade(rs));
+                    }
+                }
+            }
+        }
+        
+        return lista;
+    }
+    
+    @Override
+    public Entidade consultar(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
     protected String getComandoConsultar() {
-        return "SELECT * FROM " + getTabela() + " WHERE UsuarioId = ?;";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override
@@ -53,6 +85,7 @@ public class ItemLojaXUsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
     protected E preencherEntidade(ResultSet rs) throws SQLException {
         ItemLojaXUsuario entidade = new ItemLojaXUsuario();
 
