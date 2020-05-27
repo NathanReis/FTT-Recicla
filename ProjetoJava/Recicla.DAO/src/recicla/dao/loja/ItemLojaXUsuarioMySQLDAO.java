@@ -33,7 +33,7 @@ public class ItemLojaXUsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
-                        lista.add(preencherEntidade(rs));
+                        lista.add((ItemLojaXUsuario)preencherEntidade(rs));
                     }
                 }
             }
