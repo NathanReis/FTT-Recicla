@@ -53,8 +53,8 @@ public class ItensWs {
         //TODO return proper representation object
 
         ItemLojaXUsuarioMySQLDAO dao = new ItemLojaXUsuarioMySQLDAO();
-        //List<ItemLojaXUsuario> itens = new ArrayList<>();
-        ItemLojaXUsuario itens = (ItemLojaXUsuario)dao.listarPorUsuarioId(userId);
+        List<ItemLojaXUsuario> itens = new ArrayList<>();
+        itens = dao.listarPorUsuarioId(userId);
     
         Gson g = new Gson();
         return g.toJson(itens);
@@ -69,13 +69,14 @@ public class ItensWs {
     public void putJson(String content) {
     }
     
-    /*
-    @POST
+    
+    /*@POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/adciona-item-usuario")
-    public String addUserItem(String user) throws SQLException {
+    public String addUserItem(String item) throws SQLException {
         Gson g = new Gson();
-        Usuario u = g.fromJson(user, Usuario.class);
+        //Usuario u = g.fromJson(user, Usuario.class);
+        ItemLojaXUsuario itemRetorno = g.fromJson(item,ItemLojaXUsuario.class);
         CadastraUsuario crud = new CadastraUsuario();
         boolean inserted = crud.insereUsuario(u);
         //UsuarioMySQLDAO dao = new UsuarioMySQLDAO();

@@ -20,6 +20,9 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import recicla.business.basis.FabricaRepositorio;
 import recicla.business.crud.CadastraUsuario;
+import recicla.business.crud.Crud;
+import recicla.business.validations.IValidation;
+import recicla.business.validations.UsuarioValidation;
 import recicla.comuns.crud.basis.Entidade;
 import recicla.comuns.enums.EntidadesDisponiveis;
 import recicla.comuns.vos.Usuario;
@@ -36,11 +39,14 @@ public class UserWs {
 
     @Context
     private UriInfo context;
-
+    UsuarioMySQLDAO dao;
+    IValidation validation;
     /**
      * Creates a new instance of UserWs
      */
     public UserWs() {
+        dao = new UsuarioMySQLDAO();
+        validation = new UsuarioValidation();
     }
 
     /**
@@ -52,12 +58,8 @@ public class UserWs {
     @Path("/obtem-usuario/{user}/{senha}")
     public String getUser(@PathParam("user") String user, @PathParam("senha") String senha) throws SQLException {
         //TODO return proper representation object
-        Usuario u = new Usuario();
-        UsuarioMySQLDAO dao = new UsuarioMySQLDAO();
-        
-        u = (Usuario)dao.buscarPorCredenciais(user, senha);
-        
-    
+        Usuario u = new Usuario();          
+        u = (Usuario)dao.buscarPorCredenciais(user, senha);   
         Gson g = new Gson();
         return g.toJson(u);
     }
@@ -77,13 +79,14 @@ public class UserWs {
     public String addUser(String user) throws SQLException {
         Gson g = new Gson();
         Usuario u = g.fromJson(user, Usuario.class);
-        CadastraUsuario crud = new CadastraUsuario();
-        boolean inserted = crud.insereUsuario(u);
-        //UsuarioMySQLDAO dao = new UsuarioMySQLDAO();
-        //dao.inserir(u);
-        if(inserted == false)
-            return null;
+        boolean isValid = validation.validate(u);
         
-        return g.toJson(u);
+        if(isValid){
+            dao.inserir(u);
+            return g.toJson(u);
+        }
+        else
+            return null;
+               
     }
 }
