@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import recicla.business.acesso.Acesso;
+import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.vos.Usuario;
 
 /**
@@ -54,8 +55,8 @@ public class TelaLoginAlunoController implements Initializable {
         String chamadaWS;
                 
         //chamadaWS = "http://localhost:8080/ReciclaWebServices/webresources/user/obtem-usuario/";
-        chamadaWS = "http://25.101.216.49:8080/WEB-INF/webresources/user/obtem-usuario/";
-        String json = sendGet(chamadaWS + user.getUsuario() + "/" + user.getSenha());
+        chamadaWS = "user/obtem-usuario/";
+        String json = httpRequest.sendGet(chamadaWS + user.getUsuario() + "/" + user.getSenha());
         Gson g = new Gson();
 
         Usuario u = new Usuario();
@@ -63,7 +64,7 @@ public class TelaLoginAlunoController implements Initializable {
         Type usuarioType = new TypeToken<Usuario>() {}.getType();
 
         u = g.fromJson(json, usuarioType);
-        
+          
         try {
             
             if(u != null) {
@@ -105,32 +106,4 @@ public class TelaLoginAlunoController implements Initializable {
                 
     }
     
-    private String sendGet(String url) throws Exception {
- 	
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-        // optional default is GET
-        con.setRequestMethod("GET");
-
-        //add request header
-        con.setRequestProperty("User-Agent", USER_AGENT);
-
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-        }
-        in.close();
-
-        return response.toString();
- 
-    }
 }

@@ -28,6 +28,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.lang.reflect.Type;
 import javafx.scene.control.Alert;
+import recicla.business.httpRequests.httpRequest;
 
 /**
  * FXML Controller class
@@ -45,7 +46,7 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private TextField txtNome;
     
-    String url = "http://25.101.216.49:8080/WEB-INF/webresources/user/adciona-usuario";
+    String url = "user/adciona-usuario";
     
     /**
      * Initializes the controller class.
@@ -65,7 +66,7 @@ public class TelaCadastroController implements Initializable {
        Gson g = new Gson();
        
        String json = g.toJson(user);
-       String retorno = sendPost(json);
+       String retorno = httpRequest.sendPost(json, url);
        
        if(retorno.equalsIgnoreCase("invalid"))
        {
@@ -84,62 +85,6 @@ public class TelaCadastroController implements Initializable {
        
        System.out.print(retorno);
         
-    }
-    
-    
-    public String sendPost(String json) throws Exception {
-
-        try {
-            // Cria um objeto HttpURLConnection:
-            HttpURLConnection request = (HttpURLConnection) new URL(url).openConnection();
-
-            try {
-                // Define que a conexão pode enviar informações e obtê-las de volta:
-                request.setDoOutput(true);
-                request.setDoInput(true);
-
-                // Define o content-type:
-                request.setRequestProperty("Content-Type", "application/json");
-
-                // Define o método da requisição:
-                request.setRequestMethod("POST");
-
-                // Conecta na URL:
-                request.connect();
-
-                // Escreve o objeto JSON usando o OutputStream da requisição:
-                try (OutputStream outputStream = request.getOutputStream()) {
-                    outputStream.write(json.getBytes("UTF-8"));
-                }
-
-                // Caso você queira usar o código HTTP para fazer alguma coisa, descomente esta linha.
-                int response = request.getResponseCode();
-                
-                if(response != 200)
-                {
-                    return "invalid";
-                }
-                System.out.print(response);
-
-                return readResponse(request);
-            } finally {
-                request.disconnect();
-            }
-        } catch (IOException ex) {
-            throw new Exception(ex);
-        }
-    }
-   
-    private String readResponse(HttpURLConnection request) throws IOException {
-        ByteArrayOutputStream os;
-        try (InputStream is = request.getInputStream()) {
-            os = new ByteArrayOutputStream();
-            int b;
-            while ((b = is.read()) != -1) {
-                os.write(b);
-            }
-        }
-            return new String(os.toByteArray());
     }
     
 }
