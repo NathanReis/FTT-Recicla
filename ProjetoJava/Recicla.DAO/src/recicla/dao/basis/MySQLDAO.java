@@ -109,7 +109,7 @@ public class MySQLDAO <E extends Entidade> extends DAO{
     }
     
     @Override
-    public void inserir(Entidade entidade)  throws SQLException {
+    public void inserir(Entidade entidade) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
