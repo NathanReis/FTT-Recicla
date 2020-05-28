@@ -19,7 +19,7 @@ import java.net.URL;
  * @author vitorlupinetti
  */
 public class httpRequest {
-    private  static String baseUrl = "http://25.101.216.49:8080/WEB-INF/webresources/";
+    private  static String baseUrl = "http://25.101.216.49:8080/ReciclaWebServices/webresources/";
     private static final String USER_AGENT = "Mozilla/5.0";
     
      public static String sendGet(String url) throws Exception {
