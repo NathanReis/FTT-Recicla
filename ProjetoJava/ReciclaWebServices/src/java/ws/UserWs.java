@@ -58,9 +58,11 @@ public class UserWs {
     @Path("/obtem-usuario/{user}/{senha}")
     public String getUser(@PathParam("user") String user, @PathParam("senha") String senha) throws SQLException {
         //TODO return proper representation object
-        Usuario u = new Usuario();          
-        u = (Usuario)dao.buscarPorCredenciais(user, senha);   
+                
+        Usuario u = (Usuario)dao.buscarPorCredenciais(user, senha);   
+        System.out.print(u);
         Gson g = new Gson();
+       
         return g.toJson(u);
     }
 

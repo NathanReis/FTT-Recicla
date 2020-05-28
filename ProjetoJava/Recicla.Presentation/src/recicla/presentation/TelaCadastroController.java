@@ -45,7 +45,7 @@ public class TelaCadastroController implements Initializable {
     @FXML
     private TextField txtNome;
     
-    String url = "http://25.101.216.49:8080/ReciclaWebServices/webresources/user/adciona-usuario";
+    String url = "http://25.101.216.49:8080/WEB-INF/webresources/user/adciona-usuario";
     
     /**
      * Initializes the controller class.

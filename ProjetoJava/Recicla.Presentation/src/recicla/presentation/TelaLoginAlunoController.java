@@ -54,7 +54,7 @@ public class TelaLoginAlunoController implements Initializable {
         String chamadaWS;
                 
         //chamadaWS = "http://localhost:8080/ReciclaWebServices/webresources/user/obtem-usuario/";
-        chamadaWS = "http://25.101.216.49:8080/ReciclaWebServices/webresources/user/obtem-usuario/";
+        chamadaWS = "http://25.101.216.49:8080/WEB-INF/webresources/user/obtem-usuario/";
         String json = sendGet(chamadaWS + user.getUsuario() + "/" + user.getSenha());
         Gson g = new Gson();
 
