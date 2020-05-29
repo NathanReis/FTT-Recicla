@@ -31,6 +31,8 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(ws.ItensUsuarioWs.class);
         resources.add(ws.ItensWs.class);
+        resources.add(ws.JogoWs.class);
+        resources.add(ws.PerguntaQuizWs.class);
         resources.add(ws.UserWs.class);
     }
     

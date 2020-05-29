@@ -9,6 +9,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -26,11 +27,12 @@ public class ItensUsuarioWs {
 
     @Context
     private UriInfo context;
-
+    ItemLojaXUsuarioMySQLDAO dao;
     /**
      * Creates a new instance of UserWs
      */
     public ItensUsuarioWs() {
+        dao = new ItemLojaXUsuarioMySQLDAO();
     }
 
     /**
@@ -43,7 +45,7 @@ public class ItensUsuarioWs {
     public String getUserItensByUserId(@PathParam("userId") int userId) throws SQLException {
         //TODO return proper representation object
 
-        ItemLojaXUsuarioMySQLDAO dao = new ItemLojaXUsuarioMySQLDAO();
+        
         List<ItemLojaXUsuario> itens = new ArrayList<>();
         itens = dao.listarPorUsuarioId(userId);
     
@@ -61,20 +63,15 @@ public class ItensUsuarioWs {
     }
     
     
-    /*@POST
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/adciona-item-usuario")
     public String addUserItem(String item) throws SQLException {
         Gson g = new Gson();
-        //Usuario u = g.fromJson(user, Usuario.class);
         ItemLojaXUsuario itemRetorno = g.fromJson(item,ItemLojaXUsuario.class);
-        CadastraUsuario crud = new CadastraUsuario();
-        boolean inserted = crud.insereUsuario(u);
-        //UsuarioMySQLDAO dao = new UsuarioMySQLDAO();
-        //dao.inserir(u);
-        if(inserted == false)
-            return null;
+
+         dao.inserir(itemRetorno);
         
-        return g.toJson(u);
-    }*/
+        return g.toJson(itemRetorno);
+    }
 }
