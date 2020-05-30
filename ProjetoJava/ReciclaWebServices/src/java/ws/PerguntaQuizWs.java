@@ -20,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import recicla.business.validations.IValidation;
+import recicla.business.validations.PerguntaQuizValidation;
 import recicla.comuns.vos.PerguntaQuiz;
 import recicla.dao.jogo.PerguntaQuizMySQLDAO;
 
@@ -40,7 +41,7 @@ public class PerguntaQuizWs {
      */
     public PerguntaQuizWs() {
         dao = new PerguntaQuizMySQLDAO();
-        //validation = new UsuarioValidation();
+        validation = new PerguntaQuizValidation();
     }
 
     /**
@@ -75,21 +76,15 @@ public class PerguntaQuizWs {
     @Path("/adcionar-pergunta")
     public String addQuestion(String question) throws SQLException {
         Gson g = new Gson();
-        //Usuario u = g.fromJson(user, Usuario.class);
         PerguntaQuiz pergunta = g.fromJson(question, PerguntaQuiz.class);
-        //boolean isValid = validation.validate(u);
+        boolean isValid = validation.validate(pergunta);
         
-       /* if(isValid){
-            dao.inserir(u);
-            return g.toJson(u);
+        if(isValid){
+            dao.inserir(pergunta);
+            return g.toJson(pergunta);
         }
         else
-            return null;*/
-       
-       dao.inserir(pergunta);
-       
-       return question;
-               
+            return null;               
     }
     
     @GET
