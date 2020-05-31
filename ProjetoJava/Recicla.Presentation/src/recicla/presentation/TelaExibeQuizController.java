@@ -22,7 +22,7 @@ public class TelaExibeQuizController implements Initializable {
         // TODO
     }    
 
-    private void btnAdicionaPergunta(ActionEvent event) {
+    public void btnAdicionaPergunta(ActionEvent event) {
         try {
             FXMLLoader fxml = new FXMLLoader(getClass().getResource("TelaCadastroPergunta.fxml")); 
             Parent root = (Parent) fxml.load();

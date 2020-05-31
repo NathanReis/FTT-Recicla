@@ -77,7 +77,7 @@ public class httpRequest {
 
                 // Caso você queira usar o código HTTP para fazer alguma coisa, descomente esta linha.
                 int response = request.getResponseCode();
-                
+                System.out.print(response);
                 if(response != 200)
                 {
                     return "invalid";

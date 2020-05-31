@@ -60,7 +60,7 @@ public class PerguntaQuizMySQLDAO <E extends Entidade> extends MySQLDAO {
         entidade.setRespostaCorreta(rs.getString("RespostaCorreta"));
         entidade.setAlternativa1(rs.getString("Alternativa1"));
         entidade.setAlternativa2(rs.getString("Alternativa2"));
-        entidade.setJogoId(rs.getInt("SalaId"));
+        entidade.setJogoId(rs.getInt("JogoId"));
 
         return (E)entidade;
     }

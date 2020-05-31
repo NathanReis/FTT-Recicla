@@ -95,7 +95,7 @@ public class PerguntaQuizWs {
                   
        
         PerguntaQuiz pergunta = (PerguntaQuiz) dao.consultar(questionId);
-        
+        System.out.print(pergunta);
         Gson g = new Gson();
         
         return g.toJson(pergunta);
