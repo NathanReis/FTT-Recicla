@@ -7,25 +7,23 @@ import recicla.comuns.crud.basis.Entidade;
 public abstract class DAO <E extends Entidade> {
     protected Class<E> entityClass;
 
-    public DAO(Class<E> entityClass){
+    public DAO(Class<E> entityClass) {
         this.entityClass = entityClass;
     }
 
     public abstract ArrayList<E> listar() throws SQLException;
     public abstract E consultar(int id) throws SQLException;
     public abstract E consultar(String valorCampo) throws SQLException;
+    public abstract E consultar(String campo, int valor) throws SQLException;
+    public abstract E consultar(String campo, String valor) throws SQLException;
     public abstract void inserir(Entidade entidade) throws SQLException;
     public abstract void atualizar(Entidade enteidade)  throws SQLException;
     public abstract void deletar(int id) throws SQLException;
     
-    protected E getInstanceOfE()
-    {
-        try
-        {
+    protected E getInstanceOfE() {
+        try {
             return entityClass.newInstance();
-        }
-        catch (IllegalAccessException | InstantiationException e)
-        {
+        } catch (IllegalAccessException | InstantiationException e) {
             // Oops, no default constructor
             throw new RuntimeException(e);
         }

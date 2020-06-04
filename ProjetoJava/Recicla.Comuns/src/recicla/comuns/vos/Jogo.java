@@ -6,6 +6,7 @@ import recicla.comuns.crud.basis.Entidade;
 public class Jogo extends Entidade {
     @CampoNoBanco(nome = "JogoId", chave = true)
     private int JogoId;
+    
     @CampoNoBanco(nome = "Descricao", chave = false)
     private String Descricao;
     

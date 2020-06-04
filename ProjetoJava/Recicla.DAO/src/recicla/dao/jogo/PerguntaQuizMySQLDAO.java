@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import recicla.comuns.crud.basis.Entidade;
 import recicla.comuns.vos.PerguntaQuiz;
 import recicla.dao.basis.MySQLDAO;
@@ -14,6 +15,25 @@ public class PerguntaQuizMySQLDAO <E extends Entidade> extends MySQLDAO {
         super(PerguntaQuiz.class);
         
         setTabela("PerguntasQuiz");
+    }
+    
+    @Override
+    public ArrayList<PerguntaQuiz> listar() throws SQLException {
+        ArrayList<PerguntaQuiz> lista = new ArrayList<PerguntaQuiz>();
+        
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String sql = getComandoListar();
+            
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        lista.add((PerguntaQuiz)preencherEntidade(rs));
+                    }
+                }
+            }
+        }
+        
+        return lista;
     }
     
     @Override

@@ -1,8 +1,6 @@
 -- ####################
 -- Criação do banco
 -- ####################
-DROP DATABASE IF EXISTS ReciclaDB;
-
 CREATE DATABASE ReciclaDB;
 
 USE ReciclaDB;
@@ -22,7 +20,6 @@ CREATE TABLE Salas
   SalaId INT UNSIGNED AUTO_INCREMENT,
   Descricao VARCHAR(50) NOT NULL,
   ChaveAcesso CHAR(5) NOT NULL,
-  HorarioInicio TIME NOT NULL,
   PRIMARY KEY (SalaId)
 );
 

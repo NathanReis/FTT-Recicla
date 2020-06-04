@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import recicla.comuns.crud.basis.Entidade;
 
-public class MySQLDAO <E extends Entidade> extends DAO{
-    public MySQLDAO(Class entityclass){
+public class MySQLDAO <E extends Entidade> extends DAO {
+    public MySQLDAO(Class entityclass) {
         super(entityclass);
     }
     
@@ -20,54 +20,71 @@ public class MySQLDAO <E extends Entidade> extends DAO{
     final String SENHA = "";
     private String tabela;
     
-    protected String getStringConexao(){
+    protected String getStringConexao() {
         return STRING_CONEXAO;
     }
     
-    protected String getUsuario(){
+    protected String getUsuario() {
         return USUARIO;
     }
     
-    protected String getSenha(){
+    protected String getSenha() {
         return SENHA;
     }
     
-    protected void setTabela(String tabela){
+    protected void setTabela(String tabela) {
         this.tabela = tabela;
     }
     
-    protected String getTabela(){
+    protected String getTabela() {
         return tabela;
     }
     
     @Override
     public ArrayList<Entidade> listar() throws SQLException {
-        ArrayList<Entidade> lista = new ArrayList<Entidade>();
-        
-        try (Connection conexao = DriverManager.getConnection(STRING_CONEXAO, USUARIO, SENHA)) {
-            String query = "SELECT * FROM " + tabela;
-            
-            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        lista.add(preencherEntidade(rs));
-                    }
-                }
-            }
-        }
-        
-        return lista;
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public String getComandoListar() {
+        return "SELECT * FROM " + tabela;
     }
 
     @Override
     public Entidade consultar(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
+//        E entidade = null;
+//
+//        try (Connection conexao = DriverManager.getConnection(STRING_CONEXAO, USUARIO, SENHA)) {
+//            String sql = getComandoConsultar();
+//
+//            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+//                stmt.setInt(1, id);
+//
+//                try (ResultSet rs = stmt.executeQuery()) {
+//                    if (rs.first()) {
+//                        entidade = preencherEntidade(rs);
+//                    }
+//                }
+//            }
+//        }
+//
+//        return entidade;
+    }
+    
+    @Override
+    public Entidade consultar(String valorCampo) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public Entidade consultar(String campo, int valor) throws SQLException {
         E entidade = null;
 
         try (Connection conexao = DriverManager.getConnection(STRING_CONEXAO, USUARIO, SENHA)) {
-            String query = getComandoConsultar();
+            String sql = "SELECT * FROM " + tabela + " WHERE " + campo + " = ?;";
 
-            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
-                stmt.setInt(1, id);
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setInt(1, valor);
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.first()) {
@@ -81,12 +98,28 @@ public class MySQLDAO <E extends Entidade> extends DAO{
     }
     
     @Override
-    public Entidade consultar(String valorCampo) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Entidade consultar(String campo, String valor) throws SQLException {
+        E entidade = null;
+
+        try (Connection conexao = DriverManager.getConnection(STRING_CONEXAO, USUARIO, SENHA)) {
+            String sql = "SELECT * FROM " + tabela + " WHERE " + campo + " = ?;";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setString(1, valor);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.first()) {
+                        entidade = preencherEntidade(rs);
+                    }
+                }
+            }
+        }
+
+        return entidade;
     }
     
     protected String getComandoConsultar() {
-        String campos = "";
+//        String campos = "";
         String chave = "";
 
         for (Field campo : entityClass.getDeclaredFields()) {            
@@ -95,22 +128,23 @@ public class MySQLDAO <E extends Entidade> extends DAO{
 
                 if (anotacao.chave()) {
                     chave = anotacao.nome();
+                    break;
                 }
 
-                campos += anotacao.nome() + ", ";
+//                campos += anotacao.nome() + ", ";
             }
         }
 
-        if (campos.length() > 0) {
-            campos = campos.substring(0, campos.length()-2);
-        }
+//        if (campos.length() > 0) {
+//            campos = campos.substring(0, campos.length()-2);
+//        }
 
-        return "SELECT " + campos + " FROM " + tabela + " WHERE " + chave + " = ?;";
+        return "SELECT * FROM " + tabela + " WHERE " + chave + " = ?;";
     }
     
     @Override
     public void inserir(Entidade entidade) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     protected String getComandoInserir() {
@@ -138,7 +172,7 @@ public class MySQLDAO <E extends Entidade> extends DAO{
 
     @Override
     public void atualizar(Entidade entidade) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     protected String getComandoAtualizar() {
@@ -167,9 +201,9 @@ public class MySQLDAO <E extends Entidade> extends DAO{
     @Override
     public void deletar(int id) throws SQLException {
         try (Connection conexao = DriverManager.getConnection(STRING_CONEXAO, USUARIO, SENHA )) {
-            String query = getComandoDeletar();
+            String sql = getComandoDeletar();
 
-            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                 stmt.setInt(1, id);
 
                 stmt.executeUpdate();
@@ -191,7 +225,7 @@ public class MySQLDAO <E extends Entidade> extends DAO{
             }
         }
 
-        return "DELETE FROM " + tabela + " WHERE " + chave + " = ?";
+        return "DELETE FROM " + tabela + " WHERE " + chave + " = ?;";
     }
     
     protected E preencherEntidade(ResultSet rs) throws SQLException {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -56,8 +51,7 @@ public class SalaWs {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/obtem-sala-por-id/{salaId}")
     public String getRoomById(@PathParam("salaId") int salaId) throws SQLException {
-        
-        Sala sala = (Sala) dao.consultar(salaId);
+        Sala sala = (Sala)dao.consultar("SalaId", salaId);
         Gson g = new Gson();
        
         return g.toJson(sala);
@@ -67,7 +61,7 @@ public class SalaWs {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/obtem-sala-por-chave/{chave}")
     public String getRoomByKey(@PathParam("chave") String chave) throws SQLException { 
-        Sala sala = (Sala) dao.consultar(chave);
+        Sala sala = (Sala)dao.consultar("ChaveAcesso", chave);
         Gson g = new Gson();
        
         return g.toJson(sala);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -57,8 +52,6 @@ public class UserWs {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/obtem-usuario/{user}/{senha}")
     public String getUser(@PathParam("user") String user, @PathParam("senha") String senha) throws SQLException {
-        //TODO return proper representation object
-                
         Usuario u = (Usuario)dao.buscarPorCredenciais(user, senha);   
         System.out.print(u);
         Gson g = new Gson();

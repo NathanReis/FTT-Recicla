@@ -1,7 +1,5 @@
 package recicla.dao.sala;
 
-import annotation.CampoNoBanco;
-import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,23 +7,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import recicla.comuns.crud.basis.Entidade;
-import recicla.comuns.vos.Rodada;
+import recicla.comuns.vos.JogoRodada;
 import recicla.dao.basis.MySQLDAO;
 
-public class RodadaMySQLDAO <E extends Entidade> extends MySQLDAO {
-    public RodadaMySQLDAO() {
-        super(Rodada.class);
+public class JogoRodadaMySQLDAO <E extends Entidade> extends MySQLDAO {
+    public JogoRodadaMySQLDAO() {
+        super(JogoRodada.class);
         
-        setTabela("Rodadas");
+        setTabela("JogosRodada");
     }
     
     @Override
     public void inserir(Entidade entidade) throws SQLException {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String sql = getComandoInserir();
+            String query = getComandoInserir();
 
-            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
-                stmt.setInt(1, ((Rodada)entidade).getSalaId());
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                stmt.setInt(1, ((JogoRodada)entidade).getJogoId());
+                stmt.setInt(2, ((JogoRodada)entidade).getRodadaId());
 
                 stmt.executeUpdate();
             }
@@ -39,24 +38,27 @@ public class RodadaMySQLDAO <E extends Entidade> extends MySQLDAO {
     
     @Override
     protected E preencherEntidade(ResultSet rs) throws SQLException {
-        Rodada entidade = new Rodada();
+        JogoRodada entidade = new JogoRodada();
 
+        entidade.setJogoRodadaId(rs.getInt("JogoRodadaId"));
+        entidade.setJogoId(rs.getInt("JogoId"));
         entidade.setRodadaId(rs.getInt("RodadaId"));
-        entidade.setSalaId(rs.getInt("SalaId"));
 
         return (E)entidade;
     }
     
-    public ArrayList<Rodada> listarPorSalaId(int salaId) throws SQLException {
-        ArrayList<Rodada> lista = new ArrayList<Rodada>();
+    public ArrayList<JogoRodada> listarPorRodadaId(int rodadaId) throws SQLException {
+        ArrayList<JogoRodada> lista = new ArrayList<JogoRodada>();
         
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String sql = "SELECT * FROM " + getTabela() + " WHERE SalaId = ?;";
+            String query = "SELECT * FROM " + getTabela() + " WHERE RodadaId = ?;";
             
-            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                stmt.setInt(1, rodadaId);
+
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
-                        lista.add((Rodada)preencherEntidade(rs));
+                        lista.add((JogoRodada)preencherEntidade(rs));
                     }
                 }
             }

@@ -18,15 +18,41 @@ public class ItemLojaXUsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
     }
     
     @Override
-    public ArrayList<Entidade> listar() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected String getComandoInserir() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public ArrayList<Entidade> listarPorUsuarioId(int usuarioId) throws SQLException {
-        ArrayList<Entidade> lista = new ArrayList<Entidade>();
+    @Override
+    protected String getComandoAtualizar() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public void deletar(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    protected String getComandoDeletar() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    protected E preencherEntidade(ResultSet rs) throws SQLException {
+        ItemLojaXUsuario entidade = new ItemLojaXUsuario();
+
+        entidade.setItemLojaId(rs.getInt("ItemLojaId"));
+        entidade.setUsuarioId(rs.getInt("UsuarioId"));
+        entidade.setQuantidade(rs.getInt("Quantidade"));
+
+        return (E)entidade;
+    }
+    
+    public ArrayList<ItemLojaXUsuario> listarPorUsuarioId(int usuarioId) throws SQLException {
+        ArrayList<ItemLojaXUsuario> lista = new ArrayList<ItemLojaXUsuario>();
         
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String query = "SELECT * FROM " + getTabela() + " WHERE UsuarioId = ?";
+            String query = "SELECT * FROM " + getTabela() + " WHERE UsuarioId = ?;";
             
             try (PreparedStatement stmt = conexao.prepareStatement(query)) {
                 stmt.setInt(1, usuarioId);
@@ -42,59 +68,36 @@ public class ItemLojaXUsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         return lista;
     }
     
-    @Override
-    public Entidade consultar(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    protected String getComandoConsultar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    protected String getComandoInserir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public void atualizar(Entidade entidade) throws SQLException {
+    public void comprarItem(int itemId, int usuarioId, int quantidade) throws SQLException {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String query = getComandoAtualizar();
+            String query = 
+                "UPDATE " + getTabela() + " " +
+                "SET Quantidade = (Quantidade + ?) " +
+                "WHERE ItemId = ? AND UsuarioId = ?;";
 
             try (PreparedStatement stmt = conexao.prepareStatement(query)) {
-                stmt.setInt(1, ((ItemLojaXUsuario)entidade).getQuantidade());
-                stmt.setInt(2, ((ItemLojaXUsuario)entidade).getItemLojaId());
-                stmt.setInt(3, ((ItemLojaXUsuario)entidade).getUsuarioId());
+                stmt.setInt(1, quantidade);
+                stmt.setInt(2, itemId);
+                stmt.setInt(3, usuarioId);
 
                 stmt.executeUpdate();
             }
         }
     }
     
-    @Override
-    protected String getComandoAtualizar() {
-        return "UPDATE " + getTabela() + " SET Quantidade = ? WHERE ItemLojaId = ? AND UsuarioId = ?";
-    }
-    
-    @Override
-    public void deletar(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    protected String getComandoDeletar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    protected E preencherEntidade(ResultSet rs) throws SQLException {
-        ItemLojaXUsuario entidade = new ItemLojaXUsuario();
+    public void consumirItem(int itemId, int usuarioId) throws SQLException {
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String query = 
+                "UPDATE " + getTabela() + " " +
+                "SET Quantidade = (Quantidade - 1) " +
+                "WHERE ItemId = ? AND UsuarioId = ?;";
 
-        entidade.setItemLojaId(rs.getInt("ItemLojaId"));
-        entidade.setUsuarioId(rs.getInt("UsuarioId"));
-        entidade.setQuantidade(rs.getInt("Quantidade"));
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                stmt.setInt(2, itemId);
+                stmt.setInt(3, usuarioId);
 
-        return (E)entidade;
+                stmt.executeUpdate();
+            }
+        }
     }
 }

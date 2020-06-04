@@ -10,8 +10,6 @@ public class Sala extends Entidade {
     private String Descricao;
     @CampoNoBanco(nome = "ChaveAcesso", chave = false)
     private String ChaveAcesso;
-    @CampoNoBanco(nome = "HorarioInicio", chave = false)
-    private float HorarioInicio;
     
     /**
      * @return the SalaId
@@ -53,19 +51,5 @@ public class Sala extends Entidade {
      */
     public void setChaveAcesso(String ChaveAcesso) {
         this.ChaveAcesso = ChaveAcesso;
-    }
-
-    /**
-     * @return the HorarioInicio
-     */
-    public float getHorarioInicio() {
-        return HorarioInicio;
-    }
-
-    /**
-     * @param HorarioInicio the HorarioInicio to set
-     */
-    public void setHorarioInicio(float HorarioInicio) {
-        this.HorarioInicio = HorarioInicio;
     }
 }

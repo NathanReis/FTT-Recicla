@@ -19,16 +19,53 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
     }
     
     @Override
-    protected String getComandoConsultar() {
-        return "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, SalaId, Dinheiro FROM " + getTabela() + " WHERE UsuarioId = ?;";
+    public Entidade consultar(String campo, int valor) throws SQLException {
+        E entidade = null;
+
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String sql = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, SalaId, Dinheiro FROM " + getTabela() + " WHERE " + campo + " = ?;";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setInt(1, valor);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.first()) {
+                        entidade = preencherEntidade(rs);
+                    }
+                }
+            }
+        }
+
+        return entidade;
+    }
+    
+    @Override
+    public Entidade consultar(String campo, String valor) throws SQLException {
+        E entidade = null;
+
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String sql = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, SalaId, Dinheiro FROM " + getTabela() + " WHERE " + campo + " = ?;";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setString(1, valor);
+
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.first()) {
+                        entidade = preencherEntidade(rs);
+                    }
+                }
+            }
+        }
+
+        return entidade;
     }
     
     @Override
     public void inserir(Entidade entidade) throws SQLException {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String query = "INSERT INTO " + getTabela() + " (Nome, Usuario, Senha) VALUES (?, ?, AES_ENCRYPT(?, '" + chaveCriptogafia + "'));";
+            String sql = getComandoInserir();
 
-            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                 stmt.setString(1, ((Usuario)entidade).getNome());
                 stmt.setString(2, ((Usuario)entidade).getUsuario());
                 stmt.setString(3, ((Usuario)entidade).getSenha());
@@ -36,6 +73,14 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
                 stmt.executeUpdate();
             }
         }
+    }
+    
+    @Override
+    protected String getComandoInserir() {
+        return 
+            "INSERT INTO " + getTabela() + " " +
+                "(Nome, Usuario, Senha) " +
+            "VALUES (?, ?, AES_ENCRYPT(?, '" + chaveCriptogafia + "'));";
     }
     
     @Override
@@ -57,32 +102,23 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         Usuario entidade = null;
 
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String query = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, SalaId, Dinheiro FROM " + getTabela() + " WHERE Usuario = ? AND AES_DECRYPT(Senha, '" + chaveCriptogafia + "') = ?";
+            String sql = 
+                "SELECT " +
+                    "UsuarioId, " +
+                    "Nome, " +
+                    "Usuario, " +
+                    "AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, " +
+                    "TipoUsuario, " +
+                    "SalaId, " +
+                    "Dinheiro " +
+                "FROM " + getTabela() + " " +
+                "WHERE " +
+                    "Usuario = ? AND " +
+                    "AES_DECRYPT(Senha, '" + chaveCriptogafia + "') = ?;";
 
-            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                 stmt.setString(1, usuario);
                 stmt.setString(2, senha);
-
-                try (ResultSet rs = stmt.executeQuery()) {
-                    if (rs.first()) {
-                        entidade = (Usuario)preencherEntidade(rs);
-                    }
-                }
-            }
-        }
-
-        return entidade;
-    }
-    
-    @Override
-    public Entidade consultar(String usuario) throws SQLException {
-        Usuario entidade = null;
-
-        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String query = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, SalaId, Dinheiro FROM " + getTabela() + " WHERE Usuario = ?;";
-
-            try (PreparedStatement stmt = conexao.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
-                stmt.setString(1, usuario);
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.first()) {

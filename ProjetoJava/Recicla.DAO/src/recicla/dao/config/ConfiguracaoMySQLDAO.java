@@ -18,13 +18,15 @@ public class ConfiguracaoMySQLDAO <E extends Entidade> extends MySQLDAO {
     
     @Override
     protected String getComandoInserir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     @Override
     public void atualizar(Entidade entidade) throws SQLException {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            try (PreparedStatement stmt = conexao.prepareStatement(getComandoAtualizar())) {
+            String sql = getComandoAtualizar();
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                 stmt.setString(1, ((Configuracao)entidade).getMusica());
                 stmt.setString(2, ((Configuracao)entidade).getSom());
 
@@ -35,12 +37,12 @@ public class ConfiguracaoMySQLDAO <E extends Entidade> extends MySQLDAO {
     
     @Override
     public void deletar(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     @Override
     protected String getComandoDeletar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     @Override

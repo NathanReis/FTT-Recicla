@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -52,8 +47,6 @@ public class PerguntaQuizWs {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/listar-perguntas")
     public String getQuestions() throws SQLException {
-        //TODO return proper representation object
-                
         List<PerguntaQuiz> perguntas = new ArrayList<>();
         perguntas = dao.listar();
         
@@ -91,10 +84,7 @@ public class PerguntaQuizWs {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/obtem-pergunta-por-id/{questionId}")
     public String getQuestionById(@PathParam("questionId") int questionId) throws SQLException {
-        //TODO return proper representation object
-                  
-       
-        PerguntaQuiz pergunta = (PerguntaQuiz) dao.consultar(questionId);
+        PerguntaQuiz pergunta = (PerguntaQuiz)dao.consultar("PerguntaQuizId", questionId);
         System.out.print(pergunta);
         Gson g = new Gson();
         

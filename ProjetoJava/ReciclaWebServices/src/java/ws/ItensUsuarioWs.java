@@ -43,9 +43,6 @@ public class ItensUsuarioWs {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/obtem-itens-usuario/{userId}")
     public String getUserItensByUserId(@PathParam("userId") int userId) throws SQLException {
-        //TODO return proper representation object
-
-        
         List<ItemLojaXUsuario> itens = new ArrayList<>();
         itens = dao.listarPorUsuarioId(userId);
     
