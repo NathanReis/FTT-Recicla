@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"    minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaJogosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaJogosController">
    <children>
       <Pane prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
          <children>
@@ -73,9 +74,9 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Pane layoutX="9.0" layoutY="202.0" prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
+                        <Pane layoutX="9.0" layoutY="202.0"  prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
                            <children>
-                              <Label fx:id="txtAlternativa1" layoutX="219.0" layoutY="9.0" text="Alternativa 1">
+                              <Label fx:id="txtAlternativa1"  layoutX="219.0" layoutY="9.0" text="Alternativa 1">
                                  <font>
                                     <Font name="Arial" size="13.0" />
                                  </font>
