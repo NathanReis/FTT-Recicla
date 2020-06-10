@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import recicla.business.httpRequests.httpRequest;
@@ -42,6 +43,8 @@ public class TelaJogosController implements Initializable {
     @FXML
     private Label txtPontuacao;
     String finalUrl = "pergunta-quiz/listar-perguntas";
+    PerguntaQuiz perguntaAtual;
+    Alert alert;
 
     /**
      * Initializes the controller class.
@@ -60,6 +63,7 @@ public class TelaJogosController implements Initializable {
             
             PerguntaQuiz pergunta = new PerguntaQuiz();
             pergunta = perguntas.get(1);
+            perguntaAtual = pergunta;
             
             txtPergunta.setText(pergunta.getPergunta());
             txtAlternativa1.setText(pergunta.getAlternativa1());
@@ -70,6 +74,51 @@ public class TelaJogosController implements Initializable {
             Logger.getLogger(TelaJogosController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    @FXML
+    private void btnAlt1Clicked() {
+
+        if(perguntaAtual.getRespostaCorreta().equalsIgnoreCase(txtAlternativa1.getText())){
+               alert = new Alert(Alert.AlertType.INFORMATION);
+               alert.setTitle("Correto");
+               alert.setContentText("Alternativa correta.");
+               alert.showAndWait();
+               return;
+        }
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errado");
+        alert.setContentText("Alternativa incorreta.");
+        alert.showAndWait();
+    }
+    
+     @FXML
+    private void btnAlt2Clicked() {
+         if(perguntaAtual.getRespostaCorreta().equalsIgnoreCase(txtAlternativa2.getText())){
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Correto");
+                alert.setContentText("Alternativa correta.");
+                alert.showAndWait();
+                return;
+         }
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errado");
+        alert.setContentText("Alternativa incorreta.");
+        alert.showAndWait();
+    }
+     @FXML
+    private void btnAlt3Clicked() {
+         if(perguntaAtual.getRespostaCorreta().equalsIgnoreCase(txtAlternativa3.getText())){
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Correto");
+                alert.setContentText("Alternativa correta.");
+                alert.showAndWait();
+                return;
+         }
+        alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errado");
+        alert.setContentText("Alternativa incorreta.");
+        alert.showAndWait();
     }
     
      

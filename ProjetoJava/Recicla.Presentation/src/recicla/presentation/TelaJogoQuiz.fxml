@@ -74,16 +74,16 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Pane layoutX="9.0" layoutY="202.0"  prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
+                        <Pane layoutX="9.0" layoutY="202.0" onMouseClicked="#btnAlt1Clicked" prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
                            <children>
-                              <Label fx:id="txtAlternativa1"  layoutX="219.0" layoutY="9.0" text="Alternativa 1">
+                              <Label fx:id="txtAlternativa1" layoutX="219.0" layoutY="9.0" text="Alternativa 1">
                                  <font>
                                     <Font name="Arial" size="13.0" />
                                  </font>
                               </Label>
                            </children>
                         </Pane>
-                        <Pane layoutX="9.0" layoutY="238.0" prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
+                        <Pane layoutX="9.0" layoutY="238.0" onMouseClicked="#btnAlt2Clicked" prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
                            <children>
                               <Label fx:id="txtAlternativa2" layoutX="219.0" layoutY="9.0" text="Alternativa 2">
                                  <font>
@@ -92,7 +92,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Pane layoutX="9.0" layoutY="275.0" prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
+                        <Pane layoutX="9.0" layoutY="275.0" onMouseClicked="#btnAlt3Clicked" prefHeight="33.0" prefWidth="658.0" style="-fx-background-color: white; -fx-border-color: #8DBA62; -fx-border-radius: 5;">
                            <children>
                               <Label fx:id="txtAlternativa3" layoutX="219.0" layoutY="9.0" text="Alternativa 3">
                                  <font>
