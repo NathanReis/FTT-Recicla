@@ -42,33 +42,27 @@ public class TelaJogosController implements Initializable {
     private Label txtAlternativa3;
     @FXML
     private Label txtPontuacao;
-    String finalUrl = "pergunta-quiz/listar-perguntas";
-    PerguntaQuiz perguntaAtual;
-    Alert alert;
-
+    private String finalUrl = "pergunta-quiz/listar-perguntas";
+    private PerguntaQuiz perguntaAtual;
+    private Alert alert;
+    private int numQuestao = 0;
+    private List<PerguntaQuiz> perguntas;
+    private int pontos = 0;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        List<PerguntaQuiz> perguntas = new ArrayList<>();
+        perguntas = new ArrayList<>();
         try {
             String response = httpRequest.sendGet(finalUrl);
             Gson g = new Gson();
             Type perguntaType = new TypeToken<ArrayList<PerguntaQuiz>>() {}.getType();
             perguntas = g.fromJson(response, perguntaType);
-            System.out.print(perguntas.get(0));
-            
-            
-            PerguntaQuiz pergunta = new PerguntaQuiz();
-            pergunta = perguntas.get(1);
-            perguntaAtual = pergunta;
-            
-            txtPergunta.setText(pergunta.getPergunta());
-            txtAlternativa1.setText(pergunta.getAlternativa1());
-            txtAlternativa2.setText(pergunta.getAlternativa2());
-            txtAlternativa3.setText(pergunta.getRespostaCorreta());
+           
+                       
+            trocaPergunta();
             
         } catch (Exception ex) {
             Logger.getLogger(TelaJogosController.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,48 +72,75 @@ public class TelaJogosController implements Initializable {
     
     @FXML
     private void btnAlt1Clicked() {
-
-        if(perguntaAtual.getRespostaCorreta().equalsIgnoreCase(txtAlternativa1.getText())){
-               alert = new Alert(Alert.AlertType.INFORMATION);
-               alert.setTitle("Correto");
-               alert.setContentText("Alternativa correta.");
-               alert.showAndWait();
-               return;
-        }
-        alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errado");
-        alert.setContentText("Alternativa incorreta.");
-        alert.showAndWait();
+        verificaResposta(txtAlternativa1.getText());    
     }
     
      @FXML
     private void btnAlt2Clicked() {
-         if(perguntaAtual.getRespostaCorreta().equalsIgnoreCase(txtAlternativa2.getText())){
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Correto");
-                alert.setContentText("Alternativa correta.");
-                alert.showAndWait();
-                return;
-         }
-        alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errado");
-        alert.setContentText("Alternativa incorreta.");
-        alert.showAndWait();
+         verificaResposta(txtAlternativa2.getText());    
     }
      @FXML
     private void btnAlt3Clicked() {
-         if(perguntaAtual.getRespostaCorreta().equalsIgnoreCase(txtAlternativa3.getText())){
+        verificaResposta(txtAlternativa3.getText());        
+    }
+    
+    private void verificaResposta(String resposta){
+        if(perguntaAtual.getRespostaCorreta().equalsIgnoreCase(resposta)){
+            alertaCorreto();
+            calculaPontos(true);
+
+            if(perguntas.size() > numQuestao + 1){
+                numQuestao++;
+                trocaPergunta();
+            }
+            else{
                 alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Correto");
-                alert.setContentText("Alternativa correta.");
+                alert.setTitle("Fim");
+                alert.setContentText("Fim do quiz.");
                 alert.showAndWait();
-                return;
-         }
+            }
+        }
+        else{
+            alertaIncorreto();
+            calculaPontos(false);
+        }
+    }
+    
+    private void alertaCorreto(){
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Correto");
+        alert.setContentText("Alternativa correta.");
+        alert.showAndWait();
+        
+    }
+    
+     private void alertaIncorreto(){
         alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Errado");
         alert.setContentText("Alternativa incorreta.");
         alert.showAndWait();
+        
     }
     
+    private void trocaPergunta(){
+        perguntaAtual = perguntas.get(numQuestao);
+        txtPergunta.setText(perguntaAtual.getPergunta());
+        txtAlternativa1.setText(perguntaAtual.getAlternativa1());
+        txtAlternativa2.setText(perguntaAtual.getAlternativa2());
+        txtAlternativa3.setText(perguntaAtual.getRespostaCorreta());
+    }
+     
+    private void calculaPontos(boolean acertou){
+        if(acertou){
+            pontos+= 10;
+        }
+        else{
+            pontos-= 5;
+            if(pontos < 0)
+                pontos = 0;
+        }
+        txtPontuacao.setText(Integer.toString(pontos));
+
+    }
      
 }

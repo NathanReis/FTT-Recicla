@@ -135,7 +135,7 @@
                   </ImageView>
                   <Pane layoutX="302.0" layoutY="-7.0" prefHeight="62.0" prefWidth="103.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
                      <children>
-                        <Label fx:id="txtPontuacao" layoutX="48.0" layoutY="29.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                        <Label fx:id="txtPontuacao" layoutX="48.0" layoutY="29.0" prefHeight="19.0" prefWidth="28.0" text="0">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>
