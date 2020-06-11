@@ -59,7 +59,7 @@ public class TelaJogoMemoriaController implements Initializable {
     private ImageView img_card_5;
     @FXML
     private Label txtPontuacao;
-
+    private int pontos = 0;
     /**
      * Initializes the controller class.
      */
@@ -183,6 +183,7 @@ public class TelaJogoMemoriaController implements Initializable {
                 if (carta_aberta.getId_carta() == carta.getId_carta_par()) {
                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
+                    calculaPontos(true);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Validação");
                     alert.setContentText("Você acertou");
@@ -192,6 +193,7 @@ public class TelaJogoMemoriaController implements Initializable {
                 } else {
                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
+                    calculaPontos(false);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Validação");
                     alert.setContentText("Você errou");
@@ -293,6 +295,20 @@ public class TelaJogoMemoriaController implements Initializable {
             }
 
         }
+
+    }
+    
+    //calculo de pontos
+    private void calculaPontos(boolean acertou){
+        if(acertou){
+            pontos+= 10;
+        }
+        else{
+            pontos-= 5;
+            if(pontos < 0)
+                pontos = 0;
+        }
+        txtPontuacao.setText(Integer.toString(pontos));
 
     }
 
