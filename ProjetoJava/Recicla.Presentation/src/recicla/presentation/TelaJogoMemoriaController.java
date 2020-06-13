@@ -181,23 +181,30 @@ public class TelaJogoMemoriaController implements Initializable {
             carta = cartas.stream().filter(x -> x.isStatus() == true && x.getId_carta() != carta_aberta.getId_carta()).findFirst().get();
             if (carta != null) {
                 if (carta_aberta.getId_carta() == carta.getId_carta_par()) {
+                    
                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
+                    
                     calculaPontos(true);
+                    
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Validação");
                     alert.setContentText("Você acertou");
                     alert.showAndWait();
+                    
                     Acao_Conparacao_Carta(carta_aberta.getId_carta(), carta.getId_carta(), true);
 
                 } else {
                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
+                    
                     calculaPontos(false);
+                    
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Validação");
                     alert.setContentText("Você errou");
                     alert.showAndWait();
+                    
                     Acao_Conparacao_Carta(carta_aberta.getId_carta(), carta.getId_carta(), false);
                 }
             }

@@ -23,10 +23,10 @@ public class TelaHomeController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
          try {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("TelaJogoQuiz.fxml")); 
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("TelaLoginProfessor.fxml")); 
             Parent root = (Parent) fxml.load();
             Stage stage = new Stage();
-            stage.setTitle("Cadastro pergunta");
+            stage.setTitle("Login Professor");
             stage.setScene(new Scene(root));           
             stage.show();
         } catch(Exception e) {
