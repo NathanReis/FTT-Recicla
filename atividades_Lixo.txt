@@ -1,0 +1,34 @@
+DESENVOLVIMENTO
+Atualiza script do banco - Nathan (sexta-feria 19/06)
+molda na API - Vitor(Sexta-feira 19/06)
+Fazer DAO RodadaXAlunos - Ítalo(Sabado 20/06) 
+Singleton do RodadaXALunos - Nathan(Domingo 21/06)
+Tela de Lobby - Ítalo(Sexta-feria)
+Cadastro de Rodada do Professor - Nathan (Sexta-feira 19/06) 
+Esquemas de threads multiplayer - Ítalo(Sexta-feira 19/06) (testar se precisa realmente de thread - Nathan(quarta-feira 17/06))
+Compras Loja usuários - Vitor(sexta-feira)
+Recordes (back-end/tela) - Sillas(27/06)
+
+
+DOCUMENTAÇÃO
+ Board - Power Point - Ítalo(29/06)
+ Diagrama de sequencia e classe - Astah
+
+Casos de uso (revisão conforme cadastro sala) - Ítalo (27/06)
+Diagrama de Robustez - Silas (27/06)
+
+Diagrama de sequência (terça-feria mostrar) - Vitor -> Entregar na Terça
+Diagrama de classe - Nathan  -> Mostrar na terça 
+
+
+IVANILDOS COISAS
+
+ Custo do projeto - (Método ABC) - Sillas (27/06)
+	Tempo gasto;
+	Aluguel do software;
+	Alugel do espaço;
+	Energia elétrica;
+	...
+ Viabilidade Econômica - Ítalo (27/06)
+	Se o projeto é viável ou não.
+	Definição de preço de venda
