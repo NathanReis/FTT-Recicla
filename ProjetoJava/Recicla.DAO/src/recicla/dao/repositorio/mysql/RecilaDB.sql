@@ -1,7 +1,6 @@
 -- ####################
 -- Criação do banco
 -- ####################
--- DROP DATABASE `ReciclaDB`;
 CREATE DATABASE `ReciclaDB`;
 
 USE `ReciclaDB`;
@@ -164,7 +163,9 @@ BEGIN
 		INSERT INTO `Recordes`
 			(`JogoId`, `UsuarioId`, `QtdPartidas`, `QtdVitorias`, `MelhorTempo`, `Pontos`)
 		VALUES
-			(1, NEW.`UsuarioId`, 0, 0, '23:59:59', 0);
+			(1, NEW.`UsuarioId`, 0, 0, '23:59:59', 0),
+      (2, NEW.`UsuarioId`, 0, 0, '23:59:59', 0),
+      (3, NEW.`UsuarioId`, 0, 0, '23:59:59', 0);
 	END IF;
 END$
 -- ####################
