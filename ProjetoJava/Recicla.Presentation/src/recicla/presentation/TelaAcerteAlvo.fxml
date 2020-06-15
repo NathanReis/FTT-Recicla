@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaAcerteAlvoController">
+   <children>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0">
+         <children>
+            <Pane prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
+               <children>
+                  <Pane layoutX="71.0" layoutY="19.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+                     <children>
+                        <Label fx:id="txtDinheiro" layoutX="42.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                     </effect>
+                  </Pane>
+                  <Pane layoutX="326.0" layoutY="29.0" prefHeight="27.0" prefWidth="103.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+                     <children>
+                        <Label fx:id="txtTempo" layoutX="52.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                     </effect>
+                  </Pane>
+                  <Pane layoutX="590.0" layoutY="18.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+                     <children>
+                        <Label fx:id="txtTempo1" layoutX="35.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                     </effect>
+                  </Pane>
+                  <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="36.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/bau.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="62.0" fitWidth="66.0" layoutX="558.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/trophe.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutY="62.0" prefHeight="429.0" prefWidth="706.0" style="-fx-background-color: A5CA97;">
+               <children>
+                  <Pane layoutX="10.0" layoutY="16.0" prefHeight="327.0" prefWidth="683.0" style="-fx-background-color: #8DBA62;">
+                     <children>
+                        <Pane layoutX="4.0" layoutY="5.0" prefHeight="317.0" prefWidth="675.0" style="-fx-background-color: #FDEBC7;">
+                           <children>
+                              <ImageView fitHeight="317.0" fitWidth="675.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/ImagemCidade.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela0" fitHeight="23.0" fitWidth="12.0" layoutX="310.5" layoutY="284.2" onMouseClicked="#JanelaAtivada0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela0.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela1" fitHeight="23.0" fitWidth="12.0" layoutX="427.3" layoutY="247.0" onMouseClicked="#JanelaAtivada1" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela1.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela4" fitHeight="17.0" fitWidth="8.0" layoutX="181.5" layoutY="187.8" onMouseClicked="#JanelaAtivada4" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela4.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela7" fitHeight="19.0" fitWidth="14.0" layoutX="372.0" layoutY="165.0" onMouseClicked="#JanelaAtivada7" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela7.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela3" fitHeight="19.0" fitWidth="14.0" layoutX="15.0" layoutY="256.0" onMouseClicked="#JanelaAtivada3" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela3.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela6" fitHeight="19.0" fitWidth="14.0" layoutX="402.0" layoutY="165.0" onMouseClicked="#JanelaAtivada6" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela6.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela5" fitHeight="18.0" fitWidth="9.0" layoutX="225.0" layoutY="255.0" onMouseClicked="#JanelaAtivada5" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela5.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela2" fitHeight="19.0" fitWidth="14.0" layoutX="52.7" layoutY="184.0" onMouseClicked="#JanelaAtivada2" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela2.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela9" fitHeight="19.0" fitWidth="14.0" layoutX="548.0" layoutY="288.3" onMouseClicked="#JanelaAtivada9" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela9.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="janela8" fitHeight="19.0" fitWidth="14.0" layoutX="567.5" layoutY="186.5" onMouseClicked="#JanelaAtivada8" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/janela8.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <Pane layoutY="367.0" prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
+                     <children>
+                        <Pane layoutX="30.0" layoutY="21.0" prefHeight="33.0" prefWidth="158.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+                           <children>
+                              <ImageView fitHeight="51.0" fitWidth="58.0" layoutX="14.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/Sand_clock.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="43.0" fitWidth="51.0" layoutX="64.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@imagens/correct.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="117.0" layoutY="4.0" text="2 x" textFill="#65b72f">
+                                 <font>
+                                    <Font name="HoloLens MDL2 Assets" size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <effect>
+                              <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                           </effect>
+                        </Pane>
+                        <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="-4.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/bag.png" />
+                           </image>
+                        </ImageView>
+                        <Pane layoutX="302.0" layoutY="-7.0" prefHeight="62.0" prefWidth="103.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+                           <children>
+                              <Label fx:id="txtPontuacao" layoutX="48.0" layoutY="29.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                                 <font>
+                                    <Font name="Arial" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                           <effect>
+                              <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
+                           </effect>
+                        </Pane>
+                     </children>
+                  </Pane>
+                  <ImageView fitHeight="72.0" fitWidth="58.0" layoutX="300.0" layoutY="-58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@imagens/relogio.png" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutX="309.0" layoutY="348.0" prefHeight="33.0" prefWidth="90.0" style="-fx-background-color: #8DBA62; -fx-background-radius: 3;">
+                     <children>
+                        <Label layoutX="22.0" layoutY="8.0" text="Score" textFill="WHITE">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Label layoutX="601.0" layoutY="337.0" text="shutterstok.com" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
