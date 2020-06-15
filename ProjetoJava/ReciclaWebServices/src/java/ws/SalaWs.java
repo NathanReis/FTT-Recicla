@@ -16,6 +16,7 @@ import recicla.business.validations.IValidation;
 import recicla.business.validations.SalaValidation;
 import recicla.comuns.vos.Sala;
 import recicla.dao.sala.SalaMySQLDAO;
+import recicla.business.crud.CadastraSala;
 
 /**
  * REST Web Service
@@ -73,15 +74,14 @@ public class SalaWs {
     public String addRoom(String salaJson) throws SQLException {
         Gson g = new Gson();
         Sala sala = g.fromJson(salaJson, Sala.class);
-        
-        boolean isValid = validation.validate(sala);
-        
+     
+        CadastraSala crud = new CadastraSala();      
+        boolean isValid = crud.InsereSala(sala);
+      
         if(isValid){
-            dao.inserir(sala);
             return g.toJson(sala);
         }
         else
-            return null;
-               
+            return null;              
     }
 }

@@ -6,7 +6,6 @@
 package recicla.presentation;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -16,17 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import recicla.business.crud.CadastraUsuario;
 import recicla.comuns.vos.Usuario;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.lang.reflect.Type;
 import javafx.scene.control.Alert;
 import recicla.business.httpRequests.httpRequest;
 
@@ -58,10 +47,10 @@ public class TelaCadastroController implements Initializable {
 
     @FXML
     private void CadastraUsuario(ActionEvent event) throws SQLException, Exception {
-        Usuario user = new Usuario();
-        user.setUsuario(txtLogin.getText());
-        user.setSenha(txtSenha.getText());
-        user.setNome(txtNome.getText());
+       Usuario user = new Usuario();
+       user.setUsuario(txtLogin.getText());
+       user.setSenha(txtSenha.getText());
+       user.setNome(txtNome.getText());
        
        Gson g = new Gson();
        
@@ -80,11 +69,8 @@ public class TelaCadastroController implements Initializable {
             alert.setTitle("Cadastro");
             alert.setContentText("Cadastrado com sucesso.");
             alert.showAndWait();
-       }
-       
-       
-       System.out.print(retorno);
-        
+        }
+                     
     }
     
 }
