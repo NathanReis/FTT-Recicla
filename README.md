@@ -1,6 +1,6 @@
 # Recicla
 ## O que é?
-Um projeto voltado para o tema de sustentabilidade onde tem o objeto de utilizar a ludificação (conhecida também como gamificação) para conscientizar principalmente as crianças sobre a inportância deste assunto.
+Um projeto voltado para o tema de sustentabilidade onde tem o objeto de utilizar a ludificação (conhecida também como gamificação) para conscientizar principalmente as crianças sobre a importância deste assunto.
 ## Utilizado para desenvolvimento
 * Java
 * NetBeans 8.3 RC
