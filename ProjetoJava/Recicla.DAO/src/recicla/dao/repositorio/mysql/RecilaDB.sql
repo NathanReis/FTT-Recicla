@@ -109,6 +109,7 @@ CREATE TABLE `RodadasXUsuarios`
 (
 	`RodadaId` INT UNSIGNED,
 	`UsuarioId` INT UNSIGNED,
+        `Pontos` INT,
   PRIMARY KEY (`RodadaId`, `UsuarioId`),
   FOREIGN KEY (`RodadaId`) REFERENCES `Rodadas` (`RodadaId`),
   FOREIGN KEY (`UsuarioId`) REFERENCES `Usuarios` (`UsuarioId`)
