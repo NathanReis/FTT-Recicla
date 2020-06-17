@@ -34,6 +34,7 @@ public class ApplicationConfig extends Application {
         resources.add(ws.JogoWs.class);
         resources.add(ws.PerguntaQuizWs.class);
         resources.add(ws.RecordeWs.class);
+        resources.add(ws.RodadaWs.class);
         resources.add(ws.SalaWs.class);
         resources.add(ws.UserWs.class);
     }

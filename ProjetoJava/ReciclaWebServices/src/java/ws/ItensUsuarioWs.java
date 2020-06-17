@@ -67,7 +67,7 @@ public class ItensUsuarioWs {
         Gson g = new Gson();
         ItemLojaXUsuario itemRetorno = g.fromJson(item,ItemLojaXUsuario.class);
 
-         dao.inserir(itemRetorno);
+        dao.inserir(itemRetorno);
         
         return g.toJson(itemRetorno);
     }

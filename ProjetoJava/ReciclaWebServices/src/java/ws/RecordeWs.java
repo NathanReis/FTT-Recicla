@@ -18,11 +18,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import recicla.business.validations.IValidation;
-import recicla.business.validations.SalaValidation;
 import recicla.comuns.vos.Recorde;
-import recicla.comuns.vos.Sala;
 import recicla.dao.recorde.RecordeMySQLDAO;
-import recicla.dao.sala.SalaMySQLDAO;
 
 /**
  *
@@ -79,16 +76,8 @@ public class RecordeWs {
     public String addRecord(String recordeJson) throws SQLException {
         Gson g = new Gson();
         Recorde r = g.fromJson(recordeJson, Recorde.class);
+        dao.inserir(r);
         
-        //boolean isValid = validation.validate(sala);
-        
-       /* if(isValid){
-            dao.inserir(sala);
-            return g.toJson(sala);
-        }
-        else
-            return null;*/
-       
        return g.toJson(r);
                
     }
