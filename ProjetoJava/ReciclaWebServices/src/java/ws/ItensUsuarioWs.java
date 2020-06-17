@@ -54,20 +54,22 @@ public class ItensUsuarioWs {
      * PUT method for updating or creating an instance of UserWs
      * @param content representation for the resource
      */
-    @PUT
+    
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
     
     
-    @POST
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/adciona-item-usuario")
+    @Path("/adciona-item-usuario/")
     public String addUserItem(String item) throws SQLException {
         Gson g = new Gson();
+        System.out.print(item);
         ItemLojaXUsuario itemRetorno = g.fromJson(item,ItemLojaXUsuario.class);
-
-        dao.inserir(itemRetorno);
+        
+        dao.comprarItem(itemRetorno.getItemLojaId(), itemRetorno.getUsuarioId(), 1);
+        //dao.inserir(itemRetorno);
         
         return g.toJson(itemRetorno);
     }

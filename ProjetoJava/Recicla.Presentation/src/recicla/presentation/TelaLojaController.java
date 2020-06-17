@@ -27,16 +27,20 @@ public class TelaLojaController implements Initializable {
     @FXML
     private void btnCompraTempo(ActionEvent event) throws Exception {
         boolean isValid = Loja.comprarItem(1);
+        System.out.print(isValid);
+        emiteAlerta(isValid);
     }
 
     @FXML
     private void btnCompraResposta(ActionEvent event) throws Exception {
         boolean isValid = Loja.comprarItem(2);
+        emiteAlerta(isValid);
     }
 
     @FXML
     private void btnCompraPontos(ActionEvent event) throws Exception {
         boolean isValid = Loja.comprarItem(3);
+        emiteAlerta(isValid);
     }
     
     private void emiteAlerta(boolean isValid){
@@ -50,7 +54,7 @@ public class TelaLojaController implements Initializable {
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Compra");
-            alert.setContentText("Ops, algo deu errado com a compra, tente novamente mais tarde!");
+            alert.setContentText("Ops, algo deu errado com a compra, verifique seu saldo ou tente mais tarde!");
             alert.showAndWait();
         }
     }

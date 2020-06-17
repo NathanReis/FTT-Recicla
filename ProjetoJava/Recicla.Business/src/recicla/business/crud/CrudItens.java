@@ -24,7 +24,8 @@ public class CrudItens {
 
         try {
             String userItemJson = g.toJson(item);
-            String response = httpRequest.sendPost(userItemJson, "itens/adciona-item-usuario");
+            System.out.print(userItemJson);
+            httpRequest.sendPut(userItemJson, "itens/adciona-item-usuario");
             
         } catch (SQLException ex) {
             retorno = false;

@@ -23,6 +23,8 @@ public class Loja {
     
     public static boolean comprarItem(int itemId) throws Exception{
         Usuario aluno = new Usuario(); // substituir por aluno logado
+        aluno.setDinheiro(100000);
+        aluno.setUsuarioId(2);
         ItemLojaXUsuario userItem = new ItemLojaXUsuario();
         String itemJson = httpRequest.sendGet("itens/obtem-item/" + itemId);
         Gson g = new Gson();

@@ -36,7 +36,7 @@ public class ItensWs {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/obtem-item/{itemId}")
     public String getItemById(@PathParam("itemId") String itemId) throws SQLException {
-        ItemLoja item = (ItemLoja)dao.consultar(itemId);
+        ItemLoja item = (ItemLoja)dao.consultar("ItemLojaId", itemId);
     
         Gson g = new Gson();
         return g.toJson(item);
