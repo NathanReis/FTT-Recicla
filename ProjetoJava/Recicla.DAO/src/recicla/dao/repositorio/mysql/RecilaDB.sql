@@ -109,7 +109,7 @@ CREATE TABLE `RodadasXUsuarios`
 (
 	`RodadaId` INT UNSIGNED,
 	`UsuarioId` INT UNSIGNED,
-        `Pontos` INT,
+	`Pontos` INT UNSIGNED,
   PRIMARY KEY (`RodadaId`, `UsuarioId`),
   FOREIGN KEY (`RodadaId`) REFERENCES `Rodadas` (`RodadaId`),
   FOREIGN KEY (`UsuarioId`) REFERENCES `Usuarios` (`UsuarioId`)
@@ -168,6 +168,22 @@ BEGIN
       (2, NEW.`UsuarioId`, 0, 0, '23:59:59', 0),
       (3, NEW.`UsuarioId`, 0, 0, '23:59:59', 0);
 	END IF;
+END$
+
+CREATE TRIGGER `tgrAfterUpdadeItensLojaXUsuarios`
+AFTER UPDATE ON `ItensLojaXUsuarios`
+FOR EACH ROW
+BEGIN
+	-- Novo valor maior que antigo representa compra de item
+	IF NEW.`Quantidade` > OLD.`Quantidade` THEN
+		SET @preco = (SELECT `Preco` FROM `ItensLoja` WHERE `ItemLojaId` = NEW.`ItemLojaId`);
+    SET @difQuantidade = NEW.`Quantidade` - OLD.`Quantidade`;
+    
+    -- Desconta valor gasto com o item (preço * quantidade comprada)
+		UPDATE `Usuarios`
+    SET `Dinheiro` = (`Dinheiro` - (@preco * @difQuantidade))
+    WHERE `UsuarioId` = NEW.`UsuarioId`;
+  END IF;
 END$
 -- ####################
 -- Criação dos eventos
