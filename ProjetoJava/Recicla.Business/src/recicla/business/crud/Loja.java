@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import javafx.scene.control.Alert;
+import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.vos.ItemLoja;
 import recicla.comuns.vos.ItemLojaXUsuario;
@@ -22,9 +23,8 @@ public class Loja {
 
     
     public static boolean comprarItem(int itemId) throws Exception{
-        Usuario aluno = new Usuario(); // substituir por aluno logado
-        aluno.setDinheiro(100000);
-        aluno.setUsuarioId(2);
+        Usuario aluno = Config.getInstance().getLoggedUser(); // substituir por aluno logado
+
         ItemLojaXUsuario userItem = new ItemLojaXUsuario();
         String itemJson = httpRequest.sendGet("itens/obtem-item/" + itemId);
         Gson g = new Gson();
@@ -40,7 +40,7 @@ public class Loja {
             userItem.setItemLojaId(itemId);
             userItem.setUsuarioId(aluno.getUsuarioId());
             userItem.setQuantidade(1);
-            
+            //httpRequest.sendPut(g.toJson(aluno), "user/atualiza-usuario");
             return insertUserItem(userItem);
         }
         else{

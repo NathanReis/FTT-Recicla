@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaLojaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaLojaController">
    <children>
       <Pane prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
          <children>
-            <Pane layoutX="561.0" layoutY="19.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+            <Pane layoutX="561.0" layoutY="19.0" prefHeight="27.0" prefWidth="134.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
                <children>
-                  <Label fx:id="txtDinheiro" layoutX="42.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                  <Label fx:id="txtDinheiro" layoutX="42.0" layoutY="4.0" prefHeight="19.0" prefWidth="88.0" text="X">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
                   </Label>
+                  <Label layoutX="30.0" layoutY="5.0" prefHeight="17.0" prefWidth="3.0" text="\$" />
                </children>
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
@@ -29,6 +31,7 @@
                   <Image url="@imagens/bau.png" />
                </image>
             </ImageView>
+            <Label layoutX="455.0" layoutY="24.0" text="Saldo Atual: " />
          </children>
       </Pane>
       <Pane layoutY="62.0" prefHeight="429.0" prefWidth="706.0" style="-fx-background-color: A5CA97;">
@@ -90,7 +93,7 @@
                            <children>
                               <Pane layoutY="229.0" prefHeight="68.0" prefWidth="144.0" style="-fx-background-color: #8DBA62; -fx-background-radius: 11;">
                                  <children>
-                                    <Label layoutX="52.0" layoutY="6.0" text="\$ 50" textFill="WHITE">
+                                    <Label layoutX="52.0" layoutY="6.0" text="\$ 200" textFill="WHITE">
                                        <font>
                                           <Font name="Arial" size="18.0" />
                                        </font>
@@ -139,7 +142,7 @@
                            <children>
                               <Pane layoutY="229.0" prefHeight="68.0" prefWidth="144.0" style="-fx-background-color: #8DBA62; -fx-background-radius: 11;">
                                  <children>
-                                    <Label layoutX="52.0" layoutY="6.0" text="\$ 50" textFill="WHITE">
+                                    <Label layoutX="52.0" layoutY="6.0" text="\$ 300" textFill="WHITE">
                                        <font>
                                           <Font name="Arial" size="18.0" />
                                        </font>

@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import recicla.business.acesso.Acesso;
+import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.vos.Usuario;
 
@@ -68,16 +69,16 @@ public class TelaLoginAlunoController implements Initializable {
         try {
             
             if(u != null) {
-
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }  
+                Config.getInstance().setLoggedUser(u);
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }  
                 
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

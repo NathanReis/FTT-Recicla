@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import recicla.business.validations.IValidation;
 import recicla.business.validations.UsuarioValidation;
+import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.Usuario;
 import recicla.dao.acesso.UsuarioMySQLDAO;
 
@@ -76,5 +77,18 @@ public class UserWs {
         else
             return null;
                
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/atualiza-usuario")
+    public String updateUser(String userJson) throws SQLException {
+        Gson g = new Gson();
+        Usuario user = g.fromJson(userJson,Usuario.class);
+        
+        dao.atualizar(user);
+        //dao.inserir(itemRetorno);
+        
+        return g.toJson(user);
     }
 }
