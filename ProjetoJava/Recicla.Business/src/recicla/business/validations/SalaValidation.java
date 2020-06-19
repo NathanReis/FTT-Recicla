@@ -22,8 +22,8 @@ public class SalaValidation implements IValidation {
         if(sala.getDescricao().trim().length() == 0)
             isValid = false;
         if(sala.getChaveAcesso().trim().length() == 0)
-            isValid = false;
-        
+           isValid = false;
+                
         return isValid;
     }
     

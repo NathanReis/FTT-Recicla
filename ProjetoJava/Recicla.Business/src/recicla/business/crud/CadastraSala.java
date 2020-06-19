@@ -5,10 +5,12 @@
  */
 package recicla.business.crud;
 
+import com.google.gson.Gson;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import recicla.business.httpRequests.httpRequest;
 import recicla.business.validations.SalaValidation;
 import recicla.comuns.vos.Sala;
 import recicla.dao.acesso.UsuarioMySQLDAO;
@@ -19,21 +21,21 @@ import recicla.dao.sala.SalaMySQLDAO;
  * @author italo
  */
 public class CadastraSala {
-    
-    public boolean InsereSala(Sala sala){
+    String url = "sala/adciona-sala";
+
+    public boolean InsereSala(Sala sala) throws Exception{
         boolean retorno = true;
         
          try {
-            SalaValidation valida_sala = new SalaValidation();
-            boolean isValid = valida_sala.validate(sala);
             
-            if(isValid == false){
-                return false;
-            }
             sala.setChaveAcesso(codigo_de_acesso());
-            SalaMySQLDAO dao = new SalaMySQLDAO();
-            dao.inserir(sala);
-            
+            Gson g = new Gson();
+            String json = g.toJson(sala);
+            String retornoApi = httpRequest.sendPost(json, url);
+            System.out.print(retornoApi);
+            if(retornoApi.equals("invalid")){
+                retorno =  false;
+            }
         } catch (SQLException ex) {
             retorno = false;
         }

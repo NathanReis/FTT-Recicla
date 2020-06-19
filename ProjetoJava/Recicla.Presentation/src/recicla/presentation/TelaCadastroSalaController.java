@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import recicla.business.crud.CadastraSala;
 import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.vos.Sala;
 
@@ -29,7 +30,6 @@ public class TelaCadastroSalaController implements Initializable {
     @FXML
     private TextField txt_NomeSala;
 
-    String url = "sala/adciona-sala";
     /**
      * Initializes the controller class.
      */
@@ -43,12 +43,14 @@ public class TelaCadastroSalaController implements Initializable {
         Sala sala = new Sala();
         sala.setDescricao(txt_NomeSala.getText());       
        
-
-        Gson g = new Gson();
+        CadastraSala crud = new CadastraSala();
+        boolean isValid = crud.InsereSala(sala);
+        System.out.print(isValid);
+        /*Gson g = new Gson();
         String json = g.toJson(sala);
-        String retorno = httpRequest.sendPost(json, url);
+        String retorno = httpRequest.sendPost(json, url);*/
 
-        if (retorno.equalsIgnoreCase("invalid")) {
+        if (isValid == false) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Cadastro");
             alert.setContentText("Cadastro inválido, verifique campos em branco.");

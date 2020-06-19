@@ -74,11 +74,12 @@ public class SalaWs {
     public String addRoom(String salaJson) throws SQLException {
         Gson g = new Gson();
         Sala sala = g.fromJson(salaJson, Sala.class);
-     
-        CadastraSala crud = new CadastraSala();      
-        boolean isValid = crud.InsereSala(sala);
+        System.out.print(g);
+        SalaValidation valida_sala = new SalaValidation();
+        boolean isValid = valida_sala.validate(sala);
       
         if(isValid){
+            dao.inserir(sala);
             return g.toJson(sala);
         }
         else
