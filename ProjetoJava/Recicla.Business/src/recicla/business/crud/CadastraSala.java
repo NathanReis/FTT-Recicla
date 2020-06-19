@@ -5,15 +5,10 @@
  */
 package recicla.business.crud;
 
-import com.google.gson.Gson;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
-import recicla.business.httpRequests.httpRequest;
 import recicla.business.validations.SalaValidation;
 import recicla.comuns.vos.Sala;
-import recicla.dao.acesso.UsuarioMySQLDAO;
 import recicla.dao.sala.SalaMySQLDAO;
 
 /**
@@ -21,7 +16,6 @@ import recicla.dao.sala.SalaMySQLDAO;
  * @author italo
  */
 public class CadastraSala {
-    String url = "sala/adciona-sala";
     SalaMySQLDAO dao = new SalaMySQLDAO();
 
     public boolean InsereSala(Sala sala) throws Exception{
