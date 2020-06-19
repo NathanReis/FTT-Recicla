@@ -56,8 +56,7 @@ public class TelaLoginProfessorController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-      
-  
+       
   
 
     }

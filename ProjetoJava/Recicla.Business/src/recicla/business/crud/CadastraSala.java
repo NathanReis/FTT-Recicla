@@ -8,6 +8,7 @@ package recicla.business.crud;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import recicla.business.validations.SalaValidation;
 import recicla.comuns.vos.Sala;
 import recicla.dao.acesso.UsuarioMySQLDAO;
@@ -29,7 +30,7 @@ public class CadastraSala {
             if(isValid == false){
                 return false;
             }
-            sala.setChaveAcesso(codigo_de_acesso(sala.getDescricao()));
+            sala.setChaveAcesso(codigo_de_acesso());
             SalaMySQLDAO dao = new SalaMySQLDAO();
             dao.inserir(sala);
             
@@ -39,14 +40,15 @@ public class CadastraSala {
          return retorno;
     }
     
-    public String codigo_de_acesso(String nome) {
+    public String codigo_de_acesso() {
+        String codigo = "";
 
-        DateTimeFormatter yearformatter = DateTimeFormatter.ofPattern("yyyy");
-        DateTimeFormatter monthrformatter = DateTimeFormatter.ofPattern("MM");
-        LocalDateTime now = LocalDateTime.now();
+        Random rand = new Random();
+        for (int i = 0; i < 4; i++) {
+            codigo +=  String.valueOf(rand.nextInt(6));
+        }
+        return codigo;
+    } 
+  
 
-        return nome + "_" + monthrformatter.format(now) + "_" + yearformatter.format(now);
-
-    }
-    
 }
