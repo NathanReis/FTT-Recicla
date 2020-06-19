@@ -22,6 +22,7 @@ import recicla.dao.sala.SalaMySQLDAO;
  */
 public class CadastraSala {
     String url = "sala/adciona-sala";
+    SalaMySQLDAO dao = new SalaMySQLDAO();
 
     public boolean InsereSala(Sala sala) throws Exception{
         boolean retorno = true;
@@ -29,13 +30,16 @@ public class CadastraSala {
          try {
             
             sala.setChaveAcesso(codigo_de_acesso());
-            Gson g = new Gson();
-            String json = g.toJson(sala);
-            String retornoApi = httpRequest.sendPost(json, url);
-            System.out.print(retornoApi);
-            if(retornoApi.equals("invalid")){
-                retorno =  false;
+            SalaValidation valida_sala = new SalaValidation();
+            retorno = valida_sala.validate(sala);
+            if(retorno == false){
+                return false;
             }
+
+            dao.inserir(sala);
+
+            
+
         } catch (SQLException ex) {
             retorno = false;
         }

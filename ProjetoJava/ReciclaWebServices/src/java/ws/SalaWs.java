@@ -71,15 +71,13 @@ public class SalaWs {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/adciona-sala")
-    public String addRoom(String salaJson) throws SQLException {
+    public String addRoom(String salaJson) throws SQLException, Exception {
         Gson g = new Gson();
         Sala sala = g.fromJson(salaJson, Sala.class);
         System.out.print(g);
-        SalaValidation valida_sala = new SalaValidation();
-        boolean isValid = valida_sala.validate(sala);
-      
+        CadastraSala crud = new CadastraSala();
+        boolean isValid = crud.InsereSala(sala);
         if(isValid){
-            dao.inserir(sala);
             return g.toJson(sala);
         }
         else
