@@ -18,6 +18,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import recicla.business.crud.CadastraSala;
 import recicla.business.serversocket.SalaServer;
 import recicla.business.serversocket.StudentSocket;
 import recicla.comuns.vos.Usuario;
@@ -56,6 +57,7 @@ public class TelaLoginProfessorController implements Initializable {
         stage.setScene(scene);
         stage.show();
       
+  
   
 
     }
