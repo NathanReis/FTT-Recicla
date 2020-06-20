@@ -8,11 +8,16 @@ package recicla.presentation;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -76,10 +81,11 @@ public class TelaJogoMemoriaController implements Initializable {
         cartas = carta.Lista_cards_randomicos();
         try {
             Monta_Jogo_da_Memoria(cartas); 
-            card_background = new Image(new FileInputStream("card_background.png"));
+            card_background = new Image(new FileInputStream("card_background.png"));        
+            Time();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TelaJogoMemoriaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
     }
     //Retorna a posição da carta com o Id_especificado
@@ -318,6 +324,31 @@ public class TelaJogoMemoriaController implements Initializable {
         txtPontuacao.setText(Integer.toString(pontos));
 
     }
+    
+    //Time
+    private void Time(){
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int interval = 30;
+
+            public void run() {
+                if (interval > 0) {
+                    Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));   
+                    interval--;
+                } else {
+                    timer.cancel();
+                }
+            }
+        }, 1000, 1000);
+    
+    }
+    
+   
+        
+        
+        
+        
 
     //Evento do Card 1
     @FXML

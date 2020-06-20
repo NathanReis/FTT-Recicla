@@ -27,7 +27,7 @@
                   </Pane>
                   <Pane layoutX="326.0" layoutY="29.0" prefHeight="27.0" prefWidth="103.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
                      <children>
-                        <Label fx:id="txtTempo" layoutX="52.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                        <Label fx:id="txtTempo" layoutX="29.0" layoutY="4.0" prefHeight="19.0" prefWidth="70.0" text="X">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>
