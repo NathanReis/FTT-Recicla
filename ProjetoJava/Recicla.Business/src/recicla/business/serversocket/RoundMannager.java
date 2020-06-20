@@ -5,6 +5,7 @@
  */
 package recicla.business.serversocket;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -12,14 +13,28 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * @author italo
  */
 public class RoundMannager {
-
-    ConcurrentLinkedQueue<String> LinesGame;
-
-    public void GamesManager() {
-        if (this.LinesGame == null) {
-            LinesGame = new ConcurrentLinkedQueue<String>();
-        }
+    
+    private static RoundMannager instance;    
+    ConcurrentLinkedQueue<String> LinesGame = new ConcurrentLinkedQueue<String>();;
+    private  boolean IsRoomAvaliable = false;
+    
+    public static RoundMannager getInstance() {
+        if (instance == null) 
+             instance = new RoundMannager();
+        
+        return instance;
     }
+    
+
+//    public void GamesManager() {
+//        if (this.LinesGame == null) {
+//            LinesGame = new ConcurrentLinkedQueue<String>();
+//        }
+//    }
+    
+    public ConcurrentLinkedQueue<String> getGames(){
+        return this.LinesGame;
+    }    
 
     public void add_game(String game) {
         this.LinesGame.add(game);
@@ -27,6 +42,20 @@ public class RoundMannager {
 
     public void remove_game() {
         this.LinesGame.poll();
+    }
+
+    /**
+     * @return the IsRoomAvaliable
+     */
+    public boolean isIsRoomAvaliable() {
+        return IsRoomAvaliable;
+    }
+
+    /**
+     * @param IsRoomAvaliable the IsRoomAvaliable to set
+     */
+    public void setIsRoomAvaliable(boolean IsRoomAvaliable) {
+        this.IsRoomAvaliable = IsRoomAvaliable;
     }
 
 }

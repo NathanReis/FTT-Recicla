@@ -7,17 +7,30 @@ package recicla.business.serversocket;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  *
  * @author italo
  */
 public class StudentsManager implements Runnable{
-
+    
+     private ConcurrentLinkedQueue<String> games;  
      private Socket clientSocket;
     @Override
     public void run() {
         System.out.println("The student enter in the room");
+        while(true){
+            if(RoundMannager.getInstance().isIsRoomAvaliable()){
+                games = RoundMannager.getInstance().getGames();  
+                
+                //Now i need to figure out on how to pass the screens 
+            
+            }
+        
+        
+        }
     }
 
     /**
