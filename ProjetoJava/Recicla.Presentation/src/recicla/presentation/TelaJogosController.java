@@ -7,8 +7,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -54,7 +57,7 @@ public class TelaJogosController implements Initializable {
             Gson g = new Gson();
             Type perguntaType = new TypeToken<ArrayList<PerguntaQuiz>>() {}.getType();
             perguntas = g.fromJson(response, perguntaType);
-           
+            Time();
                        
             trocaPergunta();
             
@@ -63,6 +66,25 @@ public class TelaJogosController implements Initializable {
         }
         
     }
+     //Time
+    private void Time(){
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int interval = 30;
+
+            public void run() {
+                if (interval > 0) {
+                    Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));   
+                    interval--;
+                } else {
+                    timer.cancel();
+                }
+            }
+        }, 1000, 1000);
+    
+    }
+    
     
     @FXML
     private void btnAlt1Clicked() {
