@@ -1,0 +1,35 @@
+HORAS DE DESENVOLVIMENTO
+	Hora desenvolvedor Java: $56 ou 18,46
+        Quantidade de horas: ?
+	Fonte: https://www.ziprecruiter.com/Salaries/How-Much-Does-a-Java-Developer-Make-an-Hour
+
+ALGUEL DE SALA DE COWORKING(para apresentaçao ao cliente)
+         Valor por dia: $25
+         Fonte: https://www.regus.com.br/offices/brazil/sao-paulo-state/sao-bernardo-do-campo/coworking-space?gclid=EAIaIQobChMInfG5586V6gIVChGRCh08rQRvEAAYAiAAEgLBG_D_BwE&gclsrc=aw.ds
+
+SERVIDOR PARA A API
+      	Aluguel: $15,99/mês
+	Fonte: https://www.locaweb.com.br/hospedagem-de-sites-com-dominio-gratis/
+
+TRIBUTOS
+       Software por encomenda:
+		ISS: 2,90%
+		PIS cumulativo: 0,65%
+		COFINS cumulativo: 3%
+		IRPJ*: 15%
+		Adicional IR*: 10%
+		CSLL*: 9%
+
+	Fonte: https://www.contabeis.com.br/noticias/39072/guia-definitivo-impostos-de-empresas-de-ti/
+		
+
+FERRAMENTAS
+	Netbeans e Mysql são ferramentas open-source, dessa forma não entra no custo.
+
+
+
+DÚVIDAS
+  Precisa de computador?
+  Precisa de energia elétrica?
+  Preciso dos salários?
+
