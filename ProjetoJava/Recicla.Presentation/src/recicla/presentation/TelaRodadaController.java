@@ -1,5 +1,6 @@
 package recicla.presentation;
 
+import com.google.gson.Gson;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -10,14 +11,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import recicla.business.config.Config;
+import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.helperController.HelperController;
+import recicla.comuns.vos.JogoRodada;
 
 /**
  * FXML Controller class
  */
 public class TelaRodadaController implements Initializable {
     private ArrayList<String> jogosCadastrados = new ArrayList<String>();
+    private final int APAGUE_A_LUZ_ID = 1;
+    private final int JOGO_MEMORIA_ID = 2;
+    private final int QUIZ_ID = 3;
 
     @FXML
     private Button btnAdicionarApagueALuz;
@@ -37,6 +45,8 @@ public class TelaRodadaController implements Initializable {
     private Label lblTituloRodada;
     @FXML
     private Pane pnlJogosCadastrados;
+    @FXML
+    private TextField txtRodadaId;
 
     /**
      * Initializes the controller class.
@@ -44,6 +54,7 @@ public class TelaRodadaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        this.txtRodadaId.setText(Integer.toString(Config.getInstance().getRodadaAtualEditando()));
     }    
 
     @FXML
@@ -55,23 +66,44 @@ public class TelaRodadaController implements Initializable {
 
     @FXML
     private void btnEscolherPregunta_Click(ActionEvent event) {
-        this.adicionarJogo("Pergunta Quiz");
+        this.adicionarJogo(this.QUIZ_ID);
     }
 
     @FXML
     private void btnAdicionarJogoMemoria_Click(ActionEvent event) {
-        this.adicionarJogo("Jogo da memória");
+        this.adicionarJogo(this.JOGO_MEMORIA_ID);
     }
 
     @FXML
     private void btnAdicionarApagueALuz_Click(ActionEvent event) {
-        this.adicionarJogo("Apague a luz");
+        this.adicionarJogo(this.APAGUE_A_LUZ_ID);
     }
     
-    private void adicionarJogo(String jogo) {
-        System.out.println("Adicionado: " + jogo);
-        this.jogosCadastrados.add(jogo);
-        atualizarQtdExibida();
+    private void adicionarJogo(int jogoId) {
+        try {
+            System.out.println("Adicionado: " + jogoId);
+            this.jogosCadastrados.add(Integer.toString(jogoId));
+            atualizarQtdExibida();
+
+            JogoRodada jogoRodada = new JogoRodada();
+            jogoRodada.setRodadaId(Integer.parseInt(this.txtRodadaId.getText()));
+            jogoRodada.setJogoId(jogoId);
+
+            String chamadaWS = "rodada/adciona-jogo-rodada/";
+            Gson g = new Gson();
+
+            int idInserido = Integer.parseInt(httpRequest.sendPost(g.toJson(jogoRodada), chamadaWS));
+
+            if(idInserido != 0) {
+                if(jogoId == 3) {
+                    // Pegar pergunta(s) selecionadas
+                }
+            } else {
+                System.out.println("Por algum motivo não foi inserido");
+            }
+        } catch(Exception exception) {
+            System.out.println(exception.getMessage());
+        }
     }
     
     private void atualizarQtdExibida() {

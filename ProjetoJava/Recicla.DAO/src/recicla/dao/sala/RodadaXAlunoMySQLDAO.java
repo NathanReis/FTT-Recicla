@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package recicla.dao.sala;
 
 import java.sql.Connection;
@@ -16,27 +11,28 @@ import recicla.comuns.vos.JogoRodadaXPerguntaQuiz;
 import recicla.comuns.vos.RodadaXAluno;
 import recicla.dao.basis.MySQLDAO;
 
-/**
- *
- * @author italo
- */
 public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
     
     public RodadaXAlunoMySQLDAO() {
         super(RodadaXAluno.class);
-        setTabela("RodadasXUsuarios");
         
+        setTabela("RodadasXUsuarios");
     }
     
     @Override
-    public void inserir(Entidade entidade) throws SQLException {
+    protected String getComandoInserir() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    public void atualizar(Entidade entidade) throws SQLException {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String query = "INSERT INTO RodadasXUsuarios (UsuarioId,RodadaId,Pontos) VALUES (?,?,?);";
+            String sql = getComandoAtualizar();
 
-            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
-                stmt.setInt(1, ((RodadaXAluno)entidade).getUsuarioId());
-                stmt.setInt(2, ((RodadaXAluno)entidade).getRodadaId());
-                stmt.setInt(3, ((RodadaXAluno)entidade).getPontos());
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setInt(1, ((RodadaXAluno)entidade).getRodadaId());
+                stmt.setInt(2, ((RodadaXAluno)entidade).getPontos());
+                stmt.setInt(3, ((RodadaXAluno)entidade).getUsuarioId());
 
                 stmt.executeUpdate();
             }
@@ -44,7 +40,12 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
     }
     
     @Override
-    protected String getComandoAtualizar() {
+    public void deletar(int id) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    @Override
+    protected String getComandoDeletar() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
@@ -58,14 +59,14 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
         return (E)entidade;
     }
     
-    public ArrayList<RodadaXAluno> listarPorRodadaId(int RodadaId) throws SQLException {
+    public ArrayList<RodadaXAluno> listarPorRodadaId(int rodadaId) throws SQLException {
         ArrayList<RodadaXAluno> lista = new ArrayList<RodadaXAluno>();
         
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
             String query = "SELECT * FROM " + getTabela() + " WHERE RodadaId = ?;";
             
             try (PreparedStatement stmt = conexao.prepareStatement(query)) {
-                stmt.setInt(1, RodadaId);
+                stmt.setInt(1, rodadaId);
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
@@ -78,14 +79,14 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
         return lista;
     }
     
-      public ArrayList<RodadaXAluno> listarPorUsuarioId(int UsuarioId) throws SQLException {
+    public ArrayList<RodadaXAluno> listarPorUsuarioId(int usuarioId) throws SQLException {
         ArrayList<RodadaXAluno> lista = new ArrayList<RodadaXAluno>();
         
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
             String query = "SELECT * FROM " + getTabela() + " WHERE UsuarioId = ?;";
             
             try (PreparedStatement stmt = conexao.prepareStatement(query)) {
-                stmt.setInt(1, UsuarioId);
+                stmt.setInt(1, usuarioId);
 
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
@@ -97,8 +98,4 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
         
         return lista;
     }
-    
-    
-    
-    
 }

@@ -18,6 +18,8 @@ public class Config {
     
     private TipoRepositorio tipoRepositorio; 
     private Usuario loggedUser;
+    private int salaAtualEditando;
+    private int rodadaAtualEditando;
 
     public TipoRepositorio getTipoRepositorio() {
         return tipoRepositorio;
@@ -33,5 +35,33 @@ public class Config {
     
     public Usuario getLoggedUser (){
         return this.loggedUser;
+    }
+
+    /**
+     * @return the salaAtualEditando
+     */
+    public int getSalaAtualEditando() {
+        return salaAtualEditando;
+    }
+
+    /**
+     * @param salaAtualEditando the salaAtualEditando to set
+     */
+    public void setSalaAtualEditando(int salaAtualEditando) {
+        this.salaAtualEditando = salaAtualEditando;
+    }
+
+    /**
+     * @return the rodadaAtualEditando
+     */
+    public int getRodadaAtualEditando() {
+        return rodadaAtualEditando;
+    }
+
+    /**
+     * @param rodadaAtualEditando the rodadaAtualEditando to set
+     */
+    public void setRodadaAtualEditando(int rodadaAtualEditando) {
+        this.rodadaAtualEditando = rodadaAtualEditando;
     }
 }

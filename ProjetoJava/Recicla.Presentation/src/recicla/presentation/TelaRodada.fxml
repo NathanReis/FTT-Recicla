@@ -101,6 +101,7 @@
                   </Pane>
                </children>
             </Pane>
+            <TextField fx:id="txtRodadaId" editable="false" layoutX="10.0" layoutY="413.0" visible="false" />
          </children>
       </Pane>
    </children>

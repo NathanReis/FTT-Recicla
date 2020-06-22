@@ -35,6 +35,7 @@
                   </Pane>
                </children>
             </Pane>
+            <TextField fx:id="txtSalaId" editable="false" layoutY="403.0" visible="false" />
          </children>
       </Pane>
    </children>

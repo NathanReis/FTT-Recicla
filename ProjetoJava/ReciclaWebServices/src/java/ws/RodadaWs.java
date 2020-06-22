@@ -16,8 +16,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import recicla.business.crud.CadastraRodadaXAluno;
 import recicla.business.validations.IValidation;
+import recicla.comuns.vos.Jogo;
+import recicla.comuns.vos.JogoRodada;
 import recicla.comuns.vos.Rodada;
 import recicla.comuns.vos.RodadaXAluno;
+import recicla.dao.sala.JogoRodadaMySQLDAO;
 import recicla.dao.sala.RodadaMySQLDAO;
 import recicla.dao.sala.RodadaXAlunoMySQLDAO;
 
@@ -64,8 +67,23 @@ public class RodadaWs {
     public String addRound(String roundJson) throws SQLException {
         Gson g = new Gson();
         Rodada r = g.fromJson(roundJson, Rodada.class);
+        
         dao.inserir(r);
-       return g.toJson(r);              
+        
+       return g.toJson(dao.getIdInserido());              
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/adciona-jogo-rodada/")
+    public String addGameOnRound(String gameRoundJson) throws SQLException {
+        Gson g = new Gson();
+        JogoRodadaMySQLDAO jogoRodadaDAO = new JogoRodadaMySQLDAO();
+        JogoRodada jogoRodada = g.fromJson(gameRoundJson, JogoRodada.class);
+        
+        jogoRodadaDAO.inserir(jogoRodada);
+        
+       return g.toJson(jogoRodadaDAO.getIdInserido());              
     }
     
     @POST

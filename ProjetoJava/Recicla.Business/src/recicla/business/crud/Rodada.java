@@ -37,12 +37,4 @@ public class Rodada {
         
         return isValid;
     }
-    
-    public boolean validarInserir(Rodada rodada) throws Exception {
-        boolean isValid = false;
-        
-        isValid = true;
-        
-        return isValid;
-    }
 }

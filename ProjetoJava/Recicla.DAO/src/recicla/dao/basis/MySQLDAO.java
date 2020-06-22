@@ -228,6 +228,24 @@ public class MySQLDAO <E extends Entidade> extends DAO {
         return "DELETE FROM " + tabela + " WHERE " + chave + " = ?;";
     }
     
+    public int getIdInserido() throws SQLException {
+        int idInserido = 0;
+        
+        try (Connection conexao = DriverManager.getConnection(STRING_CONEXAO, USUARIO, SENHA )) {
+            String sql = "SELECT LAST_INSERT_ID() AS id FROM " + tabela + ";";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.first()) {
+                        idInserido = rs.getInt("id");
+                    }
+                }
+            }
+        }
+        
+        return idInserido;
+    }
+    
     protected E preencherEntidade(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
     }

@@ -107,10 +107,10 @@ CREATE TABLE `Rodadas`
 
 CREATE TABLE `RodadasXUsuarios`
 (
-	`RodadaId` INT UNSIGNED,
 	`UsuarioId` INT UNSIGNED,
+  `RodadaId` INT UNSIGNED,
 	`Pontos` INT UNSIGNED,
-  PRIMARY KEY (`RodadaId`, `UsuarioId`),
+  PRIMARY KEY (`UsuarioId`),
   FOREIGN KEY (`RodadaId`) REFERENCES `Rodadas` (`RodadaId`),
   FOREIGN KEY (`UsuarioId`) REFERENCES `Usuarios` (`UsuarioId`)
 );
