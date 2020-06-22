@@ -28,6 +28,7 @@ public class Usuario extends Entidade {
 
     public void setItens(ItemLojaXUsuario[] itens) {
         this.itens = itens;
+        
     }
     
     /**

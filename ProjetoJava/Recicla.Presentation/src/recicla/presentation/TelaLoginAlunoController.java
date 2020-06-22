@@ -35,6 +35,7 @@ import recicla.comuns.vos.Usuario;
  * FXML Controller class
  */
 public class TelaLoginAlunoController implements Initializable {
+
     @FXML
     private TextField txtLogin;
     @FXML
@@ -44,41 +45,41 @@ public class TelaLoginAlunoController implements Initializable {
     @FXML
     private Hyperlink txtNaoCadastro;
     private final String USER_AGENT = "Mozilla/5.0";
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void btnEntrar(MouseEvent event) throws Exception {
         Usuario user = new Usuario();
-        user.setUsuario(txtLogin.getText()); 
+        user.setUsuario(txtLogin.getText());
         user.setSenha(txtSenha.getText());
-        
+
         String chamadaWS;
-                
-        //chamadaWS = "http://localhost:8080/ReciclaWebServices/webresources/user/obtem-usuario/";
-        chamadaWS = "user/obtem-usuario/";
-        String json = httpRequest.sendGet(chamadaWS + user.getUsuario() + "/" + user.getSenha());
-        Gson g = new Gson();
-
-        Usuario u = new Usuario();
-
-        Type usuarioType = new TypeToken<Usuario>() {}.getType();   
-        Type itensType = new TypeToken<List<ItemLojaXUsuario>>() {}.getType();
-
-
-        u = g.fromJson(json, usuarioType);
-        chamadaWS = "itens/obtem-itens-usuario/";
-        String itensJson = httpRequest.sendGet(chamadaWS + u.getUsuarioId());
-        System.out.print(itensJson);
-          
         try {
-            
-            if(u != null) {
+            //chamadaWS = "http://localhost:8080/ReciclaWebServices/webresources/user/obtem-usuario/";
+            chamadaWS = "user/obtem-usuario/";
+            String json = httpRequest.sendGet(chamadaWS + user.getUsuario() + "/" + user.getSenha());
+            Gson g = new Gson();
+            System.out.print(json);
+            Usuario u = new Usuario();
+
+            Type usuarioType = new TypeToken<Usuario>() {
+            }.getType();
+            Type itensType = new TypeToken<List<ItemLojaXUsuario>>() {
+            }.getType();
+
+            u = g.fromJson(json, usuarioType);
+            chamadaWS = "itens/obtem-itens-usuario/";
+            String itensJson = httpRequest.sendGet(chamadaWS + u.getUsuarioId());
+            System.out.print(itensJson);
+
+            if (u != null) {
                 //u.setItens(g.fromJson(json, itensType));
                 //ItemLojaXUsuario itens = g.fromJson(json, ItemLojaXUsuario.class);
                 ItemLojaXUsuario[] itens = g.fromJson(itensJson, ItemLojaXUsuario[].class);
@@ -94,8 +95,8 @@ public class TelaLoginAlunoController implements Initializable {
                     stage.show();
                 } catch (Exception e) {
                     e.printStackTrace();
-                }  
-                
+                }
+
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Login");
@@ -104,13 +105,17 @@ public class TelaLoginAlunoController implements Initializable {
                 System.out.println("Usuario invalido");
             }
         } catch (Exception erro) {
-            erro.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login");
+            alert.setContentText("Login inválido, tente novamente.");
+            alert.showAndWait();
+            System.out.println("Usuario invalido");
         }
     }
 
     @FXML
     private void ExibeCadastroAluno(ActionEvent event) {
-        
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("TelaCadastro.fxml"));
             Scene scene = new Scene(root);
@@ -119,8 +124,8 @@ public class TelaLoginAlunoController implements Initializable {
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
-        }           
-                
+        }
+
     }
-    
+
 }

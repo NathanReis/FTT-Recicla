@@ -90,11 +90,11 @@ public class ItemLojaXUsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
             String query = 
                 "UPDATE " + getTabela() + " " +
                 "SET Quantidade = (Quantidade - 1) " +
-                "WHERE ItemId = ? AND UsuarioId = ?;";
+                "WHERE ItemLojaId = ? AND UsuarioId = ?;";
 
             try (PreparedStatement stmt = conexao.prepareStatement(query)) {
-                stmt.setInt(2, itemId);
-                stmt.setInt(3, usuarioId);
+                stmt.setInt(1, itemId);
+                stmt.setInt(2, usuarioId);
 
                 stmt.executeUpdate();
             }

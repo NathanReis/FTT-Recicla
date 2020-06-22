@@ -73,4 +73,18 @@ public class ItensUsuarioWs {
         
         return g.toJson(itemRetorno);
     }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/consome-item-usuario")
+    public String consumeUserItem(String item) throws SQLException {
+        Gson g = new Gson();
+        System.out.print(item);
+        ItemLojaXUsuario itemRetorno = g.fromJson(item,ItemLojaXUsuario.class);
+        
+        dao.consumirItem(itemRetorno.getItemLojaId(), itemRetorno.getUsuarioId());
+        //dao.inserir(itemRetorno);
+        
+        return g.toJson(itemRetorno);
+    }
 }
