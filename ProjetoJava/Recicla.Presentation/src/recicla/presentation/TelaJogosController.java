@@ -16,9 +16,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import recicla.business.httpRequests.httpRequest;
+import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.PerguntaQuiz;
-
+import recicla.business.config.Config;
+import recicla.comuns.vos.Usuario;
 /**
  * FXML Controller class
  */
@@ -45,6 +48,14 @@ public class TelaJogosController implements Initializable {
     private int numQuestao = 0;
     private List<PerguntaQuiz> perguntas;
     private int pontos = 0;
+    @FXML
+    private ImageView itemQuiz; 
+    @FXML
+    private ImageView itemTempo;
+    @FXML
+    private Label item2x;
+
+
     /**
      * Initializes the controller class.
      */
@@ -58,7 +69,11 @@ public class TelaJogosController implements Initializable {
             Type perguntaType = new TypeToken<ArrayList<PerguntaQuiz>>() {}.getType();
             perguntas = g.fromJson(response, perguntaType);
             Time();
-                       
+            itemQuiz.setVisible(false);
+            itemTempo.setVisible(false);
+            item2x.setVisible(false);
+
+            verificaItensUsuario();
             trocaPergunta();
             
         } catch (Exception ex) {
@@ -98,6 +113,14 @@ public class TelaJogosController implements Initializable {
      @FXML
     private void btnAlt3Clicked() {
         verificaResposta(txtAlternativa3.getText());        
+    }
+    
+    @FXML
+    private void itemTempoClicked(){
+        int tempo = Integer.getInteger(this.txtTempo.getText());
+        tempo += 30;
+        this.txtTempo.setText(Integer.toString(tempo));
+        verificaItensUsuario();
     }
     
     private void verificaResposta(String resposta){
@@ -158,5 +181,21 @@ public class TelaJogosController implements Initializable {
         txtPontuacao.setText(Integer.toString(pontos));
 
     }
-     
+    
+    private void verificaItensUsuario(){
+        ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
+       for (ItemLojaXUsuario item : itens) {
+            if(item.getItemLojaId() == 1 && item.getQuantidade() > 1){
+                itemTempo.setVisible(true);
+            }
+            //apenas no quiz
+            if(item.getItemLojaId() == 2 && item.getQuantidade() > 1){
+                itemQuiz.setVisible(true);
+            }
+            if(item.getItemLojaId() == 3 && item.getQuantidade() > 1){
+                item2x.setVisible(true);
+            }
+                        
+        }
+    }
 }

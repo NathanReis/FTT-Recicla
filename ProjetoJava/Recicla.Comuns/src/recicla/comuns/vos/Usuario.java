@@ -1,6 +1,8 @@
 package recicla.comuns.vos;
 
 import annotation.CampoNoBanco;
+import java.util.ArrayList;
+import java.util.List;
 import recicla.comuns.crud.basis.Entidade;
 
 public class Usuario extends Entidade {
@@ -18,6 +20,15 @@ public class Usuario extends Entidade {
     private int SalaId;
     @CampoNoBanco(nome = "Dinheiro", chave = false)
     private double Dinheiro;
+    private ItemLojaXUsuario[] itens = null;
+
+    public ItemLojaXUsuario[] getItens() {
+        return itens;
+    }
+
+    public void setItens(ItemLojaXUsuario[] itens) {
+        this.itens = itens;
+    }
     
     /**
      * @return the UsuarioId

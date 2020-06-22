@@ -2,11 +2,15 @@ package recicla.presentation;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import static com.oracle.jrockit.jfr.ContentType.Class;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +28,7 @@ import javafx.stage.Stage;
 import recicla.business.acesso.Acesso;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
+import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.Usuario;
 
 /**
@@ -62,16 +67,27 @@ public class TelaLoginAlunoController implements Initializable {
 
         Usuario u = new Usuario();
 
-        Type usuarioType = new TypeToken<Usuario>() {}.getType();
+        Type usuarioType = new TypeToken<Usuario>() {}.getType();   
+        Type itensType = new TypeToken<List<ItemLojaXUsuario>>() {}.getType();
+
 
         u = g.fromJson(json, usuarioType);
+        chamadaWS = "itens/obtem-itens-usuario/";
+        String itensJson = httpRequest.sendGet(chamadaWS + u.getUsuarioId());
+        System.out.print(itensJson);
           
         try {
             
             if(u != null) {
+                //u.setItens(g.fromJson(json, itensType));
+                //ItemLojaXUsuario itens = g.fromJson(json, ItemLojaXUsuario.class);
+                ItemLojaXUsuario[] itens = g.fromJson(itensJson, ItemLojaXUsuario[].class);
+                //listaitens.add(itens);
+                u.setItens(itens);
                 Config.getInstance().setLoggedUser(u);
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml"));
+                    //Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml")); 
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaJogoQuiz.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setScene(scene);

@@ -111,17 +111,17 @@
                         <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
                      </effect>
                      <children>
-                        <ImageView fitHeight="51.0" fitWidth="58.0" layoutX="14.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="itemTempo" fitHeight="51.0" fitWidth="58.0" layoutX="14.0" layoutY="-5.0" onMouseClicked="#itemTempoClicked" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@imagens/Sand_clock.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="43.0" fitWidth="51.0" layoutX="64.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="itemQuiz" fitHeight="43.0" fitWidth="51.0" layoutX="64.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@imagens/correct.png" />
                            </image>
                         </ImageView>
-                        <Label layoutX="117.0" layoutY="4.0" text="2 x" textFill="#65b72f">
+                        <Label fx:id="item2x" layoutX="117.0" layoutY="4.0" text="2 x" textFill="#65b72f">
                            <font>
                               <Font name="HoloLens MDL2 Assets" size="21.0" />
                            </font>
