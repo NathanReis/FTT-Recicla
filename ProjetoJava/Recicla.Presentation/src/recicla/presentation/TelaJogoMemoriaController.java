@@ -5,6 +5,7 @@
  */
 package recicla.presentation;
 
+import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -26,7 +27,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import recicla.business.config.Config;
+import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.vos.Card;
+import recicla.comuns.vos.ItemLojaXUsuario;
 
 
 /**
@@ -64,7 +68,14 @@ public class TelaJogoMemoriaController implements Initializable {
     private ImageView img_card_5;
     @FXML
     private Label txtPontuacao;
+    @FXML
+    private ImageView itemQuiz;
+    @FXML
+    private ImageView itemTempo;
+    @FXML
+    private Label item2x;
     private int pontos = 0;
+    private int multiplicador = 1;
     /**
      * Initializes the controller class.
      */
@@ -83,11 +94,30 @@ public class TelaJogoMemoriaController implements Initializable {
             Monta_Jogo_da_Memoria(cartas); 
             card_background = new Image(new FileInputStream("card_background.png"));        
             Time();
+            verificaItensUsuario();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TelaJogoMemoriaController.class.getName()).log(Level.SEVERE, null, ex);
         } 
 
     }
+    
+    
+    @FXML
+    private void itemTempoClicked() {
+        /*int tempo = Integer.getInteger(this.txtTempo.getText());
+        tempo += 30;
+        this.txtTempo.setText(Integer.toString(tempo));
+        verificaItensUsuario();*/
+
+    }
+    
+    @FXML
+    private void item2xClicked() throws Exception{
+        consomeItem(3);
+        multiplicador = multiplicador * 2;
+        verificaItensUsuario();
+    }
+    
     //Retorna a posição da carta com o Id_especificado
     public int Posicao_Lista_por_id (int Id){
      Card carta;
@@ -312,14 +342,14 @@ public class TelaJogoMemoriaController implements Initializable {
     }
     
     //calculo de pontos
-    private void calculaPontos(boolean acertou){
-        if(acertou){
-            pontos+= 10;
-        }
-        else{
-            pontos-= 5;
-            if(pontos < 0)
+    private void calculaPontos(boolean acertou) {
+        if (acertou) {
+            pontos += 10 * multiplicador;
+        } else {
+            pontos -= 5;
+            if (pontos < 0) {
                 pontos = 0;
+            }
         }
         txtPontuacao.setText(Integer.toString(pontos));
 
@@ -344,10 +374,42 @@ public class TelaJogoMemoriaController implements Initializable {
     
     }
     
-   
+   private void verificaItensUsuario() {
+        itemQuiz.setVisible(false);
+        itemTempo.setVisible(false);
+        item2x.setVisible(false);
+        
+        ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
+        for (ItemLojaXUsuario item : itens) {
+            if (item.getItemLojaId() == 1 && item.getQuantidade() >= 1) {
+                itemTempo.setVisible(true);
+            }
+            //apenas no quiz
+            /*if (item.getItemLojaId() == 2 && item.getQuantidade() >= 1) {
+                itemQuiz.setVisible(true);
+            }*/
+            if (item.getItemLojaId() == 3 && item.getQuantidade() >= 1) {
+                item2x.setVisible(true);
+            }
+
+        }
+    }
         
         
-        
+    private void consomeItem(int idItem) throws Exception {
+        ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
+        Gson g = new Gson();
+        for (ItemLojaXUsuario item : itens) {
+            if (item.getItemLojaId() == idItem) {
+                int qtd = item.getQuantidade();
+                item.setQuantidade(qtd - 1);
+                String chamadaWs = "itens/consome-item-usuario";
+                httpRequest.sendPut(g.toJson(item), chamadaWs);
+                break;
+            }
+        }
+        Config.getInstance().getLoggedUser().setItens(itens);
+    }
         
 
     //Evento do Card 1

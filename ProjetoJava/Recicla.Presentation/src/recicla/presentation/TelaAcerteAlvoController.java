@@ -5,6 +5,7 @@
  */
 package recicla.presentation;
 
+import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URL;
@@ -21,6 +22,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
+import recicla.business.config.Config;
+import recicla.business.httpRequests.httpRequest;
+import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.Janelas;
 
 /**
@@ -64,6 +71,13 @@ public class TelaAcerteAlvoController implements Initializable {
     private int totalJanela = 10;
     private int pontos;
     private int n;
+    @FXML
+    private ImageView itemQuiz;
+    @FXML
+    private ImageView itemTempo;
+    @FXML
+    private Label item2x;
+    private int multiplicador = 1;
     
     List<Janelas> janelas;
     List<Integer> contem = new ArrayList<Integer>();
@@ -71,7 +85,7 @@ public class TelaAcerteAlvoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          List<Janelas> janelas1 = new ArrayList<Janelas>();
-       
+         verificaItensUsuario();
         //Adiciona todos objetos janela em uma lista
         
        try{ 
@@ -94,6 +108,22 @@ public class TelaAcerteAlvoController implements Initializable {
         }
         GeraIdRandomico();
     }    
+    
+    @FXML
+    private void itemTempoClicked() {
+        /*int tempo = Integer.getInteger(this.txtTempo.getText());
+        tempo += 30;
+        this.txtTempo.setText(Integer.toString(tempo));
+        verificaItensUsuario();*/
+
+    }
+    
+    @FXML
+    private void item2xClicked() throws Exception{
+        consomeItem(3);
+        multiplicador = multiplicador * 2;
+        verificaItensUsuario();
+    }
     
     public void GeraIdRandomico(){
   
@@ -131,7 +161,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         if(janelas.get(id).getEstado()){
             n++;
-            pontos += 5;
+            pontos += 5 * multiplicador;
             if(n == totalJanela){
                 txtPontuacao.setText(Integer.toString(pontos));
             }
@@ -341,5 +371,64 @@ public class TelaAcerteAlvoController implements Initializable {
         CalculaPontos(8);
         ApagaJanela(8);
     }
+    
+    
+    
+    //Time
+    private void Time(){
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int interval = 30;
+
+            public void run() {
+                if (interval > 0) {
+                    Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));   
+                    interval--;
+                } else {
+                    timer.cancel();
+                }
+            }
+        }, 1000, 1000);
+    
+    }
+    
+   private void verificaItensUsuario() {
+        itemQuiz.setVisible(false);
+        itemTempo.setVisible(false);
+        item2x.setVisible(false);
+        
+        ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
+        for (ItemLojaXUsuario item : itens) {
+            if (item.getItemLojaId() == 1 && item.getQuantidade() >= 1) {
+                itemTempo.setVisible(true);
+            }
+            //apenas no quiz
+            /*if (item.getItemLojaId() == 2 && item.getQuantidade() >= 1) {
+                itemQuiz.setVisible(true);
+            }*/
+            if (item.getItemLojaId() == 3 && item.getQuantidade() >= 1) {
+                item2x.setVisible(true);
+            }
+
+        }
+    }
+        
+        
+    private void consomeItem(int idItem) throws Exception {
+        ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
+        Gson g = new Gson();
+        for (ItemLojaXUsuario item : itens) {
+            if (item.getItemLojaId() == idItem) {
+                int qtd = item.getQuantidade();
+                item.setQuantidade(qtd - 1);
+                String chamadaWs = "itens/consome-item-usuario";
+                httpRequest.sendPut(g.toJson(item), chamadaWs);
+                break;
+            }
+        }
+        Config.getInstance().getLoggedUser().setItens(itens);
+    }
+        
     
 }

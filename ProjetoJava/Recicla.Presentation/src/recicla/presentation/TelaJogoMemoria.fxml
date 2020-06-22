@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaJogoMemoriaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaJogoMemoriaController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0">
          <children>
@@ -126,17 +128,17 @@
                      <children>
                         <Pane layoutX="30.0" layoutY="21.0" prefHeight="33.0" prefWidth="158.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
                            <children>
-                              <ImageView fitHeight="51.0" fitWidth="58.0" layoutX="14.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="itemTempo" fitHeight="51.0" fitWidth="58.0" layoutX="14.0" layoutY="-5.0" onMouseClicked="#itemTempoClicked" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@imagens/Sand_clock.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="43.0" fitWidth="51.0" layoutX="64.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="itemQuiz" fitHeight="43.0" fitWidth="51.0" layoutX="64.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@imagens/correct.png" />
                                  </image>
                               </ImageView>
-                              <Label layoutX="117.0" layoutY="4.0" text="2 x" textFill="#65b72f">
+                              <Label fx:id="item2x" layoutX="117.0" layoutY="4.0" onMouseClicked="#item2xClicked" text="2 x" textFill="#65b72f">
                                  <font>
                                     <Font name="HoloLens MDL2 Assets" size="21.0" />
                                  </font>
@@ -153,7 +155,7 @@
                         </ImageView>
                         <Pane layoutX="302.0" layoutY="-7.0" prefHeight="62.0" prefWidth="103.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
                            <children>
-                              <Label fx:id="txtPontuacao" layoutX="48.0" layoutY="29.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                              <Label fx:id="txtPontuacao" layoutX="48.0" layoutY="29.0" prefHeight="19.0" prefWidth="28.0" text="0">
                                  <font>
                                     <Font name="Arial" size="12.0" />
                                  </font>

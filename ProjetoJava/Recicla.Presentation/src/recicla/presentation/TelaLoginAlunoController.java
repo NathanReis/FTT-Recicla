@@ -52,6 +52,7 @@ public class TelaLoginAlunoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }
 
     @FXML
@@ -88,7 +89,7 @@ public class TelaLoginAlunoController implements Initializable {
                 Config.getInstance().setLoggedUser(u);
                 try {
                     //Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml")); 
-                    Parent root = FXMLLoader.load(getClass().getResource("TelaJogoQuiz.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaAcerteAlvo.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setScene(scene);
