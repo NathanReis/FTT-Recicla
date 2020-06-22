@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ws;
 
 import com.google.gson.Gson;
@@ -26,10 +21,6 @@ import recicla.comuns.vos.RodadaXAluno;
 import recicla.dao.sala.RodadaMySQLDAO;
 import recicla.dao.sala.RodadaXAlunoMySQLDAO;
 
-/**
- *
- * @author vitorlupinetti
- */
 @Path("rodada")
 public class RodadaWs {
     @Context

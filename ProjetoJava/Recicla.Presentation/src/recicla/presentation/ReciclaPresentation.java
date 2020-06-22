@@ -11,8 +11,9 @@ import recicla.comuns.enums.TipoRepositorio;
 public class ReciclaPresentation extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("TelaHome.fxml"));
-        
+
+        Parent root = FXMLLoader.load(getClass().getResource("TelaExibeSala.fxml"));
+
         Scene scene = new Scene(root);
         
         stage.setScene(scene);

@@ -10,20 +10,26 @@
    <children>
       <Pane prefHeight="62.0" prefWidth="740.0" style="-fx-background-color: #8DBA62;">
          <children>
-            <Label fx:id="txt_titulo_rodada" layoutX="14.0" layoutY="7.0" text="Rodada X" textFill="WHITE">
+            <Label fx:id="lblTituloRodada" layoutX="14.0" layoutY="7.0" text="Rodada X" textFill="WHITE">
                <font>
                   <Font name="Wingdings" size="27.0" />
                </font>
             </Label>
+            <Button fx:id="btnExcluirRodada" layoutX="635.0" layoutY="19.0" mnemonicParsing="false" onAction="#btnExcluirRodada_Click" text="Excluir rodada" />
          </children>
       </Pane>
       <Pane layoutY="62.0" prefHeight="439.0" prefWidth="740.0" style="-fx-background-color: A5CA97;">
          <children>
             <Pane layoutX="10.0" layoutY="16.0" prefHeight="403.0" prefWidth="403.0" style="-fx-background-color: #8DBA62;">
                <children>
-                  <Pane layoutX="6.0" layoutY="6.0" prefHeight="392.0" prefWidth="391.0" style="-fx-background-color: #FDEBC7;">
+                  <Pane fx:id="pnlJogosCadastrados" layoutX="6.0" layoutY="6.0" prefHeight="392.0" prefWidth="391.0" style="-fx-background-color: #FDEBC7;">
                      <children>
-                        <Button layoutX="316.0" layoutY="90.0" mnemonicParsing="false" onAction="#btnExcluiJogo" prefHeight="34.0" prefWidth="40.0" style="-fx-background-color: red;" textFill="#eb0d0d">
+                        <Label fx:id="lblJogosCadastrados" layoutX="20.0" layoutY="14.0" text="Jogos Cadastrados" textFill="#447e43">
+                           <font>
+                              <Font name="Wingdings" size="27.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="323.0" layoutY="66.0" mnemonicParsing="false" onAction="#btnExcluiJogo" prefHeight="34.0" prefWidth="40.0" style="-fx-background-color: red;" textFill="#eb0d0d">
                            <effect>
                               <DropShadow blurType="ONE_PASS_BOX" height="19.52" offsetX="1.0" offsetY="1.0" radius="8.8875" width="18.03" />
                            </effect>
@@ -31,11 +37,12 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Label fx:id="txt_titulo_sala2" layoutX="20.0" layoutY="14.0" text="Jogos Cadastrados" textFill="#447e43">
+                        <Label fx:id="lblQtdJogosCadasreados" layoutX="301.0" layoutY="16.0" text="0">
                            <font>
-                              <Font name="Wingdings" size="27.0" />
+                              <Font size="20.0" />
                            </font>
                         </Label>
+                        <Button fx:id="btnStart" layoutX="14.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnStart_Click" text="Iniciar rodada" />
                      </children>
                   </Pane>
                </children>
@@ -46,13 +53,14 @@
                      <children>
                         <Pane layoutX="25.0" layoutY="-2.0" prefHeight="28.0" prefWidth="200.0" style="-fx-background-color: #8DBA62;">
                            <children>
-                              <Label fx:id="txt_titulo_sala1" layoutX="85.0" layoutY="6.0" text="QUIZ" textFill="WHITE">
+                              <Label layoutX="85.0" layoutY="6.0" text="QUIZ" textFill="WHITE">
                                  <font>
                                     <Font name="Wingdings" size="13.0" />
                                  </font>
                               </Label>
                            </children>
                         </Pane>
+                        <Button fx:id="btnEscolherPergunta" layoutX="89.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnEscolherPregunta_Click" text="Escolher pregunta" />
                      </children>
                   </Pane>
                </children>
@@ -63,13 +71,14 @@
                      <children>
                         <Pane layoutX="20.0" layoutY="-2.0" prefHeight="28.0" prefWidth="206.0" style="-fx-background-color: #8DBA62;">
                            <children>
-                              <Label fx:id="txt_titulo_sala11" layoutX="54.0" layoutY="6.0" text="Jogo da Memória" textFill="WHITE">
+                              <Label layoutX="54.0" layoutY="6.0" text="Jogo da Memória" textFill="WHITE">
                                  <font>
                                     <Font name="Wingdings" size="13.0" />
                                  </font>
                               </Label>
                            </children>
                         </Pane>
+                        <Button fx:id="btnAdicionarJogoMemoria" layoutX="64.0" layoutY="46.0" mnemonicParsing="false" onAction="#btnAdicionarJogoMemoria_Click" text="Adicionar Jogo da Memória" />
                      </children>
                   </Pane>
                </children>
@@ -80,13 +89,14 @@
                      <children>
                         <Pane layoutX="20.0" layoutY="-2.0" prefHeight="28.0" prefWidth="206.0" style="-fx-background-color: #8DBA62;">
                            <children>
-                              <Label fx:id="txt_titulo_sala111" layoutX="54.0" layoutY="6.0" text="Apague a Luz !" textFill="WHITE">
+                              <Label layoutX="54.0" layoutY="6.0" text="Apague a Luz !" textFill="WHITE">
                                  <font>
                                     <Font name="Wingdings" size="13.0" />
                                  </font>
                               </Label>
                            </children>
                         </Pane>
+                        <Button fx:id="btnAdicionarApagueALuz" layoutX="74.0" layoutY="46.0" mnemonicParsing="false" onAction="#btnAdicionarApagueALuz_Click" text="Adicionar Apague a Luz" />
                      </children>
                   </Pane>
                </children>

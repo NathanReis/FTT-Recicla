@@ -6,7 +6,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaExibeSalaController">
    <children>
       <Pane layoutY="-1.0" prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
@@ -24,7 +23,7 @@
                <children>
                   <Pane layoutX="6.0" layoutY="6.0" prefHeight="371.0" prefWidth="669.0" style="-fx-background-color: #FDEBC7;">
                      <children>
-                        <Button layoutX="494.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnAdicionaRodada" prefHeight="34.0" prefWidth="158.0" style="-fx-background-color: #73D54A;" text="Adiciona Rodada" textFill="WHITE">
+                        <Button fx:id="btnAdicionaRodada" layoutX="494.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnAdicionaRodada" prefHeight="34.0" prefWidth="158.0" style="-fx-background-color: #73D54A;" text="Adiciona Rodada" textFill="WHITE">
                            <effect>
                               <DropShadow blurType="ONE_PASS_BOX" height="19.52" offsetX="1.0" offsetY="1.0" radius="8.8875" width="18.03" />
                            </effect>
