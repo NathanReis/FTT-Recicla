@@ -78,6 +78,7 @@ public class SalaWs {
         CadastraSala crud = new CadastraSala();
         boolean isValid = crud.InsereSala(sala);
         if(isValid){
+            sala.setSalaId(this.dao.getIdInserido());
             return g.toJson(sala);
         }
         else

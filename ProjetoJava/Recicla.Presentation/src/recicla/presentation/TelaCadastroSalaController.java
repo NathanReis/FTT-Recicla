@@ -9,13 +9,17 @@ import com.google.gson.Gson;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import recicla.business.config.Config;
 import recicla.business.crud.CadastraSala;
 import recicla.business.httpRequests.httpRequest;
+import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.Sala;
 
 /**
@@ -62,6 +66,13 @@ public class TelaCadastroSalaController implements Initializable {
             alert.setTitle("Cadastro");
             alert.setContentText("Cadastrado com sucesso.");
             alert.showAndWait();
+            
+            // Configura no singleton qual sala será editada
+            Config.getInstance().setSalaAtualEditando(g.fromJson(retorno, Sala.class).getSalaId());
+            
+            // Abre a tela para editar a sala cadastrada
+            Parent root = FXMLLoader.load(getClass().getResource("TelaExibeSala.fxml"));
+            HelperController.exibirTela(root);
         }
     }
     
