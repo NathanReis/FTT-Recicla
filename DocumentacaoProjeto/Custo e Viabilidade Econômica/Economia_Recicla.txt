@@ -7,11 +7,15 @@ ALGUEL DE SALA DE COWORKING(para apresentaçao ao cliente)
          Valor por dia: $25
          Fonte: https://www.regus.com.br/offices/brazil/sao-paulo-state/sao-bernardo-do-campo/coworking-space?gclid=EAIaIQobChMInfG5586V6gIVChGRCh08rQRvEAAYAiAAEgLBG_D_BwE&gclsrc=aw.ds
 
+SALÁRIO
+	salário dos programadores. 
+
 SERVIDOR PARA A API
       	Aluguel: $15,99/mês
 	Fonte: https://www.locaweb.com.br/hospedagem-de-sites-com-dominio-gratis/
 
 TRIBUTOS
+       MEI é uma boa opção - Regime tributário
        Software por encomenda:
 		ISS: 2,90%
 		PIS cumulativo: 0,65%
@@ -25,6 +29,9 @@ TRIBUTOS
 
 FERRAMENTAS
 	Netbeans e Mysql são ferramentas open-source, dessa forma não entra no custo.
+
+INTERNET
+	
 
 
 

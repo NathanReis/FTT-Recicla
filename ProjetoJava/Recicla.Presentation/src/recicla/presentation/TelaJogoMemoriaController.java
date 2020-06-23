@@ -341,6 +341,25 @@ public class TelaJogoMemoriaController implements Initializable {
 
     }
     
+    private void Verifica_Fim_Jogo(){
+        
+          if(img_card_1.getImage() == null &&
+             img_card_2.getImage() == null &&
+             img_card_3.getImage() == null &&
+             img_card_4.getImage() == null &&
+             img_card_5.getImage() == null &&
+             img_card_6.getImage() == null &&
+             img_card_7.getImage() == null &&
+             img_card_8.getImage() == null &&
+             img_card_9.getImage() == null &&
+             img_card_10.getImage() == null  ){
+          System.out.println("Fim de Jogo");
+          
+          }
+    
+    
+    }
+    
     //calculo de pontos
     private void calculaPontos(boolean acertou) {
         if (acertou) {
