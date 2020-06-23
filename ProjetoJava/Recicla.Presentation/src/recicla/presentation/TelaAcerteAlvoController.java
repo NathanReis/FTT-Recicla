@@ -27,6 +27,7 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
+import recicla.business.serversocket.RoundMannager;
 import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.Janelas;
 
@@ -308,6 +309,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
        CalculaPontos(0);
        ApagaJanela(0);
+       verifica_fim_jogo();
     }
 
     @FXML
@@ -315,6 +317,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(1);
         ApagaJanela(1);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -322,6 +325,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(4);
         ApagaJanela(4);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -329,6 +333,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(7);
         ApagaJanela(7);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -336,6 +341,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(3);
         ApagaJanela(3);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -343,6 +349,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(6);
         ApagaJanela(6);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -350,6 +357,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(5);
         ApagaJanela(5);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -357,6 +365,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(2);
         ApagaJanela(2);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -364,6 +373,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(9);
         ApagaJanela(9);
+        verifica_fim_jogo();
     }
 
     @FXML
@@ -371,6 +381,7 @@ public class TelaAcerteAlvoController implements Initializable {
         
         CalculaPontos(8);
         ApagaJanela(8);
+        verifica_fim_jogo();
     }
     
     
@@ -388,6 +399,8 @@ public class TelaAcerteAlvoController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
+                     System.out.println("Fim jogo Acerte ao alvo");
+                     RoundMannager.getInstance().setTarget_game(false);
                     timer.cancel();
                 }
             }
@@ -436,6 +449,25 @@ public class TelaAcerteAlvoController implements Initializable {
             }
         }
         Config.getInstance().getLoggedUser().setItens(itens);
+    }
+    
+    private void verifica_fim_jogo(){
+    
+        if(janela0.getOpacity() == 0.0 &&
+           janela1.getOpacity() == 0.0 &&
+           janela2.getOpacity() == 0.0 &&
+           janela3.getOpacity() == 0.0 &&
+           janela4.getOpacity() == 0.0 &&
+           janela5.getOpacity() == 0.0 &&
+           janela6.getOpacity() == 0.0 &&
+           janela7.getOpacity() == 0.0 &&
+           janela8.getOpacity() == 0.0 &&
+           janela9.getOpacity() == 0.0   ){
+               System.out.println("Fim jogo Acerte ao alvo");
+               RoundMannager.getInstance().setTarget_game(false);        
+        
+        }
+    
     }
         
     

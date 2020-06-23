@@ -21,6 +21,7 @@ import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.PerguntaQuiz;
 import recicla.business.config.Config;
+import recicla.business.serversocket.RoundMannager;
 import recicla.comuns.vos.Usuario;
 
 /**
@@ -97,6 +98,8 @@ public class TelaJogosController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
+                         System.out.println("Fim jogo Quiz ");
+                     RoundMannager.getInstance().setQuiz_game(false);
                     timer.cancel();
                 }
             }
@@ -154,6 +157,8 @@ public class TelaJogosController implements Initializable {
                 numQuestao++;
                 trocaPergunta();
             } else {
+                System.out.println("Fim jogo quiz");
+                RoundMannager.getInstance().setQuiz_game(false);
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Fim");
                 alert.setContentText("Fim do quiz.");

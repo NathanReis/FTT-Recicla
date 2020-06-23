@@ -29,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
+import recicla.business.serversocket.RoundMannager;
 import recicla.comuns.vos.Card;
 import recicla.comuns.vos.ItemLojaXUsuario;
 
@@ -353,7 +354,9 @@ public class TelaJogoMemoriaController implements Initializable {
              img_card_8.getImage() == null &&
              img_card_9.getImage() == null &&
              img_card_10.getImage() == null  ){
-          System.out.println("Fim de Jogo");
+              
+           System.out.println("Fim do jogo da memória");
+           RoundMannager.getInstance().setMemory_game(false);
           
           }
     
@@ -387,6 +390,8 @@ public class TelaJogoMemoriaController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
+                    System.out.println("Fim do jogo da memória");
+                    RoundMannager.getInstance().setMemory_game(false);
                     timer.cancel();
                 }
             }
