@@ -441,7 +441,7 @@ public class TelaJogoMemoriaController implements Initializable {
     //Evento do Card 1
     @FXML
     private void Card_Event(MouseEvent event) {
-        
+       
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get();
         
         if (carta != null) {
@@ -462,11 +462,13 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+         Verifica_Fim_Jogo();
         
     }
    //Evento do Card 2
     @FXML
     private void Card_Event_2(MouseEvent event) {
+        
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get();
 
         if (carta != null) {
@@ -487,10 +489,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
     //Evento do Card 6
     @FXML
     private void Card_Event_6(MouseEvent event) {
+        Verifica_Fim_Jogo();
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 6).findFirst().get();
 
         if (carta != null) {
@@ -511,10 +515,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
     private void Card_Event_7(MouseEvent event) {
+        
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 7).findFirst().get();
 
         if (carta != null) {
@@ -535,10 +541,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
     private void Card_Event_8(MouseEvent event) {
+        
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 8).findFirst().get();
 
         if (carta != null) {
@@ -559,10 +567,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
     private void Card_Event_9(MouseEvent event) {
+        Verifica_Fim_Jogo();
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 9).findFirst().get();
 
         if (carta != null) {
@@ -583,10 +593,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
     private void Card_Event_10(MouseEvent event) {
+        Verifica_Fim_Jogo();
          Card carta = cartas.stream().filter(x -> x.getId_carta() == 10).findFirst().get();
 
         if (carta != null) {
@@ -607,10 +619,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
     private void Card_Event_3(MouseEvent event) {
+        
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 3).findFirst().get();
 
         if (carta != null) {
@@ -631,10 +645,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
     private void Card_Event_4(MouseEvent event) {
+        
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 4).findFirst().get();
 
         if (carta != null) {
@@ -655,10 +671,12 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
     private void Card_Event_5(MouseEvent event) {
+        
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 5).findFirst().get();
 
         if (carta != null) {
@@ -679,6 +697,7 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
+        Verifica_Fim_Jogo();
     }
 
     @FXML
