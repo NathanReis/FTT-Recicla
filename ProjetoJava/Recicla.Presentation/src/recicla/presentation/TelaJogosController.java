@@ -51,12 +51,15 @@ public class TelaJogosController implements Initializable {
     private List<PerguntaQuiz> perguntas;
     private int pontos = 0;
     private int multiplicador = 1;
+    private int tempoTimer;
     @FXML
     private ImageView itemQuiz;
     @FXML
     private ImageView itemTempo;
     @FXML
     private Label item2x;
+    
+    private Timer timer;
 
     /**
      * Initializes the controller class.
@@ -71,7 +74,7 @@ public class TelaJogosController implements Initializable {
             Type perguntaType = new TypeToken<ArrayList<PerguntaQuiz>>() {
             }.getType();
             perguntas = g.fromJson(response, perguntaType);
-            Time();
+            Time(30);
             verificaItensUsuario();
             trocaPergunta();
 
@@ -82,22 +85,28 @@ public class TelaJogosController implements Initializable {
     }
     //Time
 
-    private void Time() {
+    private void Time(int tempo) {
 
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
-            int interval = 30;
+            int interval = tempo;
 
             public void run() {
                 if (interval > 0) {
                     Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));
+                    tempoTimer = interval;
                     interval--;
                 } else {
                     timer.cancel();
                 }
             }
         }, 1000, 1000);
-
+        
+    }
+    
+    private void cancelTimer(){
+        timer.cancel();
+        Time(tempoTimer + 30);
     }
 
     @FXML
@@ -116,12 +125,10 @@ public class TelaJogosController implements Initializable {
     }
 
     @FXML
-    private void itemTempoClicked() {
-        /*int tempo = Integer.getInteger(this.txtTempo.getText());
-        tempo += 30;
-        this.txtTempo.setText(Integer.toString(tempo));
-        verificaItensUsuario();*/
-
+    private void itemTempoClicked() throws Exception {
+        cancelTimer();
+        consomeItem(1);
+        verificaItensUsuario();
     }
 
     @FXML

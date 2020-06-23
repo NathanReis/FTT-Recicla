@@ -75,6 +75,8 @@ public class TelaJogoMemoriaController implements Initializable {
     @FXML
     private Label item2x;
     private int pontos = 0;
+    Timer timer;
+    private int tempoTimer;
     private int multiplicador = 1;
     /**
      * Initializes the controller class.
@@ -93,7 +95,7 @@ public class TelaJogoMemoriaController implements Initializable {
         try {
             Monta_Jogo_da_Memoria(cartas); 
             card_background = new Image(new FileInputStream("card_background.png"));        
-            Time();
+            Time(30);
             verificaItensUsuario();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TelaJogoMemoriaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,12 +105,10 @@ public class TelaJogoMemoriaController implements Initializable {
     
     
     @FXML
-    private void itemTempoClicked() {
-        /*int tempo = Integer.getInteger(this.txtTempo.getText());
-        tempo += 30;
-        this.txtTempo.setText(Integer.toString(tempo));
-        verificaItensUsuario();*/
-
+     private void itemTempoClicked() throws Exception {
+        cancelTimer();
+        consomeItem(1);
+        verificaItensUsuario();
     }
     
     @FXML
@@ -356,22 +356,29 @@ public class TelaJogoMemoriaController implements Initializable {
     }
     
     //Time
-    private void Time(){
+    private void Time(int tempo) {
 
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
-            int interval = 30;
+            int interval = tempo;
 
             public void run() {
                 if (interval > 0) {
-                    Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));   
+                    Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));
+                    tempoTimer = interval;
                     interval--;
                 } else {
                     timer.cancel();
                 }
             }
         }, 1000, 1000);
+        
+    }
     
+     private void cancelTimer(){
+        
+        timer.cancel();
+        Time(tempoTimer + 30);
     }
     
    private void verificaItensUsuario() {

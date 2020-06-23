@@ -71,6 +71,8 @@ public class TelaAcerteAlvoController implements Initializable {
     private int totalJanela = 10;
     private int pontos;
     private int n;
+    Timer timer;
+    private int tempoTimer;
     @FXML
     private ImageView itemQuiz;
     @FXML
@@ -86,6 +88,7 @@ public class TelaAcerteAlvoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
          List<Janelas> janelas1 = new ArrayList<Janelas>();
          verificaItensUsuario();
+         Time(30);
         //Adiciona todos objetos janela em uma lista
         
        try{ 
@@ -110,12 +113,10 @@ public class TelaAcerteAlvoController implements Initializable {
     }    
     
     @FXML
-    private void itemTempoClicked() {
-        /*int tempo = Integer.getInteger(this.txtTempo.getText());
-        tempo += 30;
-        this.txtTempo.setText(Integer.toString(tempo));
-        verificaItensUsuario();*/
-
+     private void itemTempoClicked() throws Exception {
+        cancelTimer();
+        consomeItem(1);
+        verificaItensUsuario();
     }
     
     @FXML
@@ -375,22 +376,29 @@ public class TelaAcerteAlvoController implements Initializable {
     
     
     //Time
-    private void Time(){
+    private void Time(int tempo) {
 
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
-            int interval = 30;
+            int interval = tempo;
 
             public void run() {
                 if (interval > 0) {
-                    Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));   
+                    Platform.runLater(() -> txtTempo.setText(String.valueOf(interval)));
+                    tempoTimer = interval;
                     interval--;
                 } else {
                     timer.cancel();
                 }
             }
         }, 1000, 1000);
+        
+    }
     
+     private void cancelTimer(){
+        
+        timer.cancel();
+        Time(tempoTimer + 30);
     }
     
    private void verificaItensUsuario() {

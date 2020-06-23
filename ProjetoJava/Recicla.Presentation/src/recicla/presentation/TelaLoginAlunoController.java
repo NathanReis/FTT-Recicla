@@ -89,7 +89,7 @@ public class TelaLoginAlunoController implements Initializable {
                 Config.getInstance().setLoggedUser(u);
                 try {
                     //Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml")); 
-                    Parent root = FXMLLoader.load(getClass().getResource("TelaAcerteAlvo.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaJogoMemoria.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setScene(scene);
