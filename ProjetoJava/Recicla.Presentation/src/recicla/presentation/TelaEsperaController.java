@@ -59,9 +59,9 @@ public class TelaEsperaController implements Initializable {
 //         RoundMannager.getInstance().add_game(jogo_acerte);
 //        
 //        //Jogador conecta na sala
-//        StudentSocket aluno = new StudentSocket();
-//        aluno.start();
-//        
+       StudentSocket aluno = new StudentSocket();
+       aluno.start();
+       
       
     }    
 

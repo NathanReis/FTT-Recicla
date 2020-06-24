@@ -19,6 +19,8 @@ public class TelaHomeAlunoController implements Initializable {
     private Button btnLoja;
     @FXML
     private Button button2;
+    @FXML
+    private Button btnAcessarSala;
     
     @FXML
     private void btnLojaClick(ActionEvent event) {
@@ -46,6 +48,20 @@ public class TelaHomeAlunoController implements Initializable {
             Parent root = (Parent) fxml.load();
             Stage stage = new Stage();
             stage.setTitle("Home Aluno");
+            stage.setScene(new Scene(root));           
+            stage.show();
+        } catch(Exception e) {
+            System.out.println("Falha ao carregar a janela");
+        }
+    }
+    
+    @FXML
+    private void btnAcessarSalaClicked(){
+         try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("TelaEntrarSala.fxml")); 
+            Parent root = (Parent) fxml.load();
+            Stage stage = new Stage();
+            stage.setTitle("Entrar Sala");
             stage.setScene(new Scene(root));           
             stage.show();
         } catch(Exception e) {

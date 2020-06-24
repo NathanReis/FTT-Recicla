@@ -5,13 +5,23 @@
  */
 package recicla.presentation;
 
+import com.google.gson.Gson;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import recicla.business.config.Config;
+import recicla.business.httpRequests.httpRequest;
+import recicla.comuns.vos.Sala;
+import recicla.comuns.vos.Usuario;
 
 /**
  *
@@ -23,13 +33,60 @@ public class TelaEntrarSalaController implements Initializable {
     private TextField txtCodigoSala;
     @FXML
     private Button btnEntrarSala;
+    private String finalUrl = "sala/obtem-sala-por-chave/";
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+
     @FXML
-    private void entrarSala(){
+    private void entrarSala() throws Exception {
         String chave = txtCodigoSala.getText();
-        System.out.print("chave inserida: " + chave);
+
+        String salaJson = httpRequest.sendGet(finalUrl + chave);
+
+        Usuario usuario = Config.getInstance().getLoggedUser();
+        
+        if (salaJson.equals("null")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erro");
+            alert.setContentText("Chave inválida, verifique os campos.");
+            alert.showAndWait();
+        } else {
+            if (usuario.getTipoUsuario().equalsIgnoreCase("A")) {
+                enviaParaLobby();
+            } else {
+                Gson g = new Gson();
+                Sala salaRetornada = g.fromJson(salaJson, Sala.class);
+                Config.getInstance().setSalaAtualEditando(salaRetornada.getSalaId());
+                enviaParaEdicaoRodada();
+            }
+        }
+
+    }
+
+    private void enviaParaLobby() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("TelaEspera.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void enviaParaEdicaoRodada() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("TelaExibeSala.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
