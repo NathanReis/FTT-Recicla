@@ -101,7 +101,7 @@ CREATE TABLE `Rodadas`
 (
   `RodadaId` INT UNSIGNED AUTO_INCREMENT,
   `SalaId` INT UNSIGNED NOT NULL,
-  `StatusRodada` TINYINT,
+  `StatusRodada` TINYINT DEFAULT 0,
   PRIMARY KEY (`RodadaId`),
   FOREIGN KEY (`SalaId`) REFERENCES `Salas` (`SalaId`)
 );
