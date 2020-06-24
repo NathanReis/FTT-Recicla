@@ -73,6 +73,13 @@ public class SalaServer extends Thread {
                 cliente.show_yourself();
         }
     }
+     
+    public void Make_Room_Avaliable() {
+        for (StudentsManager cliente : ConectedStudents){
+                  Thread threadSocket = new Thread(cliente);
+                  threadSocket.start();
+        }
+    }
       
       
 

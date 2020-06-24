@@ -1,22 +1,30 @@
 package recicla.presentation;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
+import recicla.business.serversocket.RoundMannager;
+import recicla.business.serversocket.SalaServer;
+import recicla.business.serversocket.StudentSocket;
 import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.JogoRodada;
+import recicla.comuns.vos.Sala;
 
 /**
  * FXML Controller class
@@ -26,6 +34,7 @@ public class TelaRodadaController implements Initializable {
     private final int APAGUE_A_LUZ_ID = 1;
     private final int JOGO_MEMORIA_ID = 2;
     private final int QUIZ_ID = 3;
+    private List<JogoRodada> jogos;
 
     @FXML
     private Button btnAdicionarApagueALuz;
@@ -124,31 +133,68 @@ public class TelaRodadaController implements Initializable {
     @FXML
     private void btnStart_Click(ActionEvent event) {
         try {
-            String proximaTela = "";
-            System.out.println("Rodada iniciada");
-            
-            switch(this.jogosCadastrados.get(0).toLowerCase()) {
-                case "3":
-                    proximaTela = "TelaJogoQuiz";
-                    break;
-                    
-                case "1":
-                    proximaTela = "TelaAcerteAlvo";
-                    break;
-                    
-                case "2":
-                    proximaTela = "TelaJogoMemoria";
-                    break;
-                    
-                default:
-                    throw new Exception("Nenhum jogo cadastrado");
-            }
-            
-            Parent root = FXMLLoader.load(getClass().getResource(proximaTela + ".fxml"));
+//            String proximaTela = "";
+//            System.out.println("Rodada iniciada");
+//            
+//            switch(this.jogosCadastrados.get(0).toLowerCase()) {
+//                case "3":
+//                    proximaTela = "TelaJogoQuiz";
+//                    break;
+//                    
+//                case "1":
+//                    proximaTela = "TelaAcerteAlvo";
+//                    break;
+//                    
+//                case "2":
+//                    proximaTela = "TelaJogoMemoria";
+//                    break;
+//                    
+//                default:
+//                    throw new Exception("Nenhum jogo cadastrado");
+//            }
+//            
+//            Parent root = FXMLLoader.load(getClass().getResource(proximaTela + ".fxml"));
+//
+//            HelperController.exibirTela(root);
 
+//      //inicia server
+        SalaServer sala = new SalaServer();
+        sala.start();   
+
+        
+        //Pega Jogos da rodada
+         Gson g = new Gson();
+             String URL = "jogos/obtem-jogos-por-rodadaId/";
+             String retorno = httpRequest.sendGet(URL + Integer.parseInt(this.txtRodadaId.getText()));
+             jogos = new ArrayList<>();
+              Type JogoRodadaType = new TypeToken<ArrayList<JogoRodada>>() {
+            }.getType();
+             jogos = g.fromJson(retorno,JogoRodadaType);
+             
+             
+         //adiciona a lista do singleton
+         add_jogo_singleton();
+         
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Rodada Iniciada");
+            alert.setContentText("A rodada foi iniciada com sucesso");
+            alert.showAndWait();
+            
+            
+            Parent root = FXMLLoader.load(getClass().getResource("TelaHomeProfessor.fxml"));
             HelperController.exibirTela(root);
+
+         
         } catch(Exception exception) {
             System.out.println(exception.getMessage());
         }
+    }
+    
+    public void add_jogo_singleton(){
+     for (JogoRodada game : jogos){
+          RoundMannager.getInstance().add_game(game);                
+        }
+    
+    
     }
 }
