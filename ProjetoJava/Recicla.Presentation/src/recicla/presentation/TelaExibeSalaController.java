@@ -3,6 +3,8 @@ package recicla.presentation;
 import com.google.gson.Gson;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,12 +17,13 @@ import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.Rodada;
+import recicla.comuns.vos.Sala;
 
 /**
  * FXML Controller class
  */
 public class TelaExibeSalaController implements Initializable {
-
+     public String URL;
     @FXML
     private Label txt_titulo_sala;
     @FXML
@@ -34,7 +37,19 @@ public class TelaExibeSalaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        this.txtSalaId.setText(Integer.toString(Config.getInstance().getSalaAtualEditando()));
+        this.txtSalaId.setText(Integer.toString(Config.getInstance().getSalaAtualEditando()));                    
+         try {
+             Gson g = new Gson();
+             String URL = "sala/obtem-sala-por-id/";
+             String retorno = httpRequest.sendGet(URL + Integer.toString(Config.getInstance().getSalaAtualEditando()));
+             Sala salaRetornada = g.fromJson(retorno, Sala.class);
+             if(salaRetornada!= null){
+                 txt_titulo_sala.setText(salaRetornada.getDescricao());
+             }
+             
+         } catch (Exception ex) {
+             Logger.getLogger(TelaExibeSalaController.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }    
 
     @FXML

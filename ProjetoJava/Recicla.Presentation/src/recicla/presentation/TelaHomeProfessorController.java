@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -19,6 +20,8 @@ import javafx.stage.Stage;
 public class TelaHomeProfessorController implements Initializable {
     @FXML
     private Button btnCriaSala;
+    @FXML
+    private Button btnJogos;
 
     /**
      * Initializes the controller class.
@@ -54,5 +57,20 @@ public class TelaHomeProfessorController implements Initializable {
         } catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void CadastraQuiz(ContextMenuEvent event) throws IOException {
+        
+       
+    }
+
+    @FXML
+    private void CadastraPergunta(MouseEvent event) throws IOException {
+             Parent root = FXMLLoader.load(getClass().getResource("TelaCadastroPergunta.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
     }
 }

@@ -68,7 +68,7 @@ public class TelaCadastroSalaController implements Initializable {
             alert.showAndWait();
             
             url = "sala/obtem-sala-por-chave/";
-            Sala salaRetornada = g.fromJson(retorno, Sala.class);
+            Sala salaRetornada = g.fromJson(retorno, Sala.class);            
             retorno = httpRequest.sendGet(url + salaRetornada.getChaveAcesso());
             // Configura no singleton qual sala será editada
             Config.getInstance().setSalaAtualEditando(g.fromJson(retorno, Sala.class).getSalaId());
