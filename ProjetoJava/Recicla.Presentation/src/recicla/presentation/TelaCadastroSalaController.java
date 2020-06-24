@@ -55,7 +55,7 @@ public class TelaCadastroSalaController implements Initializable {
         Gson g = new Gson();
         String json = g.toJson(sala);
         String retorno = httpRequest.sendPost(json, url);
-
+        System.out.print(retorno);
         if (retorno.equals("invalid")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Cadastro");
@@ -67,6 +67,9 @@ public class TelaCadastroSalaController implements Initializable {
             alert.setContentText("Cadastrado com sucesso.");
             alert.showAndWait();
             
+            url = "sala/obtem-sala-por-chave/";
+            Sala salaRetornada = g.fromJson(retorno, Sala.class);
+            retorno = httpRequest.sendGet(url + salaRetornada.getChaveAcesso());
             // Configura no singleton qual sala será editada
             Config.getInstance().setSalaAtualEditando(g.fromJson(retorno, Sala.class).getSalaId());
             

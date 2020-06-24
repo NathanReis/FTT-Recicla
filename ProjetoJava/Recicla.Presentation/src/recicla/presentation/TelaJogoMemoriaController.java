@@ -97,7 +97,7 @@ public class TelaJogoMemoriaController implements Initializable {
             Monta_Jogo_da_Memoria(cartas); 
             card_background = new Image(new FileInputStream("card_background.png"));        
             Time(30);
-            verificaItensUsuario();
+            //verificaItensUsuario();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TelaJogoMemoriaController.class.getName()).log(Level.SEVERE, null, ex);
         } 

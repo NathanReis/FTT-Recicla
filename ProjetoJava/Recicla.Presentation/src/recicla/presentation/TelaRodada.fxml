@@ -60,7 +60,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Button fx:id="btnEscolherPergunta" layoutX="89.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnEscolherPregunta_Click" text="Escolher pregunta" />
+                        <Button fx:id="btnEscolherPergunta" layoutX="89.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnEscolherPregunta_Click" text="Escolher pergunta" />
                      </children>
                   </Pane>
                </children>

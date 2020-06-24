@@ -31,7 +31,25 @@ public class RodadaMySQLDAO <E extends Entidade> extends MySQLDAO {
             }
         }
     }
-    
+     public int getIdInserido() throws SQLException {
+        int idInserido = 0;
+        
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha() )) {
+           //String sql = "SELECT LAST_INSERT_ID() AS id FROM " + tabela + ";";
+            String sql = "SELECT RodadaId from " + getTabela() + " order by RodadaId desc LIMIT 1";
+
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.first()) {
+                        idInserido = rs.getInt("RodadaId");
+                    }
+                }
+            }
+        }
+        
+        return idInserido;
+    }
     @Override
     protected String getComandoAtualizar() {
         throw new UnsupportedOperationException("Not supported yet.");

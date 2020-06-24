@@ -88,7 +88,7 @@ public class TelaAcerteAlvoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          List<Janelas> janelas1 = new ArrayList<Janelas>();
-         verificaItensUsuario();
+         //verificaItensUsuario();
          Time(30);
         //Adiciona todos objetos janela em uma lista
         

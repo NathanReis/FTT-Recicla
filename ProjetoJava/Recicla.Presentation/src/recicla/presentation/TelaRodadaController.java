@@ -93,7 +93,6 @@ public class TelaRodadaController implements Initializable {
             Gson g = new Gson();
 
             int idInserido = Integer.parseInt(httpRequest.sendPost(g.toJson(jogoRodada), chamadaWS));
-
             if(idInserido != 0) {
                 if(jogoId == 3) {
                     // Pegar pergunta(s) selecionadas
@@ -129,15 +128,15 @@ public class TelaRodadaController implements Initializable {
             System.out.println("Rodada iniciada");
             
             switch(this.jogosCadastrados.get(0).toLowerCase()) {
-                case "pergunta quiz":
+                case "3":
                     proximaTela = "TelaJogoQuiz";
                     break;
                     
-                case "apague a luz":
+                case "1":
                     proximaTela = "TelaAcerteAlvo";
                     break;
                     
-                case "jogo da memória":
+                case "2":
                     proximaTela = "TelaJogoMemoria";
                     break;
                     
