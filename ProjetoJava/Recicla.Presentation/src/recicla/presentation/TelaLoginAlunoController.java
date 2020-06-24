@@ -60,7 +60,8 @@ public class TelaLoginAlunoController implements Initializable {
         Usuario user = new Usuario();
         user.setUsuario(txtLogin.getText());
         user.setSenha(txtSenha.getText());
-
+          
+        
         String chamadaWS;
         try {
             //chamadaWS = "http://localhost:8080/ReciclaWebServices/webresources/user/obtem-usuario/";
@@ -88,8 +89,8 @@ public class TelaLoginAlunoController implements Initializable {
                 u.setItens(itens);
                 Config.getInstance().setLoggedUser(u);
                 try {
-                    //Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml")); 
-                    Parent root = FXMLLoader.load(getClass().getResource("TelaJogoQuiz.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml")); 
+//                    Parent root = FXMLLoader.load(getClass().getResource("TelaJogoQuiz.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setScene(scene);

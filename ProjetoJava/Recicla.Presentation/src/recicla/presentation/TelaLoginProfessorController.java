@@ -5,23 +5,30 @@
  */
 package recicla.presentation;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import recicla.business.crud.CadastraSala;
+import recicla.business.httpRequests.httpRequest;
 import recicla.business.serversocket.RoundMannager;
 import recicla.business.serversocket.SalaServer;
 import recicla.business.serversocket.StudentSocket;
+import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.JogoRodada;
 import recicla.comuns.vos.Usuario;
 
@@ -50,14 +57,52 @@ public class TelaLoginProfessorController implements Initializable {
         Usuario user = new Usuario();
         user.setUsuario(txt_login.getText());
         user.setSenha(txt_senha.getText());
-        
-        //Is miss the validation by API
 
-        Parent root = FXMLLoader.load(getClass().getResource("TelaHomeProfessor.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
+        String chamadaWS;
+        try {
+            if (user.getUsuario().equals("professor")) {
+                chamadaWS = "user/obtem-usuario/";
+                String json = httpRequest.sendGet(chamadaWS + user.getUsuario() + "/" + user.getSenha());
+                Gson g = new Gson();
+                System.out.print(json);
+                Usuario u = new Usuario();
+
+                Type usuarioType = new TypeToken<Usuario>() {
+                }.getType();
+                Type itensType = new TypeToken<List<ItemLojaXUsuario>>() {
+                }.getType();
+
+                u = g.fromJson(json, usuarioType);
+
+                if (u != null) {
+
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaHomeProfessor.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+
+                } else {
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Login");
+                    alert.setContentText("Login inválido, tente novamente.");
+                    alert.showAndWait();
+
+                }
+            }else{
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Login");
+                    alert.setContentText("Este usuário não pertende a de um professor");
+                    alert.showAndWait();
+            
+            }
+
+        } catch (Exception ex) {
+
+            System.out.println(ex.getMessage());
+
+        }
 
     
         
