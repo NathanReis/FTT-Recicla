@@ -38,48 +38,7 @@ public class StudentsManager implements Runnable{
     @Override
     public void run() {
         System.out.println("The student enter in the room");
-        while(true){
-            if(RoundMannager.getInstance().isIsRoomAvaliable()){
-                games = RoundMannager.getInstance().getGames();  
-                
-                while (games.stream().count() != 0) {
-                    try {
-                        //if all the status are false, means that is the first time that loops
-                        if (!RoundMannager.getInstance().isMemory_game()
-                                && !RoundMannager.getInstance().isQuiz_game()
-                                && !RoundMannager.getInstance().isTarget_game()) {
-
-                            current_game = games.poll();
-
-
-                            
-                               set_game_status_true(current_game);
-                               HelperController.exibirTela(FXMLLoader.load(getClass().getResource("src/recicla/presentation/TelaAcerteAlvo.fxml")));
-                            
-//                            if( root != null){
-//                               set_game_status_true(current_game);
-//                               HelperController.exibirTela(root);
-//                            
-//                            }
-//                            else{
-//                                System.out.println("Something went wrong with the discover_game method");
-//                            }
-                                
-
-                        }
-                        
-                        
-                    } catch (Exception  ex) {
-                        Logger.getLogger(StudentsManager.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                }
-                //Now i need to figure out on how to pass the screens 
-
-            }
-        
-        
-        }
+        RoundMannager.getInstance().setIsRoomAvaliable(true);
     }
     
     private String dicover_game(JogoRodada game) throws IOException {

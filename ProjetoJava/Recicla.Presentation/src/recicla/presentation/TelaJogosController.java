@@ -2,6 +2,7 @@ package recicla.presentation;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -22,6 +25,8 @@ import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.PerguntaQuiz;
 import recicla.business.config.Config;
 import recicla.business.serversocket.RoundMannager;
+import recicla.comuns.helperController.HelperController;
+import recicla.comuns.vos.JogoRodada;
 import recicla.comuns.vos.Usuario;
 
 /**
@@ -98,8 +103,21 @@ public class TelaJogosController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
-                         System.out.println("Fim jogo Quiz ");
-                     RoundMannager.getInstance().setQuiz_game(false);
+                    JogoRodada game = RoundMannager.getInstance().remove_game();
+                    if (game != null) {
+                        String tela;
+                        try {
+                            tela = HelperController.dicover_game(game);
+                            Parent root = FXMLLoader.load(getClass().getResource(tela));
+                            HelperController.exibirTela(root);
+
+                        } catch (Exception ex) {
+                            Logger.getLogger(TelaJogosController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } else {
+                        System.out.println("Fim da Rodada");
+                    }
                     timer.cancel();
                 }
             }
@@ -113,17 +131,17 @@ public class TelaJogosController implements Initializable {
     }
 
     @FXML
-    private void btnAlt1Clicked() {
+    private void btnAlt1Clicked() throws Exception {
         verificaResposta(txtAlternativa1.getText());
     }
 
     @FXML
-    private void btnAlt2Clicked() {
+    private void btnAlt2Clicked() throws Exception {
         verificaResposta(txtAlternativa2.getText());
     }
 
     @FXML
-    private void btnAlt3Clicked() {
+    private void btnAlt3Clicked() throws Exception {
         verificaResposta(txtAlternativa3.getText());
     }
 
@@ -148,7 +166,7 @@ public class TelaJogosController implements Initializable {
         verificaItensUsuario();
     }
 
-    private void verificaResposta(String resposta) {
+    private void verificaResposta(String resposta) throws IOException, Exception {
         if (perguntaAtual.getRespostaCorreta().equalsIgnoreCase(resposta)) {
             alertaCorreto();
             calculaPontos(true);
@@ -157,8 +175,15 @@ public class TelaJogosController implements Initializable {
                 numQuestao++;
                 trocaPergunta();
             } else {
-                System.out.println("Fim jogo quiz");
-                RoundMannager.getInstance().setQuiz_game(false);
+                JogoRodada game = RoundMannager.getInstance().remove_game();
+               if(game!= null){
+                String tela = HelperController.dicover_game(game);
+                Parent root = FXMLLoader.load(getClass().getResource(tela));
+                HelperController.exibirTela(root);
+               
+               }else{               
+                   System.out.println("Fim da Rodada");
+               }
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Fim");
                 alert.setContentText("Fim do quiz.");

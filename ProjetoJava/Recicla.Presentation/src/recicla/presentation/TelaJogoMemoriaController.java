@@ -8,6 +8,7 @@ package recicla.presentation;
 import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,6 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Parent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -30,8 +34,10 @@ import javafx.scene.input.MouseEvent;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.business.serversocket.RoundMannager;
+import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.Card;
 import recicla.comuns.vos.ItemLojaXUsuario;
+import recicla.comuns.vos.JogoRodada;
 
 
 /**
@@ -342,7 +348,7 @@ public class TelaJogoMemoriaController implements Initializable {
 
     }
     
-    private void Verifica_Fim_Jogo(){
+    private void Verifica_Fim_Jogo() throws IOException, Exception{
         
           if(img_card_1.getImage() == null &&
              img_card_2.getImage() == null &&
@@ -356,7 +362,14 @@ public class TelaJogoMemoriaController implements Initializable {
              img_card_10.getImage() == null  ){
               
            System.out.println("Fim do jogo da memória");
-           RoundMannager.getInstance().setMemory_game(false);
+           JogoRodada game = RoundMannager.getInstance().remove_game();
+           if(game!= null){
+           String tela = HelperController.dicover_game(game);
+           Parent root = FXMLLoader.load(getClass().getResource(tela));
+           HelperController.exibirTela(root);
+           }else{
+            System.out.println("Fim da Rodada");
+           }
           
           }
     
@@ -391,12 +404,24 @@ public class TelaJogoMemoriaController implements Initializable {
                     interval--;
                 } else {
                     System.out.println("Fim do jogo da memória");
-                    RoundMannager.getInstance().setMemory_game(false);
+                    JogoRodada game = RoundMannager.getInstance().remove_game();
+                    if (game != null) {
+                        try {
+                            String tela = HelperController.dicover_game(game);
+                            Parent root = FXMLLoader.load(getClass().getResource(tela));
+                            HelperController.exibirTela(root);
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+
+                    } else {
+                        System.out.println("Fim da Rodada");
+                    }
                     timer.cancel();
                 }
             }
         }, 1000, 1000);
-        
+
     }
     
      private void cancelTimer(){
@@ -445,7 +470,7 @@ public class TelaJogoMemoriaController implements Initializable {
 
     //Evento do Card 1
     @FXML
-    private void Card_Event(MouseEvent event) {
+    private void Card_Event(MouseEvent event) throws Exception {
        
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get();
         
@@ -472,7 +497,7 @@ public class TelaJogoMemoriaController implements Initializable {
     }
    //Evento do Card 2
     @FXML
-    private void Card_Event_2(MouseEvent event) {
+    private void Card_Event_2(MouseEvent event) throws Exception {
         
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get();
 
@@ -498,8 +523,8 @@ public class TelaJogoMemoriaController implements Initializable {
     }
     //Evento do Card 6
     @FXML
-    private void Card_Event_6(MouseEvent event) {
-        Verifica_Fim_Jogo();
+    private void Card_Event_6(MouseEvent event) throws Exception {
+       
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 6).findFirst().get();
 
         if (carta != null) {
@@ -524,7 +549,7 @@ public class TelaJogoMemoriaController implements Initializable {
     }
 
     @FXML
-    private void Card_Event_7(MouseEvent event) {
+    private void Card_Event_7(MouseEvent event) throws Exception {
         
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 7).findFirst().get();
 
@@ -550,7 +575,7 @@ public class TelaJogoMemoriaController implements Initializable {
     }
 
     @FXML
-    private void Card_Event_8(MouseEvent event) {
+    private void Card_Event_8(MouseEvent event) throws Exception {
         
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 8).findFirst().get();
 
@@ -576,8 +601,8 @@ public class TelaJogoMemoriaController implements Initializable {
     }
 
     @FXML
-    private void Card_Event_9(MouseEvent event) {
-        Verifica_Fim_Jogo();
+    private void Card_Event_9(MouseEvent event) throws Exception {
+     
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 9).findFirst().get();
 
         if (carta != null) {
@@ -602,8 +627,8 @@ public class TelaJogoMemoriaController implements Initializable {
     }
 
     @FXML
-    private void Card_Event_10(MouseEvent event) {
-        Verifica_Fim_Jogo();
+    private void Card_Event_10(MouseEvent event) throws Exception {
+    
          Card carta = cartas.stream().filter(x -> x.getId_carta() == 10).findFirst().get();
 
         if (carta != null) {
@@ -628,7 +653,7 @@ public class TelaJogoMemoriaController implements Initializable {
     }
 
     @FXML
-    private void Card_Event_3(MouseEvent event) {
+    private void Card_Event_3(MouseEvent event) throws Exception {
         
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 3).findFirst().get();
 
@@ -654,7 +679,7 @@ public class TelaJogoMemoriaController implements Initializable {
     }
 
     @FXML
-    private void Card_Event_4(MouseEvent event) {
+    private void Card_Event_4(MouseEvent event) throws Exception {
         
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 4).findFirst().get();
 
@@ -680,7 +705,7 @@ public class TelaJogoMemoriaController implements Initializable {
     }
 
     @FXML
-    private void Card_Event_5(MouseEvent event) {
+    private void Card_Event_5(MouseEvent event) throws Exception {
         
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 5).findFirst().get();
 

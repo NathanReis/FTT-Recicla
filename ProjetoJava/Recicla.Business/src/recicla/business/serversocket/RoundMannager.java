@@ -40,8 +40,8 @@ public class RoundMannager {
         this.LinesGame.add(game);
     }
 
-    public void remove_game() {
-        this.LinesGame.poll();
+    public JogoRodada remove_game() {
+         return this.LinesGame.poll();
     }
 
     /**

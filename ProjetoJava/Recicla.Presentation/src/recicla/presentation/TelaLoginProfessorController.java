@@ -59,30 +59,9 @@ public class TelaLoginProfessorController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
-//        //Teste multiplaye
-//        SalaServer sala = new SalaServer();
-//        sala.start();     
-//        
-//        //Pega Jogos
-//        JogoRodada jogo_quiz = new JogoRodada();
-//        JogoRodada jogo_memoria = new JogoRodada();
-//        JogoRodada jogo_acerte = new JogoRodada();
-//        
-//        jogo_quiz.setJogoId(3);
-//        jogo_memoria.setJogoId(2);
-//        jogo_acerte.setJogoId(1);
-//        
-//         RoundMannager.getInstance().add_game(jogo_quiz);
-//         RoundMannager.getInstance().add_game(jogo_memoria);
-//         RoundMannager.getInstance().add_game(jogo_acerte);
-//        
-//        //Jogador conecta na sala
-//        StudentSocket aluno = new StudentSocket();
-//        aluno.start();
-//        
-//          //Torna a sala disponível
-//        RoundMannager.getInstance().setIsRoomAvaliable(true);
-       
+    
+        
+    
   
 
     }

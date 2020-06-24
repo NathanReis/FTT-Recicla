@@ -8,6 +8,7 @@ package recicla.presentation;
 import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,11 +26,15 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.business.serversocket.RoundMannager;
+import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.Janelas;
+import recicla.comuns.vos.JogoRodada;
 
 /**
  * FXML Controller class
@@ -305,7 +310,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
     
     @FXML
-    private void JanelaAtivada0(MouseEvent event) {
+    private void JanelaAtivada0(MouseEvent event) throws Exception {
         
        CalculaPontos(0);
        ApagaJanela(0);
@@ -313,7 +318,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada1(MouseEvent event) {
+    private void JanelaAtivada1(MouseEvent event) throws Exception {
         
         CalculaPontos(1);
         ApagaJanela(1);
@@ -321,7 +326,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada4(MouseEvent event) {
+    private void JanelaAtivada4(MouseEvent event) throws Exception {
         
         CalculaPontos(4);
         ApagaJanela(4);
@@ -329,7 +334,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada7(MouseEvent event) {
+    private void JanelaAtivada7(MouseEvent event) throws Exception {
         
         CalculaPontos(7);
         ApagaJanela(7);
@@ -337,7 +342,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada3(MouseEvent event) {
+    private void JanelaAtivada3(MouseEvent event) throws Exception {
         
         CalculaPontos(3);
         ApagaJanela(3);
@@ -345,7 +350,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada6(MouseEvent event) {
+    private void JanelaAtivada6(MouseEvent event) throws Exception {
         
         CalculaPontos(6);
         ApagaJanela(6);
@@ -353,7 +358,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada5(MouseEvent event) {
+    private void JanelaAtivada5(MouseEvent event) throws Exception {
         
         CalculaPontos(5);
         ApagaJanela(5);
@@ -361,7 +366,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada2(MouseEvent event) {
+    private void JanelaAtivada2(MouseEvent event) throws Exception {
         
         CalculaPontos(2);
         ApagaJanela(2);
@@ -369,7 +374,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada9(MouseEvent event) {
+    private void JanelaAtivada9(MouseEvent event) throws Exception {
         
         CalculaPontos(9);
         ApagaJanela(9);
@@ -377,7 +382,7 @@ public class TelaAcerteAlvoController implements Initializable {
     }
 
     @FXML
-    private void JanelaAtivada8(MouseEvent event) {
+    private void JanelaAtivada8(MouseEvent event) throws Exception {
         
         CalculaPontos(8);
         ApagaJanela(8);
@@ -399,8 +404,20 @@ public class TelaAcerteAlvoController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
-                     System.out.println("Fim jogo Acerte ao alvo");
-                     RoundMannager.getInstance().setTarget_game(false);
+                    System.out.println("Fim do jogo Acerte ao Alvo");
+                    JogoRodada game = RoundMannager.getInstance().remove_game();
+                    if (game != null) {
+                        try {
+                            String tela = HelperController.dicover_game(game);
+                            Parent root = FXMLLoader.load(getClass().getResource(tela));
+                            HelperController.exibirTela(root);
+                        } catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                        }
+
+                    } else {
+                        System.out.println("Fim da Rodada");
+                    }
                     timer.cancel();
                 }
             }
@@ -451,7 +468,7 @@ public class TelaAcerteAlvoController implements Initializable {
         Config.getInstance().getLoggedUser().setItens(itens);
     }
     
-    private void verifica_fim_jogo(){
+    private void verifica_fim_jogo() throws IOException, Exception{
     
         if(janela0.getOpacity() == 0.0 &&
            janela1.getOpacity() == 0.0 &&
@@ -464,7 +481,15 @@ public class TelaAcerteAlvoController implements Initializable {
            janela8.getOpacity() == 0.0 &&
            janela9.getOpacity() == 0.0   ){
                System.out.println("Fim jogo Acerte ao alvo");
-               RoundMannager.getInstance().setTarget_game(false);        
+               JogoRodada game = RoundMannager.getInstance().remove_game();
+               if(game!= null){
+                String tela = HelperController.dicover_game(game);
+                Parent root = FXMLLoader.load(getClass().getResource(tela));
+                HelperController.exibirTela(root);
+               
+               }else{               
+                   System.out.println("Fim da Rodada");
+               }
         
         }
     

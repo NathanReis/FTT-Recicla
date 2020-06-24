@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaEsperaController">
    <children>
@@ -28,7 +28,17 @@
                <children>
                   <Pane layoutX="10.0" layoutY="16.0" prefHeight="385.0" prefWidth="683.0" style="-fx-background-color: #8DBA62;">
                      <children>
-                        <Pane layoutX="6.0" layoutY="6.0" prefHeight="371.0" prefWidth="669.0" style="-fx-background-color: #FDEBC7;" />
+                        <Pane layoutX="6.0" layoutY="6.0" prefHeight="371.0" prefWidth="669.0" style="-fx-background-color: #FDEBC7;">
+                           <children>
+                              <Button fx:id="btn_conectar" layoutX="154.0" layoutY="248.0" mnemonicParsing="false" onMouseClicked="#Conecta_Sala" prefHeight="39.0" prefWidth="343.0" style="-fx-background-color: #009b6e;" text="Pronto !" textFill="#f5f2f2">
+                                 <effect>
+                                    <DropShadow blurType="ONE_PASS_BOX" offsetX="1.0" offsetY="1.0" radius="9.2575" width="18.03" />
+                                 </effect>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children></Pane>
                      </children>
                   </Pane>
                </children>
