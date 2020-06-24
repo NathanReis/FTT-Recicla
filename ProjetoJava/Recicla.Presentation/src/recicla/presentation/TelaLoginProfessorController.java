@@ -23,6 +23,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import recicla.business.config.Config;
 import recicla.business.crud.CadastraSala;
 import recicla.business.httpRequests.httpRequest;
 import recicla.business.serversocket.RoundMannager;
@@ -75,7 +76,8 @@ public class TelaLoginProfessorController implements Initializable {
                 u = g.fromJson(json, usuarioType);
 
                 if (u != null) {
-
+                    
+                    Config.getInstance().setLoggedUser(u);
                     Parent root = FXMLLoader.load(getClass().getResource("TelaHomeProfessor.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
