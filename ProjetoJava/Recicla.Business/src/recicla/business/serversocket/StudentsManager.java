@@ -5,6 +5,7 @@
  */
 package recicla.business.serversocket;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
@@ -12,9 +13,13 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.JogoRodada;
+import javafx.application.Application;
+
+
 
 /**
  *
@@ -46,15 +51,19 @@ public class StudentsManager implements Runnable{
 
                             current_game = games.poll();
 
-                            Parent root = dicover_game(current_game);
+
                             
-                            if( root != null){
                                set_game_status_true(current_game);
-                               HelperController.exibirTela(root);
-                            }
-                            else{
-                                System.out.println("Something went wrong with the discover_game method");
-                            }
+                               HelperController.exibirTela(FXMLLoader.load(getClass().getResource("src/recicla/presentation/TelaAcerteAlvo.fxml")));
+                            
+//                            if( root != null){
+//                               set_game_status_true(current_game);
+//                               HelperController.exibirTela(root);
+//                            
+//                            }
+//                            else{
+//                                System.out.println("Something went wrong with the discover_game method");
+//                            }
                                 
 
                         }
@@ -73,9 +82,9 @@ public class StudentsManager implements Runnable{
         }
     }
     
-    private Parent dicover_game(JogoRodada game) throws IOException {
+    private String dicover_game(JogoRodada game) throws IOException {
         String tela = "";
-        Parent root;
+//        Parent root;
 
         switch (game.getJogoId()) {
 
@@ -97,7 +106,8 @@ public class StudentsManager implements Runnable{
         if (tela == "") {
             return null;
         } else {
-            return root = FXMLLoader.load(getClass().getResource(tela));
+            
+            return tela;
         }
 
     }
