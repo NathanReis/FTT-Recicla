@@ -82,4 +82,17 @@ public class RodadaMySQLDAO <E extends Entidade> extends MySQLDAO {
         
         return lista;
     }
+    
+     public void atualiza_rodada(Entidade entidade) throws SQLException {
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String query = "UPDATE " + getTabela() +" SET StatusRodada = ? WHERE RodadaId = ?";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                stmt.setInt(1, ((Rodada)entidade).getStatusRodada());
+                stmt.setInt(2, ((Rodada)entidade).getRodadaId());
+
+                stmt.executeUpdate();
+            }
+        }
+    }
 }

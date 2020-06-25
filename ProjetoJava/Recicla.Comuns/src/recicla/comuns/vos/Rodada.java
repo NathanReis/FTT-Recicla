@@ -9,6 +9,8 @@ public class Rodada extends Entidade {
     @CampoNoBanco(nome = "SalaId", chave = false)
     private int SalaId;
     
+    private int StatusRodada;
+    
     /**
      * @return the RodadaId
      */
@@ -35,5 +37,19 @@ public class Rodada extends Entidade {
      */
     public void setSalaId(int SalaId) {
         this.SalaId = SalaId;
+    }
+
+    /**
+     * @return the StatusRodada
+     */
+    public int getStatusRodada() {
+        return StatusRodada;
+    }
+
+    /**
+     * @param StatusRodada the StatusRodada to set
+     */
+    public void setStatusRodada(int StatusRodada) {
+        this.StatusRodada = StatusRodada;
     }
 }
