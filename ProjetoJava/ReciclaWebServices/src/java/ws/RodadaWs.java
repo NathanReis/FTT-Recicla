@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import recicla.business.crud.CadastraRodadaXAluno;
 import recicla.business.validations.IValidation;
+import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.Jogo;
 import recicla.comuns.vos.JogoRodada;
 import recicla.comuns.vos.Rodada;
@@ -51,6 +52,17 @@ public class RodadaWs {
         return g.toJson(rodadas);
     }
     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/obtem-rodada-por-salaId/{salaId}")
+    public String getActualRoundByRoomId(@PathParam("salaId") int salaId) throws SQLException {
+        List<Rodada> rodadas = new ArrayList<>();
+        rodadas = dao.listarPorSalaId(salaId);
+        Rodada rodadaAtual = rodadas.get(rodadas.size() - 1);
+        Gson g = new Gson();
+       
+        return g.toJson(rodadaAtual);
+    }
 
     /**
      * PUT method for updating or creating an instance of UserWs
@@ -58,9 +70,16 @@ public class RodadaWs {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @Path("/inicia-rodada")
+    public String beginRound(String rodada) throws SQLException {
+        Gson g = new Gson();
+        Rodada rodadaRetorno = g.fromJson(rodada,Rodada.class);
+        
+        dao.atualiza_rodada(rodadaRetorno);
+        //dao.inserir(itemRetorno);
+        
+        return g.toJson(rodadaRetorno);
     }
-    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/adciona-rodada")

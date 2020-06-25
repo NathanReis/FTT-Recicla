@@ -61,6 +61,7 @@ public class RodadaMySQLDAO <E extends Entidade> extends MySQLDAO {
 
         entidade.setRodadaId(rs.getInt("RodadaId"));
         entidade.setSalaId(rs.getInt("SalaId"));
+        entidade.setStatusRodada(rs.getInt("StatusRodada"));
 
         return (E)entidade;
     }
@@ -72,6 +73,7 @@ public class RodadaMySQLDAO <E extends Entidade> extends MySQLDAO {
             String sql = "SELECT * FROM " + getTabela() + " WHERE SalaId = ?;";
             
             try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setInt(1, salaId);
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
                         lista.add((Rodada)preencherEntidade(rs));
