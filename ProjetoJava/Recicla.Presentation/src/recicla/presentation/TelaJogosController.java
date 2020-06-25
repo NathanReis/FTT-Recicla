@@ -103,21 +103,26 @@ public class TelaJogosController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
-                    JogoRodada game = RoundMannager.getInstance().remove_game();
-                    if (game != null) {
-                        String tela;
-                        try {
-                            tela = HelperController.dicover_game(game);
-                            Parent root = FXMLLoader.load(getClass().getResource(tela));
-                            HelperController.exibirTela(root);
+                  Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("Fim do jogo do Quiz");
+                            JogoRodada game = RoundMannager.getInstance().remove_game();
+                            if (game != null) {
+                                try {
+                                    String tela = HelperController.dicover_game(game);
+                                    Parent root = FXMLLoader.load(getClass().getResource(tela));
+                                    HelperController.exibirTela(root);
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
+                                }
 
-                        } catch (Exception ex) {
-                            Logger.getLogger(TelaJogosController.class.getName()).log(Level.SEVERE, null, ex);
+                            } else {
+                                System.out.println("Fim da Rodada");
+                            }
                         }
-
-                    } else {
-                        System.out.println("Fim da Rodada");
-                    }
+// ...
+                    });
                     timer.cancel();
                 }
             }

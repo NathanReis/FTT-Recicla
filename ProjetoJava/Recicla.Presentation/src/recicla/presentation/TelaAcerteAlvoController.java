@@ -404,20 +404,26 @@ public class TelaAcerteAlvoController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
-                    System.out.println("Fim do jogo Acerte ao Alvo");
-                    JogoRodada game = RoundMannager.getInstance().remove_game();
-                    if (game != null) {
-                        try {
-                            String tela = HelperController.dicover_game(game);
-                            Parent root = FXMLLoader.load(getClass().getResource(tela));
-                            HelperController.exibirTela(root);
-                        } catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                        }
+                   Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            System.out.println("Fim do jogo Acerte ao Alvo");
+                            JogoRodada game = RoundMannager.getInstance().remove_game();
+                            if (game != null) {
+                                try {
+                                    String tela = HelperController.dicover_game(game);
+                                    Parent root = FXMLLoader.load(getClass().getResource(tela));
+                                    HelperController.exibirTela(root);
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
+                                }
 
-                    } else {
-                        System.out.println("Fim da Rodada");
-                    }
+                            } else {
+                                System.out.println("Fim da Rodada");
+                            }
+                        }
+// ...
+                    });
                     timer.cancel();
                 }
             }
