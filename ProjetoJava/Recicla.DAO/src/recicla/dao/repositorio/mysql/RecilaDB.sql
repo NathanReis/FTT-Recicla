@@ -168,6 +168,12 @@ BEGIN
 			(1, NEW.`UsuarioId`, 0, 0, '23:59:59', 0),
       (2, NEW.`UsuarioId`, 0, 0, '23:59:59', 0),
       (3, NEW.`UsuarioId`, 0, 0, '23:59:59', 0);
+      
+		-- Somente alunos serão associados a uma rodada
+    INSERT INTO `RodadasXUsuarios`
+			(`UsuarioId`, `RodadaId`, `Pontos`)
+		VALUES
+			(NEW.`UsuarioId`, NULL, 0);
 	END IF;
 END$
 
@@ -197,7 +203,7 @@ DELIMITER ;
 INSERT INTO `Jogos` 
 	(`Descricao`)
 VALUES
-	('Acerto o alvo'),
+	('Apague a luz'),
 	('Jogo da memória'),
   ('Quiz');
 
