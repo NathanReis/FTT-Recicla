@@ -135,33 +135,7 @@ public class TelaRodadaController implements Initializable {
     @FXML
     private void btnStart_Click(ActionEvent event) {
         try {
-//            String proximaTela = "";
-//            System.out.println("Rodada iniciada");
-//            
-//            switch(this.jogosCadastrados.get(0).toLowerCase()) {
-//                case "3":
-//                    proximaTela = "TelaJogoQuiz";
-//                    break;
-//                    
-//                case "1":
-//                    proximaTela = "TelaAcerteAlvo";
-//                    break;
-//                    
-//                case "2":
-//                    proximaTela = "TelaJogoMemoria";
-//                    break;
-//                    
-//                default:
-//                    throw new Exception("Nenhum jogo cadastrado");
-//            }
-//            
-//            Parent root = FXMLLoader.load(getClass().getResource(proximaTela + ".fxml"));
-//
-//            HelperController.exibirTela(root);
-
-//      //inicia server
-            //SalaServer sala = new SalaServer();
-            //sala.start();   
+//              
             String URL = "rodada/obtem-rodada-por-salaId/";
 
             Gson g = new Gson();
@@ -172,16 +146,7 @@ public class TelaRodadaController implements Initializable {
             URL = "rodada/inicia-rodada";
             httpRequest.sendPut(g.toJson(rodadaAtual), URL);
 
-            //Pega Jogos da rodada
-            /*URL = "jogos/obtem-jogos-por-rodadaId/";
-            String retorno = httpRequest.sendGet(URL + Integer.parseInt(this.txtRodadaId.getText()));
-            jogos = new ArrayList<>();
-            Type JogoRodadaType = new TypeToken<ArrayList<JogoRodada>>() {
-            }.getType();
-            jogos = g.fromJson(retorno, JogoRodadaType);*/
 
-            //adiciona a lista do singleton
-            //add_jogo_singleton();
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Rodada Iniciada");

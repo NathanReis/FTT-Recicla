@@ -82,10 +82,7 @@ public class TelaLoginAlunoController implements Initializable {
             System.out.print(itensJson);
 
             if (u != null) {
-                //u.setItens(g.fromJson(json, itensType));
-                //ItemLojaXUsuario itens = g.fromJson(json, ItemLojaXUsuario.class);
                 ItemLojaXUsuario[] itens = g.fromJson(itensJson, ItemLojaXUsuario[].class);
-                //listaitens.add(itens);
                 u.setItens(itens);
                 Config.getInstance().setLoggedUser(u);
                 try {

@@ -81,7 +81,7 @@ public class TelaJogosController implements Initializable {
             }.getType();
             perguntas = g.fromJson(response, perguntaType);
             Time(30);
-            //verificaItensUsuario();
+            verificaItensUsuario();
             trocaPergunta();
 
         } catch (Exception ex) {
