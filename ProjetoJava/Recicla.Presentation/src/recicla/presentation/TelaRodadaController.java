@@ -130,7 +130,13 @@ public class TelaRodadaController implements Initializable {
     @FXML
     private void btnStart_Click(ActionEvent event) {
         try {
-//              
+//          
+            boolean possuiJogosCadastrados = verificaSeRodadaTemJogos();
+
+            if (possuiJogosCadastrados == false) {
+                exibeErro();
+                return;
+            }
             String URL = "rodada/obtem-rodada-por-salaId/";
 
             Gson g = new Gson();
@@ -159,5 +165,20 @@ public class TelaRodadaController implements Initializable {
             RoundMannager.getInstance().add_game(game);
         }
 
+    }
+
+    private boolean verificaSeRodadaTemJogos() {
+        if (this.jogosCadastrados.size() == 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private void exibeErro() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Erro");
+        alert.setContentText("Você deve cadastrar ao menos um jogo antes de iniciar a rodada.");
+        alert.showAndWait();
     }
 }
