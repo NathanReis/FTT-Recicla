@@ -73,6 +73,7 @@ public class TelaJogosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        txtPergunta.setWrapText(true);
         perguntas = new ArrayList<>();
         try {
             String response = httpRequest.sendGet(finalUrl);
