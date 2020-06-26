@@ -45,7 +45,6 @@ public class TelaEntrarSalaController implements Initializable {
         String chave = txtCodigoSala.getText();
 
         String salaJson = httpRequest.sendGet(finalUrl + chave);
-        System.out.print("Chave recebida " + salaJson);
 
         Usuario usuario = Config.getInstance().getLoggedUser();
         Gson g = new Gson();
@@ -60,8 +59,6 @@ public class TelaEntrarSalaController implements Initializable {
                 Config.getInstance().setSalaAtualEditando(salaRetornada.getSalaId());
                 enviaParaLobby();
             } else {
-                //Gson g = new Gson();
-               // Sala salaRetornada = g.fromJson(salaJson, Sala.class);
                 Config.getInstance().setSalaAtualEditando(salaRetornada.getSalaId());
                 enviaParaEdicaoRodada();
             }
@@ -70,7 +67,6 @@ public class TelaEntrarSalaController implements Initializable {
     }
 
     private void enviaParaLobby() {
-        //Config.getInstance().setSalaAtualEditando(Integer.getInteger(chave));
         try {
             Parent root = FXMLLoader.load(getClass().getResource("TelaEspera.fxml"));
             Scene scene = new Scene(root);
@@ -83,7 +79,6 @@ public class TelaEntrarSalaController implements Initializable {
     }
 
     private void enviaParaEdicaoRodada() {
-       // Config.getInstance().setSalaAtualEditando(Integer.getInteger(chave));
         try {
             Parent root = FXMLLoader.load(getClass().getResource("TelaExibeSala.fxml"));
             Scene scene = new Scene(root);
@@ -94,4 +89,6 @@ public class TelaEntrarSalaController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    
 }

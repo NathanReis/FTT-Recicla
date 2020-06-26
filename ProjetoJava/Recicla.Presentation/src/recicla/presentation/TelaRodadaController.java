@@ -1,8 +1,6 @@
 package recicla.presentation;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +18,9 @@ import javafx.scene.layout.Pane;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.business.serversocket.RoundMannager;
-import recicla.business.serversocket.SalaServer;
-import recicla.business.serversocket.StudentSocket;
 import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.JogoRodada;
 import recicla.comuns.vos.Rodada;
-import recicla.comuns.vos.Sala;
 
 /**
  * FXML Controller class
@@ -145,8 +140,6 @@ public class TelaRodadaController implements Initializable {
             rodadaAtual.setStatusRodada(1);
             URL = "rodada/inicia-rodada";
             httpRequest.sendPut(g.toJson(rodadaAtual), URL);
-
-
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Rodada Iniciada");

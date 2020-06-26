@@ -48,35 +48,36 @@ public class TelaCadastroSalaController implements Initializable {
     private void CadastraSala(MouseEvent event) throws Exception {
         Sala sala = new Sala();
         sala.setDescricao(txt_NomeSala.getText());       
-       
-        /*CadastraSala crud = new CadastraSala();
-        boolean isValid = crud.InsereSala(sala);
-        System.out.print(isValid);*/
+
         Gson g = new Gson();
         String json = g.toJson(sala);
         String retorno = httpRequest.sendPost(json, url);
-        System.out.print(retorno);
+        
         if (retorno.equals("invalid")) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Cadastro");
             alert.setContentText("Cadastro inválido, verifique campos em branco.");
             alert.showAndWait();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Cadastro");
-            alert.setContentText("Cadastrado com sucesso.");
-            alert.showAndWait();
-            
+        } else {            
             url = "sala/obtem-sala-por-chave/";
             Sala salaRetornada = g.fromJson(retorno, Sala.class);            
             retorno = httpRequest.sendGet(url + salaRetornada.getChaveAcesso());
             // Configura no singleton qual sala será editada
+            String chave = g.fromJson(retorno, Sala.class).getChaveAcesso();
             Config.getInstance().setSalaAtualEditando(g.fromJson(retorno, Sala.class).getSalaId());
             
+            exibeCodigoDaSala(chave);
             // Abre a tela para editar a sala cadastrada
             Parent root = FXMLLoader.load(getClass().getResource("TelaExibeSala.fxml"));
             HelperController.exibirTela(root);
         }
+    }
+    
+    private void exibeCodigoDaSala(String chave) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Sala cadastrada");
+        alert.setContentText("Sala cadastrada, a chave para acessar essa sala é: " + chave);
+        alert.showAndWait();
     }
     
 }
