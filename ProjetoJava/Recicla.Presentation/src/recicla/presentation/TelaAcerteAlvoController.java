@@ -414,12 +414,19 @@ public class TelaAcerteAlvoController implements Initializable {
                                     String tela = HelperController.dicover_game(game);
                                     Parent root = FXMLLoader.load(getClass().getResource(tela));
                                     HelperController.exibirTela(root);
+                                    
                                 } catch (Exception ex) {
                                     System.out.println(ex.getMessage());
                                 }
 
                             } else {
-                                System.out.println("Fim da Rodada");
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                                    HelperController.exibirTela(root);
+                                  
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
+                                }
                             }
                         }
 // ...
@@ -486,16 +493,23 @@ public class TelaAcerteAlvoController implements Initializable {
            janela7.getOpacity() == 0.0 &&
            janela8.getOpacity() == 0.0 &&
            janela9.getOpacity() == 0.0   ){
-               System.out.println("Fim jogo Acerte ao alvo");
-               JogoRodada game = RoundMannager.getInstance().remove_game();
-               if(game!= null){
+              System.out.println("Fim jogo Acerte ao alvo");
+            JogoRodada game = RoundMannager.getInstance().remove_game();
+            if (game != null) {
                 String tela = HelperController.dicover_game(game);
                 Parent root = FXMLLoader.load(getClass().getResource(tela));
                 HelperController.exibirTela(root);
-               
-               }else{               
-                   System.out.println("Fim da Rodada");
-               }
+                timer.cancel();
+
+            } else {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                    HelperController.exibirTela(root);
+                    timer.cancel();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+            }
         
         }
     

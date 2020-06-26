@@ -361,19 +361,26 @@ public class TelaJogoMemoriaController implements Initializable {
              img_card_9.getImage() == null &&
              img_card_10.getImage() == null  ){
               
-           System.out.println("Fim do jogo da memória");
-           JogoRodada game = RoundMannager.getInstance().remove_game();
-           if(game!= null){
-           String tela = HelperController.dicover_game(game);
-           Parent root = FXMLLoader.load(getClass().getResource(tela));
-           HelperController.exibirTela(root);
-           }else{
-            System.out.println("Fim da Rodada");
-           }
-          
-          }
-    
-    
+            System.out.println("Fim do jogo da memória");
+            JogoRodada game = RoundMannager.getInstance().remove_game();
+            if (game != null) {
+                String tela = HelperController.dicover_game(game);
+                Parent root = FXMLLoader.load(getClass().getResource(tela));
+                HelperController.exibirTela(root);
+                timer.cancel();
+            } else {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                    HelperController.exibirTela(root);
+                    timer.cancel();
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            }
+
+        }
+
     }
     
     //calculo de pontos
@@ -418,7 +425,13 @@ public class TelaJogoMemoriaController implements Initializable {
                                 }
 
                             } else {
-                                System.out.println("Fim da Rodada");
+                                try {                                    
+                                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                                    HelperController.exibirTela(root);
+                                } catch (Exception ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                                
                             }
                         }
 // ...
