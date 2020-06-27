@@ -19,7 +19,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 import recicla.business.validations.IValidation;
 import recicla.comuns.vos.Recorde;
+import recicla.comuns.vos.RodadaXAluno;
 import recicla.dao.recorde.RecordeMySQLDAO;
+import recicla.dao.sala.RodadaXAlunoMySQLDAO;
 
 /**
  *
@@ -77,6 +79,20 @@ public class RecordeWs {
         Gson g = new Gson();
         Recorde r = g.fromJson(recordeJson, Recorde.class);
         dao.inserir(r);
+        
+       return g.toJson(r);
+               
+    }
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/adciona-pontos")
+    public String addPoints(String rodadaAlunoJson) throws SQLException {
+        Gson g = new Gson();
+        RodadaXAluno r = g.fromJson(rodadaAlunoJson, RodadaXAluno.class);
+        RodadaXAlunoMySQLDAO rodadaAlunoDao = new RodadaXAlunoMySQLDAO();
+        rodadaAlunoDao.adicionarPontos(r.getUsuarioId(), r.getPontos());
+        
         
        return g.toJson(r);
                
