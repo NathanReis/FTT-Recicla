@@ -57,7 +57,7 @@ public class TelaCadastroPerguntaController implements Initializable {
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Cadastro");
-            alert.setContentText("Cadastro inválido, verifique campos em branco.");
+            alert.setContentText("Cadastro Inválido. Campos em  branco ou ultrapassagem de limite de caracteres");
             alert.showAndWait();
         }
        else{

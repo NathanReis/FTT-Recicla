@@ -91,7 +91,7 @@ public class RecordeWs {
         Gson g = new Gson();
         RodadaXAluno r = g.fromJson(rodadaAlunoJson, RodadaXAluno.class);
         RodadaXAlunoMySQLDAO rodadaAlunoDao = new RodadaXAlunoMySQLDAO();
-        rodadaAlunoDao.adicionarPontos(r.getUsuarioId(), r.getPontos());
+        rodadaAlunoDao.adicionarPontos(r);
         
         
        return g.toJson(r);

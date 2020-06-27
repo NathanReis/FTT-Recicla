@@ -88,6 +88,7 @@ public class TelaEsperaController implements Initializable {
         int salaId = Config.getInstance().getSalaAtualEditando();
         String rodadaJson = httpRequest.sendGet(finalUrl + salaId);
         Rodada rodadaAtual = g.fromJson(rodadaJson, Rodada.class);
+        Config.getInstance().setRodadaAtualEditando(rodadaAtual.getRodadaId());
 
         if (rodadaAtual.getStatusRodada() == 1) {
             obtemJogosRodada(rodadaAtual);

@@ -89,16 +89,18 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
         return lista;
     }
     
-    public void adicionarPontos(int usuarioId, int pontos) throws SQLException {
+    public void adicionarPontos(Entidade entidade) throws SQLException {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
             String sql = 
                     "UPDATE " + getTabela() + " " +
-                    "SET Pontos = (Pontos + ?) " +
+                    "SET Pontos = (Pontos + ?), " +
+                    "RodadaId = ? " +
                     "WHERE UsuarioId = ?;";
 
             try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
-                stmt.setInt(1, pontos);
-                stmt.setInt(2, usuarioId);
+                stmt.setInt(1, ((RodadaXAluno)entidade).getPontos());
+                stmt.setInt(2, ((RodadaXAluno)entidade).getRodadaId());
+                stmt.setInt(3, ((RodadaXAluno)entidade).getUsuarioId());
 
                 stmt.executeUpdate();
             }
