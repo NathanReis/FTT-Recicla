@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
@@ -53,6 +54,8 @@ public class TelaRodadaController implements Initializable {
     private Pane pnlJogosCadastrados;
     @FXML
     private TextField txtRodadaId;
+    @FXML
+    private Button btnFinalizar;
 
     /**
      * Initializes the controller class.
@@ -152,8 +155,7 @@ public class TelaRodadaController implements Initializable {
             alert.setContentText("A rodada foi iniciada com sucesso");
             alert.showAndWait();
 
-            Parent root = FXMLLoader.load(getClass().getResource("TelaHomeProfessor.fxml"));
-            HelperController.exibirTela(root);
+       
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
@@ -180,5 +182,38 @@ public class TelaRodadaController implements Initializable {
         alert.setTitle("Erro");
         alert.setContentText("Você deve cadastrar ao menos um jogo antes de iniciar a rodada.");
         alert.showAndWait();
+    }
+
+    @FXML
+    private void FinalizarRodada(MouseEvent event) {
+        try {
+            String URL = "rodada/obtem-rodada-por-salaId/";
+            Gson g = new Gson();
+            int chaveSala = Config.getInstance().getSalaAtualEditando();
+            String rodadaJson = httpRequest.sendGet(URL + chaveSala);
+            Rodada rodadaAtual = g.fromJson(rodadaJson, Rodada.class);
+
+            if (rodadaAtual.getStatusRodada() == 0) {
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Rodada");
+                alert.setContentText("A rodada ainda não está ativa");
+                alert.showAndWait();
+
+            } else {
+                rodadaAtual.setStatusRodada(0);
+                URL = "rodada/inicia-rodada";
+                httpRequest.sendPut(g.toJson(rodadaAtual), URL);
+
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Rodada Finalizada");
+                alert.setContentText("A rodada foi finalizada");
+                alert.showAndWait();
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
     }
 }

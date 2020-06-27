@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -8,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaRodadaController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaRodadaController">
    <children>
       <Pane prefHeight="62.0" prefWidth="740.0" style="-fx-background-color: #8DBA62;">
          <children>
@@ -45,6 +50,7 @@
                            </font>
                         </Label>
                         <Button fx:id="btnStart" layoutX="14.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnStart_Click" text="Iniciar rodada" />
+                        <Button fx:id="btnFinalizar" layoutX="263.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#FinalizarRodada" text="Finalizar rodada" />
                      </children>
                   </Pane>
                </children>
