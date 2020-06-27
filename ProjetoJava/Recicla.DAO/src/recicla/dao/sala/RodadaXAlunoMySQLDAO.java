@@ -25,18 +25,8 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
     }
     
     @Override
-    public void atualizar(Entidade entidade) throws SQLException {
-        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String sql = getComandoAtualizar();
-
-            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
-                stmt.setInt(1, ((RodadaXAluno)entidade).getRodadaId());
-                stmt.setInt(2, ((RodadaXAluno)entidade).getPontos());
-                stmt.setInt(3, ((RodadaXAluno)entidade).getUsuarioId());
-
-                stmt.executeUpdate();
-            }
-        }
+    public String getComandoAtualizar() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
     @Override
@@ -97,5 +87,21 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
         }
         
         return lista;
+    }
+    
+    public void adicionarPontos(int usuarioId, int pontos) throws SQLException {
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String sql = 
+                    "UPDATE " + getTabela() + " " +
+                    "SET Pontos = (Pontos + ?) " +
+                    "WHERE UsuarioId = ?;";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+                stmt.setInt(1, pontos);
+                stmt.setInt(2, usuarioId);
+
+                stmt.executeUpdate();
+            }
+        }
     }
 }

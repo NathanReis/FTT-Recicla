@@ -1,6 +1,7 @@
 -- ####################
 -- Criação do banco
 -- ####################
+DROP DATABASE `ReciclaDB`;
 CREATE DATABASE `ReciclaDB`;
 
 USE `ReciclaDB`;
@@ -191,6 +192,34 @@ BEGIN
     SET `Dinheiro` = (`Dinheiro` - (@preco * @difQuantidade))
     WHERE `UsuarioId` = NEW.`UsuarioId`;
   END IF;
+END$
+
+CREATE TRIGGER `tgrBeforeDeleteSala`
+BEFORE DELETE ON `Salas`
+FOR EACH ROW
+BEGIN
+	-- Retira relação de rodada e pontos do usuário
+	UPDATE `RodadasXUsuarios`
+  SET `RodadaId` = NULL,
+	 		`Pontos` = 0
+  WHERE `RodadaId` IN (SELECT `RodadaId` FROM `Rodadas` WHERE `SalaId` = OLD.`SalaId`);
+  
+  -- Apaga as perguntas que foram associadas a algum quiz de alguma rodada
+	DELETE FROM `JogosRodadaXPerguntasQuiz`
+  WHERE `JogoRodadaId` IN (SELECT `JogoRodadaId` 
+	 												 FROM `JogosRodada` 
+                           WHERE `RodadaId` IN (SELECT `RodadaId` 
+	 																							FROM `Rodadas` 
+                                                 WHERE `SalaId` = OLD.`SalaId`));
+	
+  -- Apaga os jogos das rodadas
+  DELETE FROM `JogosRodada` 
+  WHERE `RodadaId` IN (SELECT `RodadaId` 
+											 FROM `Rodadas` 
+                       WHERE `SalaId` = OLD.`SalaId`);
+  
+  -- Apaga as rodadas
+  DELETE FROM `Rodadas` WHERE `SalaId` = OLD.`SalaId`;
 END$
 -- ####################
 -- Criação dos eventos
