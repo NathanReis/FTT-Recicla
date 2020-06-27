@@ -86,7 +86,7 @@ public class UserWs {
         Gson g = new Gson();
         Usuario user = g.fromJson(userJson,Usuario.class);
         
-        dao.atualizar(user);
+        dao.atualiza_usuario(user);
         //dao.inserir(itemRetorno);
         
         return g.toJson(user);

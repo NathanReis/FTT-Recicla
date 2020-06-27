@@ -13,12 +13,12 @@
    <children>
       <Pane prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
          <children>
-            <Pane layoutX="71.0" layoutY="19.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+            <Pane layoutX="71.0" layoutY="19.0" prefHeight="27.0" prefWidth="143.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
                <effect>
                   <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
                </effect>
                <children>
-                  <Label fx:id="txtDinheiro" layoutX="42.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                  <Label fx:id="txtDinheiro" layoutX="23.0" layoutY="4.0" prefHeight="19.0" prefWidth="115.0" text="X">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -93,7 +93,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <HBox layoutX="14.0" layoutY="14.0" prefHeight="179.0" prefWidth="619.0">
+                        <HBox layoutX="14.0" layoutY="14.0" prefHeight="179.0" prefWidth="652.0">
                            <children>
                               <Label fx:id="txtPergunta" text="Pergunta">
                                  <font>

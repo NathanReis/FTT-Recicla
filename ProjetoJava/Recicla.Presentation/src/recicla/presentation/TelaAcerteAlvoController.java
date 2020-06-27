@@ -93,19 +93,20 @@ public class TelaAcerteAlvoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          List<Janelas> janelas1 = new ArrayList<Janelas>();
+         verificaDinheiroUsuario();
          verificaItensUsuario();
          Time(30);
         //Adiciona todos objetos janela em uma lista
         
-       try{ 
-            for(int i = 0; i < totalJanela;i++){
+        try {
+            for (int i = 0; i < totalJanela; i++) {
 
-                     Janelas j = new Janelas();
-                     Image imagem = new Image((new FileInputStream("janela"+Integer.toString(i)+".png")));
-                     j.setImagem(imagem);
-                     j.setId(i);
-                     janelas1.add(j);
-                 }
+                Janelas j = new Janelas();
+                Image imagem = new Image((new FileInputStream("janela" + Integer.toString(i) + ".png")));
+                j.setImagem(imagem);
+                j.setId(i);
+                janelas1.add(j);
+            }
             
        }catch(FileNotFoundException ex){
            Logger.getLogger(TelaAcerteAlvoController.class.getName()).log(Level.SEVERE, null, ex);
@@ -493,7 +494,8 @@ public class TelaAcerteAlvoController implements Initializable {
            janela7.getOpacity() == 0.0 &&
            janela8.getOpacity() == 0.0 &&
            janela9.getOpacity() == 0.0   ){
-              System.out.println("Fim jogo Acerte ao alvo");
+            salvaDinheiro(calculaDinheiroGanho());
+            System.out.println("Fim jogo Acerte ao alvo");
             JogoRodada game = RoundMannager.getInstance().remove_game();
             if (game != null) {
                 String tela = HelperController.dicover_game(game);
@@ -515,5 +517,24 @@ public class TelaAcerteAlvoController implements Initializable {
     
     }
         
+     private void salvaDinheiro(double dinheiro) throws Exception {
+        double saldoAtual = Config.getInstance().getLoggedUser().getDinheiro();
+        double novoSaldo = saldoAtual + dinheiro;
+        Config.getInstance().getLoggedUser().setDinheiro(novoSaldo);
+        System.out.print("novo saldo: " + dinheiro);
+        Gson g = new Gson();
+        String chamadaWs = "user/atualiza-usuario";
+        httpRequest.sendPut(g.toJson(Config.getInstance().getLoggedUser()), chamadaWs);
+    }
     
+    private double calculaDinheiroGanho(){
+        int tempo = tempoTimer;
+        double dinheiroGanho = tempo * pontos;
+        
+        return dinheiroGanho;
+    }
+    private void verificaDinheiroUsuario() {
+        double dinheiro = Config.getInstance().getLoggedUser().getDinheiro();
+        txtDinheiro.setText(Double.toString(dinheiro));
+    }
 }

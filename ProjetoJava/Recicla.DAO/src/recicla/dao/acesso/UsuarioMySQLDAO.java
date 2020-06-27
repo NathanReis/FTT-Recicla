@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import recicla.comuns.crud.basis.Entidade;
+import recicla.comuns.vos.Rodada;
 import recicla.comuns.vos.Usuario;
 import recicla.dao.basis.MySQLDAO;
 
@@ -38,7 +39,18 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
 
         return entidade;
     }
-    
+    public void atualiza_usuario(Entidade entidade) throws SQLException {
+        try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
+            String query = "UPDATE " + getTabela() +" SET Dinheiro = ? WHERE UsuarioId = ?";
+
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                stmt.setDouble(1, ((Usuario)entidade).getDinheiro());
+                stmt.setInt(2, ((Usuario)entidade).getUsuarioId());
+
+                stmt.executeUpdate();
+            }
+        }
+    }
     @Override
     public Entidade consultar(String campo, String valor) throws SQLException {
         E entidade = null;

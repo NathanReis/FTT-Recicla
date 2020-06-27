@@ -64,7 +64,7 @@ public class TelaJogosController implements Initializable {
     private ImageView itemTempo;
     @FXML
     private Label item2x;
-    
+
     private Timer timer;
 
     /**
@@ -82,6 +82,7 @@ public class TelaJogosController implements Initializable {
             }.getType();
             perguntas = g.fromJson(response, perguntaType);
             Time(30);
+            verificaDinheiroUsuario();
             verificaItensUsuario();
             trocaPergunta();
 
@@ -104,7 +105,7 @@ public class TelaJogosController implements Initializable {
                     tempoTimer = interval;
                     interval--;
                 } else {
-                  Platform.runLater(new Runnable() {
+                    Platform.runLater(new Runnable() {
                         @Override
                         public void run() {
                             System.out.println("Fim do jogo do Quiz");
@@ -119,7 +120,7 @@ public class TelaJogosController implements Initializable {
                                 }
 
                             } else {
-                               try {                                    
+                                try {
                                     Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
                                     HelperController.exibirTela(root);
                                 } catch (Exception ex) {
@@ -133,10 +134,10 @@ public class TelaJogosController implements Initializable {
                 }
             }
         }, 1000, 1000);
-        
+
     }
-    
-    private void cancelTimer(){
+
+    private void cancelTimer() {
         timer.cancel();
         Time(tempoTimer + 30);
     }
@@ -169,9 +170,9 @@ public class TelaJogosController implements Initializable {
         verificaResposta(this.perguntaAtual.getRespostaCorreta());
         verificaItensUsuario();
     }
-    
+
     @FXML
-    private void item2xClicked() throws Exception{
+    private void item2xClicked() throws Exception {
         consomeItem(3);
         multiplicador = multiplicador * 2;
         verificaItensUsuario();
@@ -186,6 +187,7 @@ public class TelaJogosController implements Initializable {
                 numQuestao++;
                 trocaPergunta();
             } else {
+                salvaDinheiro(calculaDinheiroGanho());
                 JogoRodada game = RoundMannager.getInstance().remove_game();
                 if (game != null) {
                     String tela = HelperController.dicover_game(game);
@@ -201,7 +203,7 @@ public class TelaJogosController implements Initializable {
                     } catch (Exception ex) {
                         System.out.println(ex.getMessage());
                     }
-                }      
+                }
             }
         } else {
             alertaIncorreto();
@@ -250,7 +252,7 @@ public class TelaJogosController implements Initializable {
         itemQuiz.setVisible(false);
         itemTempo.setVisible(false);
         item2x.setVisible(false);
-        
+
         ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
         for (ItemLojaXUsuario item : itens) {
             if (item.getItemLojaId() == 1 && item.getQuantidade() >= 1) {
@@ -267,6 +269,11 @@ public class TelaJogosController implements Initializable {
         }
     }
 
+    private void verificaDinheiroUsuario() {
+        double dinheiro = Config.getInstance().getLoggedUser().getDinheiro();
+        txtDinheiro.setText(Double.toString(dinheiro));
+    }
+
     private void consomeItem(int idItem) throws Exception {
         ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
         Gson g = new Gson();
@@ -280,5 +287,22 @@ public class TelaJogosController implements Initializable {
             }
         }
         Config.getInstance().getLoggedUser().setItens(itens);
+    }
+
+    private void salvaDinheiro(double dinheiro) throws Exception {
+        double saldoAtual = Config.getInstance().getLoggedUser().getDinheiro();
+        double novoSaldo = saldoAtual + dinheiro;
+        Config.getInstance().getLoggedUser().setDinheiro(novoSaldo);
+        System.out.print("novo saldo: " + dinheiro);
+        Gson g = new Gson();
+        String chamadaWs = "user/atualiza-usuario";
+        httpRequest.sendPut(g.toJson(Config.getInstance().getLoggedUser()), chamadaWs);
+    }
+    
+    private double calculaDinheiroGanho(){
+        int tempo = tempoTimer;
+        double dinheiroGanho = tempo * pontos;
+        
+        return dinheiroGanho;
     }
 }

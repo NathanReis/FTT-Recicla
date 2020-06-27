@@ -15,9 +15,9 @@
          <children>
             <Pane prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
                <children>
-                  <Pane layoutX="71.0" layoutY="19.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
+                  <Pane layoutX="71.0" layoutY="19.0" prefHeight="27.0" prefWidth="169.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
                      <children>
-                        <Label fx:id="txtDinheiro" layoutX="42.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
+                        <Label fx:id="txtDinheiro" layoutX="42.0" layoutY="4.0" prefHeight="19.0" prefWidth="116.0" text="X">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>

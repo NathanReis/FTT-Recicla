@@ -103,6 +103,7 @@ public class TelaJogoMemoriaController implements Initializable {
             Monta_Jogo_da_Memoria(cartas); 
             card_background = new Image(new FileInputStream("card_background.png"));        
             Time(30);
+            verificaDinheiroUsuario();
             verificaItensUsuario();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TelaJogoMemoriaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -360,7 +361,7 @@ public class TelaJogoMemoriaController implements Initializable {
              img_card_8.getImage() == null &&
              img_card_9.getImage() == null &&
              img_card_10.getImage() == null  ){
-              
+            salvaDinheiro(calculaDinheiroGanho());
             System.out.println("Fim do jogo da memória");
             JogoRodada game = RoundMannager.getInstance().remove_game();
             if (game != null) {
@@ -762,4 +763,24 @@ public class TelaJogoMemoriaController implements Initializable {
         }
     }
     
+    private void salvaDinheiro(double dinheiro) throws Exception {
+        double saldoAtual = Config.getInstance().getLoggedUser().getDinheiro();
+        double novoSaldo = saldoAtual + dinheiro;
+        Config.getInstance().getLoggedUser().setDinheiro(novoSaldo);
+        System.out.print("novo saldo: " + dinheiro);
+        Gson g = new Gson();
+        String chamadaWs = "user/atualiza-usuario";
+        httpRequest.sendPut(g.toJson(Config.getInstance().getLoggedUser()), chamadaWs);
+    }
+    
+    private double calculaDinheiroGanho(){
+        int tempo = tempoTimer;
+        double dinheiroGanho = tempo * pontos;
+        
+        return dinheiroGanho;
+    }
+    private void verificaDinheiroUsuario() {
+        double dinheiro = Config.getInstance().getLoggedUser().getDinheiro();
+        txtDinheiro.setText(Double.toString(dinheiro));
+    }
 }
