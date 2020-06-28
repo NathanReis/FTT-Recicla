@@ -20,6 +20,15 @@ public class Config {
     private Usuario loggedUser;
     private int salaAtualEditando;
     private int rodadaAtualEditando;
+    private int pontuacaoRodada;
+
+    public int getPontuacaoRodada() {
+        return pontuacaoRodada;
+    }
+
+    public void setPontuacaoRodada(int pontuacaoRodada) {
+        this.pontuacaoRodada = pontuacaoRodada;
+    }
 
     public TipoRepositorio getTipoRepositorio() {
         return tipoRepositorio;

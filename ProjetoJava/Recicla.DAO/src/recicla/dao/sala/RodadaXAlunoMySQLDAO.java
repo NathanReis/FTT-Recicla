@@ -93,7 +93,7 @@ public class RodadaXAlunoMySQLDAO <E extends Entidade> extends MySQLDAO {
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
             String sql = 
                     "UPDATE " + getTabela() + " " +
-                    "SET Pontos = (Pontos + ?), " +
+                    "SET Pontos = ?, " +
                     "RodadaId = ? " +
                     "WHERE UsuarioId = ?;";
 

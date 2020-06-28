@@ -787,11 +787,13 @@ public class TelaJogoMemoriaController implements Initializable {
     }
     
     private void ColetaPontos() throws Exception{
-        
+        int pontos = Config.getInstance().getPontuacaoRodada();
+        pontos = pontos + Integer.parseInt(txtPontuacao.getText());
+        Config.getInstance().setPontuacaoRodada(pontos);
         RodadaXAluno aluno_rodada = new RodadaXAluno();
         aluno_rodada.setUsuarioId(Config.getInstance().getLoggedUser().getUsuarioId());
         aluno_rodada.setRodadaId(Config.getInstance().getRodadaAtualEditando());
-        aluno_rodada.setPontos(Integer.parseInt(txtPontuacao.getText()));
+        aluno_rodada.setPontos(pontos);
         
         Gson g = new Gson();
         String chamadaWs = "recorde/adciona-pontos";

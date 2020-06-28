@@ -35,6 +35,7 @@ import recicla.comuns.helperController.HelperController;
 import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.Janelas;
 import recicla.comuns.vos.JogoRodada;
+import recicla.comuns.vos.RodadaXAluno;
 
 /**
  * FXML Controller class
@@ -410,6 +411,7 @@ public class TelaAcerteAlvoController implements Initializable {
                             JogoRodada game = RoundMannager.getInstance().remove_game();
                             if (game != null) {
                                 try {
+                                    ColetaPontos();
                                     String tela = HelperController.dicover_game(game);
                                     Parent root = FXMLLoader.load(getClass().getResource(tela));
                                     HelperController.exibirTela(root);
@@ -420,6 +422,7 @@ public class TelaAcerteAlvoController implements Initializable {
 
                             } else {
                                 try {
+                                    ColetaPontos();
                                     Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
                                     HelperController.exibirTela(root);
                                   
@@ -493,6 +496,7 @@ public class TelaAcerteAlvoController implements Initializable {
            janela8.getOpacity() == 0.0 &&
            janela9.getOpacity() == 0.0   ){
             salvaDinheiro(calculaDinheiroGanho());
+            ColetaPontos();
             System.out.println("Fim jogo Acerte ao alvo");
             JogoRodada game = RoundMannager.getInstance().remove_game();
             if (game != null) {
@@ -534,5 +538,21 @@ public class TelaAcerteAlvoController implements Initializable {
     private void verificaDinheiroUsuario() {
         double dinheiro = Config.getInstance().getLoggedUser().getDinheiro();
         txtDinheiro.setText(Double.toString(dinheiro));
+    }
+    private void ColetaPontos() throws Exception{
+        int pontos = Config.getInstance().getPontuacaoRodada();
+        pontos = pontos + Integer.parseInt(txtPontuacao.getText());
+        Config.getInstance().setPontuacaoRodada(pontos);
+        RodadaXAluno aluno_rodada = new RodadaXAluno();
+        aluno_rodada.setUsuarioId(Config.getInstance().getLoggedUser().getUsuarioId());
+        aluno_rodada.setRodadaId(Config.getInstance().getRodadaAtualEditando());
+        aluno_rodada.setPontos(pontos);
+        
+        Gson g = new Gson();
+        String chamadaWs = "recorde/adciona-pontos";
+        httpRequest.sendPut(g.toJson(aluno_rodada), chamadaWs);
+        
+        System.out.println("Acabou de coletar os pontos");
+    
     }
 }
