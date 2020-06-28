@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -92,10 +93,24 @@ public class TelaRankingController implements Initializable {
     }
     
     private void preencheLabels(RodadaXAluno vencedor, RodadaXAluno alunoLogado) throws Exception{
+        int posicao = descobrePosicaoJogadorLogado(alunoLogado.getPontos());
         Usuario campeao = obtemAlunoPorId(vencedor.getUsuarioId());
         txtnomeVencedor.setText(campeao.getNome());
         txtpontuacaoVencedor.setText(Integer.toString(vencedor.getPontos()));
         txtpontuacaoAluno.setText(Integer.toString(alunoLogado.getPontos()));
+        txtposicaoAluno.setText(Integer.toString(posicao));
+    }
+    
+    private int descobrePosicaoJogadorLogado(int pontos){
+        Collections.sort(Alunos_Rodada);
+        int posicao = 1;
+        for (int i = 0; i < Alunos_Rodada.size(); i++) {
+            if (pontos < Alunos_Rodada.get(i).getPontos()){
+                posicao++;
+            }
+        }
+        
+        return posicao;
     }
     
     private Usuario obtemAlunoPorId(int alunoId) throws Exception{

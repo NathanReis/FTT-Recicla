@@ -3,8 +3,8 @@ package recicla.comuns.vos;
 import annotation.CampoNoBanco;
 import recicla.comuns.crud.basis.Entidade;
 
-public class RodadaXAluno extends Entidade{
-    
+public class RodadaXAluno extends Entidade implements Comparable<RodadaXAluno> {
+
     @CampoNoBanco(nome = "UsuarioId", chave = true)
     private int UsuarioId;
     @CampoNoBanco(nome = "RodadaId", chave = false)
@@ -53,5 +53,16 @@ public class RodadaXAluno extends Entidade{
     public void setPontos(int pontos) {
         this.pontos = pontos;
     }
-    
+
+    @Override
+    public int compareTo(RodadaXAluno aluno) {
+        if (this.pontos > aluno.getPontos()) {
+            return -1;
+        }
+        if (this.pontos < aluno.getPontos()) {
+            return 1;
+        }
+        return 0;
+    }
 }
+
