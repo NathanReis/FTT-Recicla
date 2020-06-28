@@ -38,6 +38,7 @@ public class RodadaWs {
      */
     public RodadaWs() {
         dao = new RodadaMySQLDAO();
+        rodadaAlunoDao = new RodadaXAlunoMySQLDAO();
         //validation = new SalaValidation();
     }
 

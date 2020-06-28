@@ -52,6 +52,18 @@ public class UserWs {
        
         return g.toJson(u);
     }
+    
+     @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/obtem-usuario-por-id/{userId}")
+    public String getUserById(@PathParam("userId") int userId) throws SQLException {
+        Usuario u = (Usuario)dao.consultar("UsuarioId", userId);
+        System.out.print(u);
+        Gson g = new Gson();
+       
+        return g.toJson(u);
+    }
+
 
     /**
      * PUT method for updating or creating an instance of UserWs

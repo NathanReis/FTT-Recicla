@@ -18,13 +18,11 @@ import recicla.comuns.vos.PerguntaQuiz;
 import recicla.comuns.vos.RodadaXAluno;
 import recicla.comuns.vos.Usuario;
 
-
 /**
  * FXML Controller class
  */
 public class TelaRankingController implements Initializable {
-    
-    
+
     private List<RodadaXAluno> Alunos_Rodada;
     @FXML
     private Label txtfraseAluno;
@@ -36,44 +34,40 @@ public class TelaRankingController implements Initializable {
     private Label txtpontuacaoAluno;
     @FXML
     private Label txtposicaoAluno;
-    
-    
-    
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         try {
             Gson g = new Gson();
             //Busca todos os jogadores da rodada elege o vencedor
             int rodada_atual = Config.getInstance().getRodadaAtualEditando();
-            
+
             //passa rodada_atual para o método da API e obtem lista.
             String chamadaWs = "rodada/listar-rodadaAluno-por-rodadaId/";
             String response = httpRequest.sendGet(chamadaWs + rodada_atual);
             Type type = new TypeToken<ArrayList<RodadaXAluno>>() {
             }.getType();
             Alunos_Rodada = g.fromJson(response, type);
-            
+
             RodadaXAluno vencedor = getVencedorRodada();
             RodadaXAluno aluno_atual = getAlunoAtual(Config.getInstance().getLoggedUser().getUsuarioId());
-            
-            if(vencedor.getUsuarioId() == aluno_atual.getUsuarioId()){
+            preencheLabels(vencedor, aluno_atual);
+            /*if (vencedor.getUsuarioId() == aluno_atual.getUsuarioId()) {
                 txtfraseAluno.setVisible(false);
                 txtpontuacaoAluno.setVisible(false);
-                txtposicaoAluno.setVisible(false);        
-            }
+                txtposicaoAluno.setVisible(false);
+            }*/
         } catch (Exception ex) {
             Logger.getLogger(TelaRankingController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         
-    } 
-    
-    private RodadaXAluno getVencedorRodada(){
+
+    }
+
+    private RodadaXAluno getVencedorRodada() {
         int pontos = 0;
         RodadaXAluno retorno = new RodadaXAluno();
 
@@ -84,16 +78,32 @@ public class TelaRankingController implements Initializable {
             }
         }
         return retorno;
-    
+
+    }
+
+    private RodadaXAluno getAlunoAtual(int IdAluno) {
+
+        RodadaXAluno aluno = Alunos_Rodada.stream().filter(x -> x.getUsuarioId() == IdAluno).findFirst().get();
+        return aluno;
+    }
+
+    private Usuario getAluno(int IdAluno) {
+        return null;
     }
     
-    private RodadaXAluno getAlunoAtual(int IdAluno){
-    
-         RodadaXAluno aluno = Alunos_Rodada.stream().filter(x -> x.getUsuarioId() == IdAluno).findFirst().get();
-         return aluno;
+    private void preencheLabels(RodadaXAluno vencedor, RodadaXAluno alunoLogado) throws Exception{
+        Usuario campeao = obtemAlunoPorId(vencedor.getUsuarioId());
+        txtnomeVencedor.setText(campeao.getNome());
+        txtpontuacaoVencedor.setText(Integer.toString(vencedor.getPontos()));
+        txtpontuacaoAluno.setText(Integer.toString(alunoLogado.getPontos()));
     }
     
-    private Usuario getAluno(int IdAluno){
-        return null;    
+    private Usuario obtemAlunoPorId(int alunoId) throws Exception{
+        Gson g = new Gson();
+        String chamadaWs = "user/obtem-usuario-por-id/";
+        String response = httpRequest.sendGet(chamadaWs + alunoId);
+        Usuario aluno = g.fromJson(response, Usuario.class);
+        
+        return aluno;
     }
 }
