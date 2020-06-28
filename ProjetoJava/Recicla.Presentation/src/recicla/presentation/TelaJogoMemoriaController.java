@@ -371,7 +371,7 @@ public class TelaJogoMemoriaController implements Initializable {
                 timer.cancel();
             } else {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                     HelperController.exibirTela(root);
                     timer.cancel();
                 } catch (Exception ex) {
@@ -429,7 +429,7 @@ public class TelaJogoMemoriaController implements Initializable {
                             } else {
                                 try {              
                                     ColetaPontos();
-                                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                                    Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                                     HelperController.exibirTela(root);
                                 } catch (Exception ex) {
                                     System.out.println(ex.getMessage());

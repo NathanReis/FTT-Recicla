@@ -104,7 +104,6 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         entidade.setUsuario(rs.getString("Usuario"));
         entidade.setSenha(rs.getString("Senha"));
         entidade.setTipoUsuario(rs.getString("TipoUsuario"));
-        entidade.setSalaId(rs.getInt("SalaId"));
         entidade.setDinheiro(rs.getDouble("Dinheiro"));
 
         return (E)entidade;
@@ -121,7 +120,6 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
                     "Usuario, " +
                     "AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, " +
                     "TipoUsuario, " +
-                    "SalaId, " +
                     "Dinheiro " +
                 "FROM " + getTabela() + " " +
                 "WHERE " +

@@ -423,7 +423,7 @@ public class TelaAcerteAlvoController implements Initializable {
                             } else {
                                 try {
                                     ColetaPontos();
-                                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                                    Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                                     HelperController.exibirTela(root);
                                   
                                 } catch (Exception ex) {
@@ -507,7 +507,7 @@ public class TelaAcerteAlvoController implements Initializable {
 
             } else {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("TelaRanking.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                     HelperController.exibirTela(root);
                     timer.cancel();
                 } catch (Exception ex) {

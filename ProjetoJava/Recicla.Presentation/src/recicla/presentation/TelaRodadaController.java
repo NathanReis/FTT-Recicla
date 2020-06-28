@@ -10,12 +10,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.business.serversocket.RoundMannager;
@@ -215,11 +217,24 @@ public class TelaRodadaController implements Initializable {
                 alert.setTitle("Rodada Finalizada");
                 alert.setContentText("A rodada foi finalizada");
                 alert.showAndWait();
+                enviaParaEdicaoRodada();
 
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
 
+        }
+    }
+    
+    private void enviaParaEdicaoRodada() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("TelaExibeSala.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

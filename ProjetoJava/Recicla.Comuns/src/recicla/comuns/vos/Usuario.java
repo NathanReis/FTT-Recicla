@@ -16,8 +16,6 @@ public class Usuario extends Entidade {
     private String Senha;
     @CampoNoBanco(nome = "TipoUsuario", chave = false)
     private String TipoUsuario;
-    @CampoNoBanco(nome = "SalaId", chave = false)
-    private int SalaId;
     @CampoNoBanco(nome = "Dinheiro", chave = false)
     private double Dinheiro;
     private ItemLojaXUsuario[] itens = null;
@@ -101,19 +99,6 @@ public class Usuario extends Entidade {
         this.TipoUsuario = TipoUsuario;
     }
 
-    /**
-     * @return the SalaId
-     */
-    public int getSalaId() {
-        return SalaId;
-    }
-
-    /**
-     * @param SalaId the SalaId to set
-     */
-    public void setSalaId(int SalaId) {
-        this.SalaId = SalaId;
-    }
 
     /**
      * @return the Dinheiro
