@@ -94,24 +94,28 @@ public class TelaRodadaController implements Initializable {
             this.jogosCadastrados.add(Integer.toString(jogoId));
             atualizarQtdExibida();
 
+            
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+    
+    private void enviarJogoRodadaApi(String jogoId) throws Exception{
             JogoRodada jogoRodada = new JogoRodada();
             jogoRodada.setRodadaId(Integer.parseInt(this.txtRodadaId.getText()));
-            jogoRodada.setJogoId(jogoId);
+            jogoRodada.setJogoId(Integer.parseInt(jogoId));
 
             String chamadaWS = "rodada/adciona-jogo-rodada/";
             Gson g = new Gson();
 
             int idInserido = Integer.parseInt(httpRequest.sendPost(g.toJson(jogoRodada), chamadaWS));
             if (idInserido != 0) {
-                if (jogoId == 3) {
+                if (jogoId == "3") {
                     // Pegar pergunta(s) selecionadas
                 }
             } else {
                 System.out.println("Por algum motivo não foi inserido");
             }
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
-        }
     }
 
     private void atualizarQtdExibida() {
@@ -140,6 +144,10 @@ public class TelaRodadaController implements Initializable {
                 exibeErro();
                 return;
             }
+            
+            for (String jogoCadastrado : this.jogosCadastrados) {
+                enviarJogoRodadaApi(jogoCadastrado);
+            }
             String URL = "rodada/obtem-rodada-por-salaId/";
 
             Gson g = new Gson();
@@ -154,8 +162,6 @@ public class TelaRodadaController implements Initializable {
             alert.setTitle("Rodada Iniciada");
             alert.setContentText("A rodada foi iniciada com sucesso");
             alert.showAndWait();
-
-       
 
         } catch (Exception exception) {
             System.out.println(exception.getMessage());

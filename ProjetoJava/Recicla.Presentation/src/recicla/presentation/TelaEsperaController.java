@@ -106,7 +106,7 @@ public class TelaEsperaController implements Initializable {
         }.getType();
         jogos = g.fromJson(retorno, JogoRodadaType);
         add_jogo_singleton();
-
+        
     }
 
     public void add_jogo_singleton() {
