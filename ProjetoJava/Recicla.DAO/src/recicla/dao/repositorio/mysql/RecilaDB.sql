@@ -31,19 +31,8 @@ CREATE TABLE `Usuarios`
   `Usuario` VARCHAR(15) NOT NULL,
   `Senha` VARBINARY(255) NOT NULL,
   `TipoUsuario` CHAR(1) DEFAULT 'A',
-  `SalaId` INT UNSIGNED,
   `Dinheiro` DECIMAL DEFAULT 0,
-  PRIMARY KEY (`UsuarioId`),
-  FOREIGN KEY (`SalaId`) REFERENCES `Salas` (`SalaId`)
-);
-
-CREATE TABLE `Configuracoes`
-(
-  `ConfiguracaoId` INT UNSIGNED,
-  `Som` CHAR(1) DEFAULT 'L',
-  `Musica` CHAR(1) DEFAULT 'L',
-  PRIMARY KEY (`ConfiguracaoId`),
-  FOREIGN KEY (`ConfiguracaoId`) REFERENCES `Usuarios` (`UsuarioId`)
+  PRIMARY KEY (`UsuarioId`)
 );
 
 CREATE TABLE `Jogos`
@@ -51,20 +40,6 @@ CREATE TABLE `Jogos`
   `JogoId` TINYINT UNSIGNED AUTO_INCREMENT,
   `Descricao` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`JogoId`)
-);
-
-CREATE TABLE `Recordes`
-(
-  `RecordeId` INT UNSIGNED AUTO_INCREMENT,
-  `JogoId` TINYINT UNSIGNED NOT NULL,
-  `UsuarioId` INT UNSIGNED NOT NULL,
-  `QtdPartidas` SMALLINT UNSIGNED DEFAULT 0,
-  `QtdVitorias` SMALLINT UNSIGNED DEFAULT 0,
-  `MelhorTempo` TIME NOT NULL,
-  `Pontos` SMALLINT UNSIGNED NOT NULL,
-  PRIMARY KEY (`RecordeId`),
-  FOREIGN KEY (`JogoId`) REFERENCES `Jogos` (`JogoId`),
-  FOREIGN KEY (`UsuarioId`) REFERENCES `Usuarios` (`UsuarioId`)
 );
 
 CREATE TABLE `ItensLoja`
@@ -126,15 +101,6 @@ CREATE TABLE `JogosRodada`
   FOREIGN KEY (`RodadaId`) REFERENCES `Rodadas` (`RodadaId`),
   FOREIGN KEY (`JogoId`) REFERENCES `Jogos` (`JogoId`)
 );
-
-CREATE TABLE `JogosRodadaXPerguntasQuiz`
-(
-  `JogoRodadaId` INT UNSIGNED,
-  `PerguntaQuizId` SMALLINT UNSIGNED,
-  PRIMARY KEY (`JogoRodadaId`, `PerguntaQuizId`),
-  FOREIGN KEY (`JogoRodadaId`) REFERENCES `JogosRodada` (`JogoRodadaId`),
-  FOREIGN KEY (`PerguntaQuizId`) REFERENCES `PerguntasQuiz` (`PerguntaQuizId`)
-);
 -- ####################
 -- Criação das views
 -- ####################
@@ -147,12 +113,6 @@ CREATE TRIGGER `tgrAfterInsertUsuarios`
 AFTER INSERT ON `Usuarios`
 FOR EACH ROW
 BEGIN
-	-- Qualquer usuário terá configuração
-	INSERT INTO `Configuracoes` 
-		(`ConfiguracaoId`, `Som`, `Musica`) 
-	VALUES 
-		(NEW.`UsuarioId`, 'L', 'L');
-	
   IF NEW.`TipoUsuario` = 'A' THEN
 		-- Somente alunos terão itens da loja
 		INSERT INTO `ItensLojaXUsuarios`
@@ -161,14 +121,6 @@ BEGIN
 			(1, NEW.`UsuarioId`, 0),
 			(2, NEW.`UsuarioId`, 0),
 			(3, NEW.`UsuarioId`, 0);
-		
-    -- Somente alunos terão recordes
-		INSERT INTO `Recordes`
-			(`JogoId`, `UsuarioId`, `QtdPartidas`, `QtdVitorias`, `MelhorTempo`, `Pontos`)
-		VALUES
-			(1, NEW.`UsuarioId`, 0, 0, '23:59:59', 0),
-      (2, NEW.`UsuarioId`, 0, 0, '23:59:59', 0),
-      (3, NEW.`UsuarioId`, 0, 0, '23:59:59', 0);
       
 		-- Somente alunos serão associados a uma rodada
     INSERT INTO `RodadasXUsuarios`
@@ -203,14 +155,6 @@ BEGIN
   SET `RodadaId` = NULL,
 	 		`Pontos` = 0
   WHERE `RodadaId` IN (SELECT `RodadaId` FROM `Rodadas` WHERE `SalaId` = OLD.`SalaId`);
-  
-  -- Apaga as perguntas que foram associadas a algum quiz de alguma rodada
-	DELETE FROM `JogosRodadaXPerguntasQuiz`
-  WHERE `JogoRodadaId` IN (SELECT `JogoRodadaId` 
-	 												 FROM `JogosRodada` 
-                           WHERE `RodadaId` IN (SELECT `RodadaId` 
-	 																							FROM `Rodadas` 
-                                                 WHERE `SalaId` = OLD.`SalaId`));
 	
   -- Apaga os jogos das rodadas
   DELETE FROM `JogosRodada` 
