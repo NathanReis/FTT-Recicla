@@ -53,8 +53,6 @@ public class TelaJogoMemoriaController implements Initializable {
     @FXML
     private Label txtTempo;
     @FXML
-    private Label txtTempo1;
-    @FXML
     private ImageView img_card_1;
     @FXML
     private ImageView img_card_2;

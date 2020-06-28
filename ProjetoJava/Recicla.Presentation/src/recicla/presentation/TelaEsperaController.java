@@ -53,24 +53,6 @@ public class TelaEsperaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-//            //Teste multiplaye
-//        SalaServer sala = new SalaServer();
-//        sala.start();     
-//        
-//        //Pega Jogos 
-//        JogoRodada jogo_memoria = new JogoRodada();
-//        JogoRodada jogo_acerte = new JogoRodada();
-//        
-//     
-//        jogo_memoria.setJogoId(2);
-//        jogo_acerte.setJogoId(1);        
-//      
-//         RoundMannager.getInstance().add_game(jogo_memoria);
-//         RoundMannager.getInstance().add_game(jogo_acerte);
-//        
-//        //Jogador conecta na sala
-        //StudentSocket aluno = new StudentSocket();
-        //aluno.start();
     }
 
     @FXML
@@ -124,7 +106,7 @@ public class TelaEsperaController implements Initializable {
         }.getType();
         jogos = g.fromJson(retorno, JogoRodadaType);
         add_jogo_singleton();
-
+        
     }
 
     public void add_jogo_singleton() {

@@ -48,8 +48,6 @@ public class TelaAcerteAlvoController implements Initializable {
     @FXML
     private Label txtTempo;
     @FXML
-    private Label txtTempo1;
-    @FXML
     private ImageView janela0;
     @FXML
     private ImageView janela1;
