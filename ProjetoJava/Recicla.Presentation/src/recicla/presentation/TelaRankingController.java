@@ -1,12 +1,20 @@
 package recicla.presentation;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import recicla.business.config.Config;
+import recicla.business.httpRequests.httpRequest;
+import recicla.comuns.vos.PerguntaQuiz;
 import recicla.comuns.vos.RodadaXAluno;
 import recicla.comuns.vos.Usuario;
 
@@ -39,19 +47,28 @@ public class TelaRankingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        //Busca todos os jogadores da rodada elege o vencedor
-        int rodada_atual = Config.getInstance().getRodadaAtualEditando();
-        
-        //passa rodada_atual para o método da API e obtem lista.
-//        Alunos_Rodada = Retorno da API
-           
-        RodadaXAluno vencedor = getVencedorRodada();
-        RodadaXAluno aluno_atual = getAlunoAtual(Config.getInstance().getLoggedUser().getUsuarioId());
-        
-        if(vencedor.getUsuarioId() == aluno_atual.getUsuarioId()){
-            txtfraseAluno.setVisible(false);
-            txtpontuacaoAluno.setVisible(false);
-            txtposicaoAluno.setVisible(false);        
+        try {
+            Gson g = new Gson();
+            //Busca todos os jogadores da rodada elege o vencedor
+            int rodada_atual = Config.getInstance().getRodadaAtualEditando();
+            
+            //passa rodada_atual para o método da API e obtem lista.
+            String chamadaWs = "rodada/listar-rodadaAluno-por-rodadaId/";
+            String response = httpRequest.sendGet(chamadaWs + rodada_atual);
+            Type type = new TypeToken<ArrayList<RodadaXAluno>>() {
+            }.getType();
+            Alunos_Rodada = g.fromJson(response, type);
+            
+            RodadaXAluno vencedor = getVencedorRodada();
+            RodadaXAluno aluno_atual = getAlunoAtual(Config.getInstance().getLoggedUser().getUsuarioId());
+            
+            if(vencedor.getUsuarioId() == aluno_atual.getUsuarioId()){
+                txtfraseAluno.setVisible(false);
+                txtpontuacaoAluno.setVisible(false);
+                txtposicaoAluno.setVisible(false);        
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TelaRankingController.class.getName()).log(Level.SEVERE, null, ex);
         }
          
     } 
