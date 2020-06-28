@@ -39,8 +39,6 @@ public class TelaJogosController implements Initializable {
     @FXML
     private Label txtTempo;
     @FXML
-    private Label txtTempo1;
-    @FXML
     private Label txtPergunta;
     @FXML
     private Label txtAlternativa1;

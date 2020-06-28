@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -9,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaJogosController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaJogosController">
    <children>
       <Pane prefHeight="62.0" prefWidth="706.0" style="-fx-background-color: #8DBA62;">
          <children>
@@ -37,26 +43,9 @@
                   </Label>
                </children>
             </Pane>
-            <Pane layoutX="590.0" layoutY="18.0" prefHeight="27.0" prefWidth="83.0" style="-fx-background-color: #FDEBC7; -fx-background-radius: 3;">
-               <effect>
-                  <DropShadow blurType="ONE_PASS_BOX" height="18.0" offsetX="1.0" offsetY="1.0" radius="8.5" width="18.0" />
-               </effect>
-               <children>
-                  <Label fx:id="txtTempo1" layoutX="35.0" layoutY="4.0" prefHeight="19.0" prefWidth="28.0" text="X">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
             <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="36.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imagens/bau.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="62.0" fitWidth="66.0" layoutX="558.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imagens/trophe.png" />
                </image>
             </ImageView>
          </children></Pane>

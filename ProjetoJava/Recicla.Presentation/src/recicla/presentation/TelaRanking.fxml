@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
@@ -32,16 +33,41 @@
                               <Font name="Wingdings" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="67.0" layoutY="113.0" text="Você ficou na">
+                        <Label fx:id="txtfraseAluno" layoutX="67.0" layoutY="113.0" text="Você ficou em">
                            <font>
                               <Font name="Wingdings" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="226.0" layoutY="113.0" text="posiçao !">
+                        <Label fx:id="txtnomeVencedor" layoutX="325.0" layoutY="68.0" text="...">
                            <font>
                               <Font name="Wingdings" size="18.0" />
                            </font>
                         </Label>
+                        <Label layoutX="547.0" layoutY="31.0" text="Pontos">
+                           <font>
+                              <Font name="Wingdings" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="txtpontuacaoVencedor" layoutX="565.0" layoutY="68.0" text="...">
+                           <font>
+                              <Font name="Wingdings" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="txtpontuacaoAluno" layoutX="565.0" layoutY="113.0" text="...">
+                           <font>
+                              <Font name="Wingdings" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="txtposicaoAluno" layoutX="198.0" layoutY="113.0" prefHeight="23.0" prefWidth="16.0" text="...">
+                           <font>
+                              <Font name="Wingdings" size="18.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="158.0" fitWidth="179.0" layoutX="263.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@imagens/recicla.png" />
+                           </image>
+                        </ImageView>
                      </children></Pane>
                </children>
             </Pane>
