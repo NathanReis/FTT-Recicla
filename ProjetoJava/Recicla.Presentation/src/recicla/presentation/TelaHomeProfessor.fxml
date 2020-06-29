@@ -36,7 +36,7 @@
                         <DropShadow blurType="ONE_PASS_BOX" offsetX="1.0" offsetY="1.0" radius="9.2575" width="18.03" />
                      </effect>
                   </Button>
-                  <Button fx:id="btnListaSalas" layoutX="17.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnListaSalasClicked" prefHeight="28.0" prefWidth="146.0" style="-fx-background-color: #009b6e;" text="Lista de Salas" textFill="#f5f2f2">
+                  <Button fx:id="btnListaSalas" layoutX="17.0" layoutY="151.0" mnemonicParsing="false" onAction="#btnListaSalasClicked" prefHeight="28.0" prefWidth="146.0" style="-fx-background-color: #009b6e;" text="Acessar Salas" textFill="#f5f2f2">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -45,14 +45,6 @@
                      </effect>
                   </Button>
                   <Button fx:id="btnJogos" layoutX="17.0" layoutY="219.0" mnemonicParsing="false" onContextMenuRequested="#CadastraQuiz" onMouseClicked="#CadastraPergunta" prefHeight="28.0" prefWidth="146.0" style="-fx-background-color: #009b6e;" text="Jogos" textFill="#f5f2f2">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow blurType="ONE_PASS_BOX" offsetX="1.0" offsetY="1.0" radius="9.2575" width="18.03" />
-                     </effect>
-                  </Button>
-                  <Button layoutX="17.0" layoutY="288.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="146.0" style="-fx-background-color: #009b6e;" text="Ranking" textFill="#f5f2f2">
                      <font>
                         <Font size="18.0" />
                      </font>

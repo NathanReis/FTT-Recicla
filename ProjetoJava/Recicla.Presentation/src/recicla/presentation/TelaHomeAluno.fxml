@@ -52,14 +52,6 @@
                         <DropShadow blurType="ONE_PASS_BOX" offsetX="1.0" offsetY="1.0" radius="9.2575" width="18.03" />
                      </effect>
                   </Button>
-                  <Button layoutX="17.0" layoutY="288.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="146.0" style="-fx-background-color: #009b6e;" text="Ranking" textFill="#f5f2f2">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <effect>
-                        <DropShadow blurType="ONE_PASS_BOX" offsetX="1.0" offsetY="1.0" radius="9.2575" width="18.03" />
-                     </effect>
-                  </Button>
                </children>
             </Pane>
          </children>
