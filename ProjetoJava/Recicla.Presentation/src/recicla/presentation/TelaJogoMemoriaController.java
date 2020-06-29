@@ -797,7 +797,7 @@ public class TelaJogoMemoriaController implements Initializable {
     private void ColetaPontos() throws Exception {
         int pontos = Config.getInstance().getPontuacaoRodada();
         pontos = pontos + Integer.parseInt(txtPontuacao.getText());
-        pontos = pontos * tempoTimer;
+        pontos = (pontos * tempoTimer) / 3;
         Config.getInstance().setPontuacaoRodada(pontos);
         RodadaXAluno aluno_rodada = new RodadaXAluno();
         aluno_rodada.setUsuarioId(Config.getInstance().getLoggedUser().getUsuarioId());
