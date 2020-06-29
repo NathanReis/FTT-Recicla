@@ -24,7 +24,7 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         E entidade = null;
 
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String sql = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, SalaId, Dinheiro FROM " + getTabela() + " WHERE " + campo + " = ?;";
+            String sql = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, Dinheiro FROM " + getTabela() + " WHERE " + campo + " = ?;";
 
             try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                 stmt.setInt(1, valor);
@@ -56,7 +56,7 @@ public class UsuarioMySQLDAO <E extends Entidade> extends MySQLDAO {
         E entidade = null;
 
         try (Connection conexao = DriverManager.getConnection(getStringConexao(), getUsuario(), getSenha())) {
-            String sql = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, SalaId, Dinheiro FROM " + getTabela() + " WHERE " + campo + " = ?;";
+            String sql = "SELECT UsuarioId, Nome, Usuario, AES_DECRYPT(Senha, '" + chaveCriptogafia + "') AS Senha, TipoUsuario, Dinheiro FROM " + getTabela() + " WHERE " + campo + " = ?;";
 
             try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
                 stmt.setString(1, valor);
