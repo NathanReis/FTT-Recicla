@@ -10,17 +10,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class TelaHomeAlunoController implements Initializable {
     @FXML
-    private Label label;
-    @FXML
     private Button btnLoja;
     @FXML
-    private Button button2;
-    @FXML
     private Button btnAcessarSala;
+    @FXML
+    private Button btnComoFunciona;
     
     @FXML
     private void btnLojaClick(ActionEvent event) {
@@ -41,7 +40,6 @@ public class TelaHomeAlunoController implements Initializable {
         // TODO
     }    
 
-    @FXML
     private void ExibeHomeAluno(ActionEvent event) {
         try {
             FXMLLoader fxml = new FXMLLoader(getClass().getResource("TelaLoginAluno.fxml")); 
@@ -62,6 +60,20 @@ public class TelaHomeAlunoController implements Initializable {
             Parent root = (Parent) fxml.load();
             Stage stage = new Stage();
             stage.setTitle("Entrar Sala");
+            stage.setScene(new Scene(root));           
+            stage.show();
+        } catch(Exception e) {
+            System.out.println("Falha ao carregar a janela");
+        }
+    }
+
+    @FXML
+    private void ExibeComoFunciona(MouseEvent event) {
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("TelaComoFunciona.fxml")); 
+            Parent root = (Parent) fxml.load();
+            Stage stage = new Stage();
+            stage.setTitle("Ajuda");
             stage.setScene(new Scene(root));           
             stage.show();
         } catch(Exception e) {

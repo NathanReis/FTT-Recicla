@@ -6,7 +6,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recicla.presentation.TelaComoFuncionaController">
    <children>
       <ToolBar layoutX="-3.0" prefHeight="57.0" prefWidth="712.0" style="-fx-background-color: #8DBA62;">
@@ -26,7 +25,69 @@
          <children>
             <Pane layoutX="10.0" layoutY="16.0" prefHeight="385.0" prefWidth="683.0" style="-fx-background-color: #8DBA62;">
                <children>
-                  <Pane layoutX="6.0" layoutY="6.0" prefHeight="371.0" prefWidth="669.0" style="-fx-background-color: #FDEBC7;" />
+                  <Pane layoutX="6.0" layoutY="6.0" prefHeight="371.0" prefWidth="669.0" style="-fx-background-color: #FDEBC7;">
+                     <children>
+                        <Label layoutX="41.0" layoutY="50.0" text="Para começar a jogar é necessário que o seu professor informe o código da Sala.  Então você clica " textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="41.0" layoutY="21.0" text="JOGANDO" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="41.0" layoutY="68.0" text="no Acessar Sala, digita o código e aguarde na sala de espera até o professor iniciar a rodada" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="39.0" layoutY="99.0" text="Quando o professor iniciar a rodada, você clica no Pronto e os jogos vão começar a aparecer!" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="38.0" layoutY="117.0" text="Lembre-se que quando mais rápido você resolver os jogos mais pontos e moedas vai ganhar." textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="41.0" layoutY="157.0" text="COMPRANDO E USANDO ITENS" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="41.0" layoutY="186.0" text="Na lojinha do Jogo esta disponível algun poderes que podem lhe garantir a vitória. Para acessá-la" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="42.0" layoutY="204.0" text="basta clicar em Loja. Uma tela com os poderes irá abrir pra você. Para comprar da Lojinha é " textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="42.0" layoutY="222.0" text="necessario ter moedas, então certifique-se de que tem a quantidade correta." textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="38.0" layoutY="259.0" text="Durante o jogo os seus itens ficam disponível em seu inventário. Basta clicar no poder e ele sera" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="38.0" layoutY="277.0" text="automaticamente ativado!" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="38.0" layoutY="312.0" text="Bom jogo!" textFill="#39b23f">
+                           <font>
+                              <Font name="Wingdings" size="14.0" />
+                           </font>
+                        </Label>
+                     </children></Pane>
                </children>
             </Pane>
          </children>
