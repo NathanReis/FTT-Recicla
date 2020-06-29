@@ -24,13 +24,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import recicla.business.config.Config;
-import recicla.business.crud.CadastraSala;
 import recicla.business.httpRequests.httpRequest;
-import recicla.business.serversocket.RoundMannager;
-import recicla.business.serversocket.SalaServer;
-import recicla.business.serversocket.StudentSocket;
 import recicla.comuns.vos.ItemLojaXUsuario;
-import recicla.comuns.vos.JogoRodada;
 import recicla.comuns.vos.Usuario;
 
 /**
@@ -78,9 +73,11 @@ public class TelaLoginProfessorController implements Initializable {
                 if (u != null) {
                     
                     Config.getInstance().setLoggedUser(u);
+                    Stage stage = (Stage) txt_login.getScene().getWindow();
+                    stage.close();
                     Parent root = FXMLLoader.load(getClass().getResource("TelaHomeProfessor.fxml"));
                     Scene scene = new Scene(root);
-                    Stage stage = new Stage();
+                    stage = new Stage();
                     stage.setScene(scene);
                     stage.show();
 

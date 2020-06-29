@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.PerguntaQuiz;
@@ -111,6 +112,8 @@ public class TelaJogosController implements Initializable {
                             JogoRodada game = RoundMannager.getInstance().remove_game();
                             if (game != null) {
                                 try {
+                                    Stage stage = (Stage) txtPergunta.getScene().getWindow();
+                                    stage.close();
                                     ColetaPontos();
                                     String tela = HelperController.dicover_game(game);
                                     Parent root = FXMLLoader.load(getClass().getResource(tela));
@@ -122,6 +125,8 @@ public class TelaJogosController implements Initializable {
                             } else {
                                 try {
                                     ColetaPontos();
+                                    Stage stage = (Stage) txtPergunta.getScene().getWindow();
+                                    stage.close();
                                     Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                                     HelperController.exibirTela(root);
                                 } catch (Exception ex) {
@@ -192,6 +197,8 @@ public class TelaJogosController implements Initializable {
                 salvaDinheiro(calculaDinheiroGanho());
                 JogoRodada game = RoundMannager.getInstance().remove_game();
                 if (game != null) {
+                    Stage stage = (Stage) txtPergunta.getScene().getWindow();
+                    stage.close();
                     String tela = HelperController.dicover_game(game);
                     Parent root = FXMLLoader.load(getClass().getResource(tela));
                     HelperController.exibirTela(root);
@@ -199,6 +206,8 @@ public class TelaJogosController implements Initializable {
 
                 } else {
                     try {
+                        Stage stage = (Stage) txtPergunta.getScene().getWindow();
+                        stage.close();
                         Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                         HelperController.exibirTela(root);
                         timer.cancel();
@@ -300,28 +309,29 @@ public class TelaJogosController implements Initializable {
         String chamadaWs = "user/atualiza-usuario";
         httpRequest.sendPut(g.toJson(Config.getInstance().getLoggedUser()), chamadaWs);
     }
-    
-    private double calculaDinheiroGanho(){
+
+    private double calculaDinheiroGanho() {
         int tempo = tempoTimer;
         double dinheiroGanho = tempo * pontos;
-        
+
         return dinheiroGanho;
     }
-    
-    private void ColetaPontos() throws Exception{
+
+    private void ColetaPontos() throws Exception {
         int pontos = Config.getInstance().getPontuacaoRodada();
         pontos = pontos + Integer.parseInt(txtPontuacao.getText());
+        pontos = pontos * tempoTimer;
         Config.getInstance().setPontuacaoRodada(pontos);
         RodadaXAluno aluno_rodada = new RodadaXAluno();
         aluno_rodada.setUsuarioId(Config.getInstance().getLoggedUser().getUsuarioId());
         aluno_rodada.setRodadaId(Config.getInstance().getRodadaAtualEditando());
         aluno_rodada.setPontos(pontos);
-        
+
         Gson g = new Gson();
         String chamadaWs = "recorde/adciona-pontos";
         httpRequest.sendPut(g.toJson(aluno_rodada), chamadaWs);
-        
+
         System.out.println("Acabou de coletar os pontos");
-    
+
     }
 }

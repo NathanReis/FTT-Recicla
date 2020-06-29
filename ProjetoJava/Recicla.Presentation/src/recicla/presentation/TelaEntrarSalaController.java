@@ -68,9 +68,11 @@ public class TelaEntrarSalaController implements Initializable {
 
     private void enviaParaLobby() {
         try {
+            Stage stage = (Stage) btnEntrarSala.getScene().getWindow();
+            stage.close();
             Parent root = FXMLLoader.load(getClass().getResource("TelaEspera.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            stage = new Stage();
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -80,9 +82,11 @@ public class TelaEntrarSalaController implements Initializable {
 
     private void enviaParaEdicaoRodada() {
         try {
+            Stage stage = (Stage) btnEntrarSala.getScene().getWindow();
+            stage.close();
             Parent root = FXMLLoader.load(getClass().getResource("TelaExibeSala.fxml"));
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            stage = new Stage();
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {

@@ -31,6 +31,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.business.serversocket.RoundMannager;
@@ -39,7 +40,6 @@ import recicla.comuns.vos.Card;
 import recicla.comuns.vos.ItemLojaXUsuario;
 import recicla.comuns.vos.JogoRodada;
 import recicla.comuns.vos.RodadaXAluno;
-
 
 /**
  * FXML Controller class
@@ -89,45 +89,44 @@ public class TelaJogoMemoriaController implements Initializable {
      */
     //lista global das cartas
     List<Card> cartas;
-    Image card_background; 
+    Image card_background;
     @FXML
     private Button btn_compara_cartas;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Card carta = new Card(0);
         cartas = carta.Lista_cards_randomicos();
         try {
-            Monta_Jogo_da_Memoria(cartas); 
-            card_background = new Image(new FileInputStream("card_background.png"));        
+            Monta_Jogo_da_Memoria(cartas);
+            card_background = new Image(new FileInputStream("card_background.png"));
             Time(30);
             verificaDinheiroUsuario();
             verificaItensUsuario();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TelaJogoMemoriaController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 
     }
-    
-    
+
     @FXML
-     private void itemTempoClicked() throws Exception {
+    private void itemTempoClicked() throws Exception {
         cancelTimer();
         consomeItem(1);
         verificaItensUsuario();
     }
-    
+
     @FXML
-    private void item2xClicked() throws Exception{
+    private void item2xClicked() throws Exception {
         consomeItem(3);
         multiplicador = multiplicador * 2;
         verificaItensUsuario();
     }
-    
+
     //Retorna a posição da carta com o Id_especificado
-    public int Posicao_Lista_por_id (int Id){
-     Card carta;
+    public int Posicao_Lista_por_id(int Id) {
+        Card carta;
         try {
             carta = cartas.stream().filter(x -> x.getId_carta() == Id).findFirst().get();
             if (carta != null) {
@@ -139,23 +138,23 @@ public class TelaJogoMemoriaController implements Initializable {
             //Quando não encontra uma carta na busca ele lança o NoSuchElementException
             return -1;
         }
-    
-    
+
     }
 
     //Este método monta o tabuleiro de forma randomica
     public void Monta_Jogo_da_Memoria(List<Card> cartas) throws FileNotFoundException {
         int n = 1;
         Random rand = new Random();
-        int card_aleatorio;      
+        int card_aleatorio;
         boolean status = true;
         int i = 10;
-  
+
         while (status) {
             //carta aleatória de 1 a 5
             card_aleatorio = rand.nextInt(6);
-            if(card_aleatorio == 0)
+            if (card_aleatorio == 0) {
                 continue;
+            }
 
             if (!Card.Verifica_Par_cartas(card_aleatorio, cartas)) {
 
@@ -185,10 +184,10 @@ public class TelaJogoMemoriaController implements Initializable {
         }
 
     }
-    
+
     //Instancia as imagens
-    public Image Instancia_Imagens(int numero_imagem) throws FileNotFoundException{
-         
+    public Image Instancia_Imagens(int numero_imagem) throws FileNotFoundException {
+
         switch (numero_imagem) {
             case 1: {
                 Image image = new Image(new FileInputStream("card_1.png"));
@@ -215,7 +214,7 @@ public class TelaJogoMemoriaController implements Initializable {
 
         return null;
     }
-    
+
     //Compara as Cartas abertas
     public void Compara_Cartas(Card carta_aberta) {
 
@@ -224,30 +223,30 @@ public class TelaJogoMemoriaController implements Initializable {
             carta = cartas.stream().filter(x -> x.isStatus() == true && x.getId_carta() != carta_aberta.getId_carta()).findFirst().get();
             if (carta != null) {
                 if (carta_aberta.getId_carta() == carta.getId_carta_par()) {
-                    
+
                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
-                    
+
                     calculaPontos(true);
-                    
+
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Validação");
                     alert.setContentText("Você acertou");
                     alert.showAndWait();
-                    
+
                     Acao_Conparacao_Carta(carta_aberta.getId_carta(), carta.getId_carta(), true);
 
                 } else {
                     cartas.stream().filter(x -> x.getId_carta() == carta_aberta.getId_carta()).findFirst().get().setStatus(false);
                     cartas.stream().filter(x -> x.getId_carta() == carta.getId_carta()).findFirst().get().setStatus(false);
-                    
+
                     calculaPontos(false);
-                    
+
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Validação");
                     alert.setContentText("Você errou");
                     alert.showAndWait();
-                    
+
                     Acao_Conparacao_Carta(carta_aberta.getId_carta(), carta.getId_carta(), false);
                 }
             }
@@ -258,7 +257,7 @@ public class TelaJogoMemoriaController implements Initializable {
         System.out.println("Acabou de comparar as cartas");
 
     }
-    
+
     //Verifica se possui outra carta aberta
     public boolean Verifica_Cartas_Abertas(Card carta_aberta) {
         Card carta;
@@ -274,17 +273,17 @@ public class TelaJogoMemoriaController implements Initializable {
             return false;
         }
 
-    }    
-    
+    }
+
     //Esconde ou mostra as cartas
-    public void Acao_Conparacao_Carta(int Id_1, int Id_2, boolean resultado){ 
+    public void Acao_Conparacao_Carta(int Id_1, int Id_2, boolean resultado) {
 
         if (resultado) {
 
-            if (Id_1 == 1 || Id_2 == 1) {                
+            if (Id_1 == 1 || Id_2 == 1) {
                 img_card_1.setImage(null);
             }
-            if (Id_1 == 2 || Id_2 == 2) {               
+            if (Id_1 == 2 || Id_2 == 2) {
                 img_card_2.setImage(null);
             }
             if (Id_1 == 3 || Id_2 == 3) {
@@ -313,10 +312,10 @@ public class TelaJogoMemoriaController implements Initializable {
             }
 
         } else {
-            if (Id_1 == 1 || Id_2 == 1) {       
+            if (Id_1 == 1 || Id_2 == 1) {
                 img_card_1.setImage(card_background);
             }
-            if (Id_1 == 2 || Id_2 == 2) {             
+            if (Id_1 == 2 || Id_2 == 2) {
                 img_card_2.setImage(card_background);
             }
             if (Id_1 == 3 || Id_2 == 3) {
@@ -347,30 +346,34 @@ public class TelaJogoMemoriaController implements Initializable {
         }
 
     }
-    
-    private void Verifica_Fim_Jogo() throws IOException, Exception{
-        
-          if(img_card_1.getImage() == null &&
-             img_card_2.getImage() == null &&
-             img_card_3.getImage() == null &&
-             img_card_4.getImage() == null &&
-             img_card_5.getImage() == null &&
-             img_card_6.getImage() == null &&
-             img_card_7.getImage() == null &&
-             img_card_8.getImage() == null &&
-             img_card_9.getImage() == null &&
-             img_card_10.getImage() == null  ){
+
+    private void Verifica_Fim_Jogo() throws IOException, Exception {
+
+        if (img_card_1.getImage() == null
+                && img_card_2.getImage() == null
+                && img_card_3.getImage() == null
+                && img_card_4.getImage() == null
+                && img_card_5.getImage() == null
+                && img_card_6.getImage() == null
+                && img_card_7.getImage() == null
+                && img_card_8.getImage() == null
+                && img_card_9.getImage() == null
+                && img_card_10.getImage() == null) {
             salvaDinheiro(calculaDinheiroGanho());
             ColetaPontos();
             System.out.println("Fim do jogo da memória");
             JogoRodada game = RoundMannager.getInstance().remove_game();
             if (game != null) {
+                Stage stage = (Stage) txtDinheiro.getScene().getWindow();
+                stage.close();
                 String tela = HelperController.dicover_game(game);
                 Parent root = FXMLLoader.load(getClass().getResource(tela));
                 HelperController.exibirTela(root);
                 timer.cancel();
             } else {
                 try {
+                    Stage stage = (Stage) txtDinheiro.getScene().getWindow();
+                    stage.close();
                     Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                     HelperController.exibirTela(root);
                     timer.cancel();
@@ -383,7 +386,7 @@ public class TelaJogoMemoriaController implements Initializable {
         }
 
     }
-    
+
     //calculo de pontos
     private void calculaPontos(boolean acertou) {
         if (acertou) {
@@ -397,7 +400,7 @@ public class TelaJogoMemoriaController implements Initializable {
         txtPontuacao.setText(Integer.toString(pontos));
 
     }
-    
+
     //Time
     private void Time(int tempo) {
 
@@ -419,6 +422,8 @@ public class TelaJogoMemoriaController implements Initializable {
                             if (game != null) {
                                 try {
                                     ColetaPontos();
+                                    Stage stage = (Stage) txtDinheiro.getScene().getWindow();
+                                    stage.close();
                                     String tela = HelperController.dicover_game(game);
                                     Parent root = FXMLLoader.load(getClass().getResource(tela));
                                     HelperController.exibirTela(root);
@@ -427,14 +432,16 @@ public class TelaJogoMemoriaController implements Initializable {
                                 }
 
                             } else {
-                                try {              
+                                try {
                                     ColetaPontos();
+                                    Stage stage = (Stage) txtDinheiro.getScene().getWindow();
+                                    stage.close();
                                     Parent root = FXMLLoader.load(getClass().getResource("TelaEsperaRanking.fxml"));
                                     HelperController.exibirTela(root);
                                 } catch (Exception ex) {
                                     System.out.println(ex.getMessage());
                                 }
-                                
+
                             }
                         }
 // ...
@@ -446,18 +453,18 @@ public class TelaJogoMemoriaController implements Initializable {
         }, 1000, 1000);
 
     }
-    
-     private void cancelTimer(){
-        
+
+    private void cancelTimer() {
+
         timer.cancel();
         Time(tempoTimer + 30);
     }
-    
-   private void verificaItensUsuario() {
+
+    private void verificaItensUsuario() {
         itemQuiz.setVisible(false);
         itemTempo.setVisible(false);
         item2x.setVisible(false);
-        
+
         ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
         for (ItemLojaXUsuario item : itens) {
             if (item.getItemLojaId() == 1 && item.getQuantidade() >= 1) {
@@ -473,8 +480,7 @@ public class TelaJogoMemoriaController implements Initializable {
 
         }
     }
-        
-        
+
     private void consomeItem(int idItem) throws Exception {
         ItemLojaXUsuario[] itens = Config.getInstance().getLoggedUser().getItens();
         Gson g = new Gson();
@@ -489,21 +495,20 @@ public class TelaJogoMemoriaController implements Initializable {
         }
         Config.getInstance().getLoggedUser().setItens(itens);
     }
-        
 
     //Evento do Card 1
     @FXML
     private void Card_Event(MouseEvent event) throws Exception {
-       
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get();
-        
+
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_1.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 1).findFirst().get().setStatus(true);
                 if (Verifica_Cartas_Abertas(carta)) {
-                     Compara_Cartas(carta);
-                    System.out.println("Tem carta aberta");                    
+                    Compara_Cartas(carta);
+                    System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
                 }
@@ -515,21 +520,22 @@ public class TelaJogoMemoriaController implements Initializable {
         } else {
             System.out.println("Erro na busca da carta");
         }
-         Verifica_Fim_Jogo();
-        
+        Verifica_Fim_Jogo();
+
     }
-   //Evento do Card 2
+    //Evento do Card 2
+
     @FXML
     private void Card_Event_2(MouseEvent event) throws Exception {
-        
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
-                img_card_2.setImage(carta.getImagem());      
+                img_card_2.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 2).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                      Compara_Cartas(carta);
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -544,18 +550,19 @@ public class TelaJogoMemoriaController implements Initializable {
         }
         Verifica_Fim_Jogo();
     }
+
     //Evento do Card 6
     @FXML
     private void Card_Event_6(MouseEvent event) throws Exception {
-       
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 6).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_6.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 6).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                     Compara_Cartas(carta);                   
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -573,15 +580,15 @@ public class TelaJogoMemoriaController implements Initializable {
 
     @FXML
     private void Card_Event_7(MouseEvent event) throws Exception {
-        
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 7).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_7.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 7).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                     Compara_Cartas(carta);                   
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -599,15 +606,15 @@ public class TelaJogoMemoriaController implements Initializable {
 
     @FXML
     private void Card_Event_8(MouseEvent event) throws Exception {
-        
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 8).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_8.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 8).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                     Compara_Cartas(carta);                   
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -625,15 +632,15 @@ public class TelaJogoMemoriaController implements Initializable {
 
     @FXML
     private void Card_Event_9(MouseEvent event) throws Exception {
-     
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 9).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_9.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 9).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                     Compara_Cartas(carta);                   
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -651,15 +658,15 @@ public class TelaJogoMemoriaController implements Initializable {
 
     @FXML
     private void Card_Event_10(MouseEvent event) throws Exception {
-    
-         Card carta = cartas.stream().filter(x -> x.getId_carta() == 10).findFirst().get();
+
+        Card carta = cartas.stream().filter(x -> x.getId_carta() == 10).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_10.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 10).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                     Compara_Cartas(carta);                   
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -677,15 +684,15 @@ public class TelaJogoMemoriaController implements Initializable {
 
     @FXML
     private void Card_Event_3(MouseEvent event) throws Exception {
-        
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 3).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_3.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 3).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                    Compara_Cartas(carta);                   
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -703,15 +710,15 @@ public class TelaJogoMemoriaController implements Initializable {
 
     @FXML
     private void Card_Event_4(MouseEvent event) throws Exception {
-        
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 4).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_4.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 4).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                    Compara_Cartas(carta);                   
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -729,15 +736,15 @@ public class TelaJogoMemoriaController implements Initializable {
 
     @FXML
     private void Card_Event_5(MouseEvent event) throws Exception {
-        
+
         Card carta = cartas.stream().filter(x -> x.getId_carta() == 5).findFirst().get();
 
         if (carta != null) {
             if (!carta.isStatus()) {
                 img_card_5.setImage(carta.getImagem());
                 cartas.stream().filter(x -> x.getId_carta() == 5).findFirst().get().setStatus(true);
-                 if (Verifica_Cartas_Abertas(carta)) {
-                    Compara_Cartas(carta); 
+                if (Verifica_Cartas_Abertas(carta)) {
+                    Compara_Cartas(carta);
                     System.out.println("Tem carta aberta");
                 } else {
                     System.out.println("Não tem carta aberta");
@@ -764,7 +771,7 @@ public class TelaJogoMemoriaController implements Initializable {
 
         }
     }
-    
+
     private void salvaDinheiro(double dinheiro) throws Exception {
         double saldoAtual = Config.getInstance().getLoggedUser().getDinheiro();
         double novoSaldo = saldoAtual + dinheiro;
@@ -774,32 +781,34 @@ public class TelaJogoMemoriaController implements Initializable {
         String chamadaWs = "user/atualiza-usuario";
         httpRequest.sendPut(g.toJson(Config.getInstance().getLoggedUser()), chamadaWs);
     }
-    
-    private double calculaDinheiroGanho(){
+
+    private double calculaDinheiroGanho() {
         int tempo = tempoTimer;
         double dinheiroGanho = tempo * pontos;
-        
+
         return dinheiroGanho;
     }
+
     private void verificaDinheiroUsuario() {
         double dinheiro = Config.getInstance().getLoggedUser().getDinheiro();
         txtDinheiro.setText(Double.toString(dinheiro));
     }
-    
-    private void ColetaPontos() throws Exception{
+
+    private void ColetaPontos() throws Exception {
         int pontos = Config.getInstance().getPontuacaoRodada();
         pontos = pontos + Integer.parseInt(txtPontuacao.getText());
+        pontos = pontos * tempoTimer;
         Config.getInstance().setPontuacaoRodada(pontos);
         RodadaXAluno aluno_rodada = new RodadaXAluno();
         aluno_rodada.setUsuarioId(Config.getInstance().getLoggedUser().getUsuarioId());
         aluno_rodada.setRodadaId(Config.getInstance().getRodadaAtualEditando());
         aluno_rodada.setPontos(pontos);
-        
+
         Gson g = new Gson();
         String chamadaWs = "recorde/adciona-pontos";
         httpRequest.sendPut(g.toJson(aluno_rodada), chamadaWs);
-        
+
         System.out.println("Acabou de coletar os pontos");
-    
+
     }
 }

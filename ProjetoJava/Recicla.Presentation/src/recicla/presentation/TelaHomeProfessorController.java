@@ -34,17 +34,7 @@ public class TelaHomeProfessorController implements Initializable {
         // TODO
     }
 
-    /*private void btnCriaSala(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("TelaCadastroSala.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-        }catch(Exception e) {
-        e.printStackTrace();
-    }
-    }*/
+
     @FXML
     private void telaCriaSala(ActionEvent event) {
         try {
@@ -74,6 +64,7 @@ public class TelaHomeProfessorController implements Initializable {
     
     @FXML
     private void btnListaSalasClicked() throws IOException{
+        
         Parent root = FXMLLoader.load(getClass().getResource("TelaEntrarSala.fxml"));
         Scene scene = new Scene(root);
         Stage stage = new Stage();

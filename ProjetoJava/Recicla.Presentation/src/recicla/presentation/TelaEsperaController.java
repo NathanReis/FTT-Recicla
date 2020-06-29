@@ -76,10 +76,11 @@ public class TelaEsperaController implements Initializable {
             String tela = HelperController.dicover_game(game);
 //                Parent root = FXMLLoader.load(getClass().getResource(tela));
 //                HelperController.exibirTela(root);
-
+            Stage stage = (Stage) btn_conectar.getScene().getWindow();
+            stage.close();
             Parent root = FXMLLoader.load(getClass().getResource(tela));
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            stage = new Stage();
             stage.setScene(scene);
             stage.show();
 

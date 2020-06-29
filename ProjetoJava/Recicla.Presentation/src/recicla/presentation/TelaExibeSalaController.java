@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import recicla.business.config.Config;
 import recicla.business.httpRequests.httpRequest;
 import recicla.comuns.helperController.HelperController;
@@ -65,7 +66,8 @@ public class TelaExibeSalaController implements Initializable {
             
             if(idInserido != 0) {
                 Config.getInstance().setRodadaAtualEditando(idInserido);
-                
+                Stage stage = (Stage) btnAdicionaRodada.getScene().getWindow();
+                stage.close();
                 Parent root = FXMLLoader.load(getClass().getResource("TelaRodada.fxml"));
 
                 HelperController.exibirTela(root);

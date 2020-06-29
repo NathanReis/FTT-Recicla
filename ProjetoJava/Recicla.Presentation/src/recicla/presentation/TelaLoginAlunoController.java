@@ -86,9 +86,11 @@ public class TelaLoginAlunoController implements Initializable {
                 u.setItens(itens);
                 Config.getInstance().setLoggedUser(u);
                 try {
+                    Stage stage = (Stage) txtLogin.getScene().getWindow();
+                    stage.close();
                     Parent root = FXMLLoader.load(getClass().getResource("TelaHomeAluno.fxml")); 
                     Scene scene = new Scene(root);
-                    Stage stage = new Stage();
+                    stage = new Stage();
                     stage.setScene(scene);
                     stage.show();
                 } catch (Exception e) {
