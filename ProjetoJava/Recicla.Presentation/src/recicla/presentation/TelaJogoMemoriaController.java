@@ -100,7 +100,7 @@ public class TelaJogoMemoriaController implements Initializable {
         cartas = carta.Lista_cards_randomicos();
         try {
             Monta_Jogo_da_Memoria(cartas);
-            card_background = new Image(new FileInputStream("card_background.png"));
+            card_background = new Image(new FileInputStream("../src/recicla/presentation/imagens/back_face_card.png"));
             Time(30);
             verificaDinheiroUsuario();
             verificaItensUsuario();
@@ -190,23 +190,23 @@ public class TelaJogoMemoriaController implements Initializable {
 
         switch (numero_imagem) {
             case 1: {
-                Image image = new Image(new FileInputStream("card_1.png"));
+                Image image = new Image(new FileInputStream("../src/recicla/presentation/imagens/card_1.png"));
                 return image;
             }
             case 2: {
-                Image image = new Image(new FileInputStream("card_2.png"));
+                Image image = new Image(new FileInputStream("../src/recicla/presentation/imagens/card_2.png"));
                 return image;
             }
             case 3: {
-                Image image = new Image(new FileInputStream("card_3.png"));
+                Image image = new Image(new FileInputStream("../src/recicla/presentation/imagens/card_3.png"));
                 return image;
             }
             case 4: {
-                Image image = new Image(new FileInputStream("card_4.png"));
+                Image image = new Image(new FileInputStream("../src/recicla/presentation/imagens/card_4.png"));
                 return image;
             }
             case 5: {
-                Image image = new Image(new FileInputStream("card_5.png"));
+                Image image = new Image(new FileInputStream("../src/recicla/presentation/imagens/card_5.png"));
                 return image;
             }
 
